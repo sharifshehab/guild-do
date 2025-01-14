@@ -1,0 +1,43 @@
+/* google font */
+@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-color: #fff10f;
+  --secondary-color: #232323;
+}
+
+/*-------------------- 
+  preset properties 
+--------------------*/
+body {
+  font-family: "Oxanium", serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: white;
+  background: none repeat scroll 0 0;
+  background-color: #151515;
+  margin: 0 auto;
+}
+
+main>section {
+  margin: 130px 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+  object-fit: cover;
+}
+
+
