@@ -1,14 +1,37 @@
 import Container from "../../components/Container"
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import GoogleSignIn from "../shared/GoogleSignIn";
+import useAuth from "../../hooks/useAuth";
+import useToast from "../../hooks/useToast";
+// icons
+import { TbLoader3 } from "react-icons/tb";
+import { useState } from "react";
+import { Toaster } from "react-hot-toast";
 
 const Login = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
-
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
+    const { setLoading, handleEmailLogin } = useAuth();
+    const location = useLocation();
+    const navigate = useNavigate();
+    const from = location?.state ? location?.state : '/';
+    const { successToast, errorToast } = useToast();
+    const [loginLoading, setLoginLoading] = useState(false);
 
     const onSubmit = async (formData) => {
-        console.log(formData)
+        setLoginLoading(true);
+        try {
+            await handleEmailLogin(formData.email, formData.password);
+            reset();
+            successToast('Login successful');
+            navigate(from, { replace: true });
+        } catch (error) {
+            errorToast(`Login error: ${error.message}`)
+        } finally {
+            setLoading(false);
+            setLoginLoading(false);
+        }
+
     }
     return (
         <Container>
@@ -52,20 +75,18 @@ const Login = () => {
                         </div> {/* password */}
                     </div>
 
-                    <button type="submit" className={`py-3 px-4 border border-primaryColor outline-none mt-[10px]`}>Login</button>
-                    <div className="flex flex-col items-center">
-
-
-                        {/* Login and other sign-in methods */}
-                        <div className="flex flex-col items-center  justify-center mt-5 space-y-4">
-                            <GoogleSignIn></GoogleSignIn>
-                            <Link to="/register" className="text-white"> Don't have an account? <span className="text-gray-300 underline underline-offset-4 decoration-primaryColor">Register</span></Link>
-
-                        </div>
-                    </div>
+                    <button type="submit" className={`py-3 px-4 border border-primaryColor outline-none mt-[10px]`}>{loginLoading ? <TbLoader3 size={22} className="animate-spin text-[#ffffff]" /> : 'Login'}</button>
                 </form>
 
+                <div className="flex flex-col items-center">
+                    {/* Login and other sign-in methods */}
+                    <div className="flex flex-col items-center  justify-center mt-5 space-y-4">
+                        <GoogleSignIn></GoogleSignIn>
+                        <Link to="/register" className="text-white"> Don't have an account? <span className="text-gray-300 underline underline-offset-4 decoration-primaryColor">Register</span></Link>
 
+                    </div>
+                </div>
+                <Toaster />
             </section>
         </Container>
     );

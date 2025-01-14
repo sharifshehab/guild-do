@@ -2,14 +2,19 @@ import { HiBars3BottomLeft } from "react-icons/hi2";
 import { MdOutlineNotifications } from "react-icons/md";
 import Container from "../../components/Container";
 import useAuth from "../../hooks/useAuth";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Header = () => {
     const { user, handleLogOut } = useAuth();
     const menuItems =
         <>
-            <li><a>Home</a></li>
-            <li><a>Membership</a></li>
+            <li>
+                <NavLink className={({ isActive }) => isActive ? 'active-menu' : 'hover:text-yellow-300'} to='/'>Home</NavLink>
+            </li>
+            <li>
+                <NavLink className={({ isActive }) => isActive ? 'active-menu' : 'hover:text-yellow-300'} to='/membership'>Membership</NavLink>
+            </li>
+
         </>
     return (
         <Container>
@@ -76,9 +81,9 @@ const Header = () => {
                                     <li><button onClick={handleLogOut}>Log Out</button></li>
                                 </ul>
                             </div>
-                        </div>):
-                        
-                        <Link to={"/login"} className="btn bg-primaryColor">Join US</Link>
+                        </div>) :
+
+                            <Link to={"/login"} className="btn bg-primaryColor">Join US</Link>
                     }
 
                 </div>
