@@ -9,6 +9,7 @@ export default {
       colors: {
         primaryColor: 'var(--primary-color)',
         secondaryColor: 'var(--secondary-color)',
+        darkColor: 'var(--dark-color)',
       },
       backgroundImage: {
         'aboutBG': "url('./images/bg.jpg')"
