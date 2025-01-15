@@ -9,6 +9,7 @@ import useToast from "../../hooks/useToast";
 import { useState } from "react";
 // icons
 import { TbLoader3 } from "react-icons/tb";
+import { CgLaptop } from "react-icons/cg";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -32,23 +33,20 @@ const Register = () => {
         });
 
         try {
-           
             const userCredential = await handleRegister(formData.email, formData.password);
             const user = userCredential.user; 
-
-           
             await setUserNameAndPhoto(formData.name, data.data.display_url);
-            console.log(user);
 
-/*             //  Save User info in the database
+            //  Save User info in the database
             const userInfo = {
-                name: data.name,
-                email: data.email
+                name: formData.name,
+                email: formData.email,
+                badge: 'Bronze'
             }
             const res = await axiosPublic.post('/users', userInfo);
             if (res.data.insertedId) {
-                setSuccess(true);
-            } */
+                console.log(res.data);
+            }
 
             reset(); // Reset form
             // success message toast

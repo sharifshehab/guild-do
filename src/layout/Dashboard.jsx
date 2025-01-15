@@ -17,7 +17,7 @@ const Dashboard = () => {
                     {/* user dashboard */}
                     <li><NavLink to={"/dashboard/user-home"}>My Profile</NavLink></li>
                     <li><NavLink to={"/dashboard/add-post"}>Add Post</NavLink></li>
-                    <li><NavLink to={"/dashboard/user-home"}>My Posts</NavLink></li>
+                    <li><NavLink to={"/dashboard/my-posts"}>My Posts</NavLink></li>
                 </ul>
             </div>
 

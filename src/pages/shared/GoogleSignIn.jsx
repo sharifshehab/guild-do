@@ -1,8 +1,10 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const GoogleSignIn = () => {
     const { handleGoogleSignIn } = useAuth();
+    const axiosPublic = useAxiosPublic();
     const location = useLocation();
     const navigate = useNavigate();
     const from = location?.state ? location?.state : '/';
@@ -11,6 +13,18 @@ const GoogleSignIn = () => {
         handleGoogleSignIn()
             .then(result => {
                 const user = result.user;
+
+                //  Save User info in the database
+                const userInfo = {
+                    name: user.displayName,
+                    email: user.email,
+                    badge: 'Bronze'
+                }
+
+                axiosPublic.post('/users', userInfo)
+                    .then(res => {
+                        console.log(res.data);
+                    })
                 navigate(from, { replace: true }); 
             }).catch((error) => {
                 const errorMessage = error.message;
