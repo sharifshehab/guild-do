@@ -9,6 +9,7 @@ import Dashboard from "../layout/Dashboard";
 import AddPost from "../pages/Dashboard/AddPost/AddPost";
 import MyPosts from "../pages/Dashboard/MyPosts/MyPosts";
 import MyProfile from "../pages/Dashboard/MyProfile/MyProfile";
+import PostDetails from "../pages/PostDetails/PostDetails";
 
 export const router = createBrowserRouter([
     {
@@ -23,6 +24,10 @@ export const router = createBrowserRouter([
             {
                 path: "/membership",
                 element: <PrivateRoute><Membership></Membership></PrivateRoute>
+            },
+            {
+                path: "post/:postId",
+                element: <PostDetails></PostDetails>
             },
             {
                 path: "/register",

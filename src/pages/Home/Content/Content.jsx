@@ -1,19 +1,9 @@
-import { useQuery } from "@tanstack/react-query";
 import Container from "../../../components/Container";
-import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import TableRow from "./TableRow/TableRow";
+import useAllPost from "../../../API/useAllPost";
 
 const Content = () => {
-    const axiosPublic = useAxiosPublic();
-    const { data: allPosts = [] } = useQuery({
-        queryKey: ['posts'],
-        queryFn: async () => {
-            const res = await axiosPublic.get('/posts')
-            return res.data
-        }
-    });
-    console.log(allPosts);
-
+    const [allPosts] = useAllPost();
     return (
         <Container>
             <div className="grid grid-cols-3 gap-8">

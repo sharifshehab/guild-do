@@ -1,14 +1,15 @@
 import { format } from "date-fns";
+import { Link } from "react-router-dom";
 
 
 const TableRow = ({ post }) => {
     const { _id, postTitle, postDescription, postTag, UpVote, DownVote, authorName, authorImage, createdAt } = post || {}
-    const postDate = format(new Date(createdAt), "yyyy-MM-dd");
+    const postDate = format(new Date(createdAt), "yyyy-MM-dd, HH:mm a");
     return (
         <tr>
             <td className="max-w-72">
                 <div className="space-y-1">
-                    <h3 className="text-2xl font-semibold text-primaryColor">{postTitle}</h3>
+                    <Link to={`/post/${_id}`} className="text-2xl font-semibold text-primaryColor">{postTitle}</Link>
                     <p>{postDescription.slice(0, 85)}...</p>
                 </div>
             </td>
