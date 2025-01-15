@@ -7,9 +7,9 @@ import Container from "../../../components/Container";
 import { Toaster } from "react-hot-toast";
 import Select from 'react-select'
 import { TbLoader3 } from "react-icons/tb";
+import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 
-const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
-const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const AddPost = () => {
     const { register, handleSubmit, control, reset, formState: { errors } } = useForm();
@@ -24,53 +24,60 @@ const AddPost = () => {
         { value: 'vanilla', label: 'Vanilla' }
     ]
 
-    const onSubmit = async (postData) => {
-        setLoading(true);
-        console.log(postData);
+    const { data: allPosts = [], refetch, isLoading } = useQuery({
+        queryKey: ['posts', user?.email],
+        queryFn: async () => {
+            const res = await axiosPublic.get(`/post-count?user=${user?.email}`)
+            return res.data
+        }
+    });
+    console.log(allPosts.posts);
 
-        // upload image to "imgbb" and then get an url
-        // const imageFile = { image: formData.photo[0] }
-        // const { data } = await axiosPublic.post(image_hosting_api, imageFile, {
-        //     headers: {
-        //         'content-type': 'multipart/form-data'
-        //     }
-        // });
-
-        // try {
-
-        //     const userCredential = await handleRegister(formData.email, formData.password);
-        //     const user = userCredential.user;
-
-
-        //     await setUserNameAndPhoto(formData.name, data.data.display_url);
-        //     console.log(user);
-
-        //     /*             //  Save User info in the database
-        //                 const userInfo = {
-        //                     name: data.name,
-        //                     email: data.email
-        //                 }
-        //                 const res = await axiosPublic.post('/users', userInfo);
-        //                 if (res.data.insertedId) {
-        //                     setSuccess(true);
-        //                 } */
-
-        //     reset(); // Reset form
-        //     // success message toast
-        //     successToast("Registration Successful");
-        // } catch (error) {
-        //     console.error('Registration error:', error);
-        //     if (error.code === "auth/email-already-in-use") {
-        //         errorToast("This email is already in use. Please try another email address.")
-        //     } else if (error.code === "auth/invalid-email") {
-        //         errorToast("Invalid email. Please try another email address.");
-        //     } else {
-        //         errorToast("An unexpected error occurred. Please try again.");
-        //     }
-        // } finally {
-        //     setLoading(false);
-        // }
+    if (isLoading) {
+        return <div className='min-h-screen flex items-center justify-center'>
+            <span className='text-primaryColor'>Loading...</span>
+            <span className="loading loading-ring loading-lg"></span>
+        </div>
     }
+
+    if (allPosts.posts >= 5) {
+        return (
+            <div className='min-h-screen flex flex-col items-center justify-center space-y-3'>
+                <Link className="btn">Become a Member</Link>
+                <p className="text-center">You have reached the maximum number of posts allowed for a general user.
+                    <br />Upgrade to a premium membership to increase your post limit.</p>
+            </div>
+
+        )
+    }
+
+    const onSubmit = async (formData) => {
+        setLoading(true);
+        try {
+            const postData = {
+                authorName: formData.author_name,
+                authorEmail: formData.author_email,
+                authorImage: formData.author_image,
+                postTitle: formData.post_title,
+                postTag: formData.post_tags.map(tag => tag.value),
+                postDescription: formData.post_description,
+                UpVote: parseInt(0),
+                DownVote: parseInt(0),
+                createdAt: new Date().toString()
+            }
+            const res = await axiosPublic.post('/posts', postData);
+            if (res.data.insertedId) {
+                reset(); // Reset form
+                successToast("Post added successful");
+            }
+        } catch (error) {
+            console.error('Post adding error:', error);
+            errorToast(`There was an error while adding the post: ${error.message}`)
+        } finally {
+            setLoading(false);
+        }
+    }
+
     return (
         <Container>
             <section className="w-full">
@@ -89,12 +96,14 @@ const AddPost = () => {
                             <div className="flex flex-col gap-[5px] w-full sm:w-[50%]">
                                 <label className="relative">
                                     <input type="text"
-                                        className="peer bg-darkColor border-[#e5eaf2] border outline-none ps-28 pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
-                                        {...register("author_name", { required: "Author Name is required", minLength: { value: 5, message: "minimum character length is 5" } })}
+                                        className="peer bg-darkColor border-[#e5eaf2] border outline-none ps-32 pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
+                                        {...register("author_name", { required: "Author Name is required" })}
+                                        defaultValue={user?.displayName}
+                                        readOnly
                                     />
                                     <span
                                         className="absolute top-3 left-5 peer-focus:-top-3 peer-focus:bg-primaryColor peer-focus:left-2 peer-focus:scale-[0.9] peer-focus:text-secondaryColor text-[#777777] peer-focus:px-1 transition-all duration-300 ">
-                                        Name
+                                        Author Name
                                     </span>
                                 </label>
                                 {errors.author_name && <span className="text-red-500 text-sm">{errors.author_name.message}</span>}
@@ -103,12 +112,14 @@ const AddPost = () => {
                             <div className="flex flex-col gap-[5px] w-full sm:w-[50%]">
                                 <label className="relative">
                                     <input type="email"
-                                        className="peer bg-darkColor border-[#e5eaf2] border outline-none ps-28 pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
+                                        className="peer bg-darkColor border-[#e5eaf2] border outline-none ps-32 pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
                                         {...register("author_email", { required: "Author Email is required" })}
+                                        defaultValue={user?.email}
+                                        readOnly
                                     />
                                     <span
                                         className="absolute top-3 left-5 peer-focus:-top-3 peer-focus:bg-primaryColor peer-focus:left-2 peer-focus:scale-[0.9] peer-focus:text-secondaryColor text-[#777777] peer-focus:px-1 transition-all duration-300 ">
-                                        Email
+                                        Author email
                                     </span>
                                 </label>
                                 {errors.author_email && <span className="text-red-500 text-sm">{errors.author_email.message}</span>}
@@ -116,22 +127,26 @@ const AddPost = () => {
                         </div> {/* first-row */}
 
                         <div className="flex flex-col sm:flex-row items-center gap-5">
-
                             <div className="flex flex-col gap-[5px] w-full sm:w-[50%]">
-                                <label className="relative inline-block bg-darkColor text-[#777777] border-[#e5eaf2] border px-5 py-3 cursor-pointer hover:border-primaryColor transition-colors duration-300">
-                                    Author Image
-                                    <input type="file"
-                                        className="absolute inset-0 opacity-0 cursor-pointer"
-                                        // {...register("author_image", { required: "Author image is required" })}
+                                <label className="relative">
+                                    <input type="text"
+                                        className="peer bg-darkColor border-[#e5eaf2] border outline-none ps-32 pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
+                                        {...register("author_image", { required: "Author image is required" })}
+                                        defaultValue={user?.photoURL}
+                                        readOnly
                                     />
+                                    <span
+                                        className="absolute top-3 left-5 peer-focus:-top-3 peer-focus:bg-primaryColor peer-focus:left-2 peer-focus:scale-[0.9] peer-focus:text-secondaryColor text-[#777777] peer-focus:px-1 transition-all duration-300 ">
+                                        Author image
+                                    </span>
                                 </label>
-                                {/* {errors.author_image && <span className="text-red-500 text-sm">{errors.author_image.message}</span>} */}
-                            </div> {/* author image */}
+                                {errors.author_image && <span className="text-red-500 text-sm">{errors.author_image.message}</span>}
+                            </div> {/* author name */}
 
                             <div className="flex flex-col gap-[5px] w-full sm:w-[50%]">
                                 <label className="relative">
                                     <input type="text"
-                                        className="peer bg-darkColor border-[#e5eaf2] border outline-none ps-28 pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
+                                        className="peer bg-darkColor border-[#e5eaf2] border outline-none ps-24 pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
                                         {...register("post_title", { required: "Post title is required", minLength: { value: 10, message: "minimum character length is 5" } })}
                                     />
                                     <span
@@ -144,7 +159,7 @@ const AddPost = () => {
                         </div> {/* second-row */}
 
                         <div className="flex flex-col gap-[5px] w-full mt-[20px]">
-                            
+
                             <Controller
                                 name="post_tags"
                                 control={control}
@@ -154,9 +169,10 @@ const AddPost = () => {
                                         <Select
                                             {...field}
                                             options={options}
+                                            isMulti={true}
                                             onChange={(selectedOption) => field.onChange(selectedOption)}
                                             onBlur={field.onBlur}
-                                            value={field.value}
+                                            value={field.value || []}
                                             placeholder="Select post tags"
                                             className="gd-post-select"
                                             classNamePrefix="gd-post"
@@ -172,8 +188,8 @@ const AddPost = () => {
                         <div className="flex flex-col gap-[5px] w-full mt-[20px]">
                             <label className="relative w-full">
                                 <textarea
-                                    className="peer min-h-72 bg-darkColor border-[#e5eaf2] border outline-none ps-36 pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
-                                    {...register("post_description", { required: "Post description is required"})}
+                                    className="peer min-h-72 bg-darkColor border-[#e5eaf2] border outline-none ps-[150px] pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
+                                    {...register("post_description", { required: "Post description is required" })}
                                 ></textarea>
                                 <span
                                     className=" absolute top-3 left-5 peer-focus:-top-3 peer-focus:bg-primaryColor peer-focus:left-2 peer-focus:scale-[0.9] peer-focus:text-secondaryColor text-[#777777] peer-focus:px-1 transition-all duration-300 ">

@@ -2,9 +2,9 @@ import { NavLink, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
     return (
-        <div className="flex">
+        <div className="flex flex-col lg:flex-row items-center justify-center">
             {/* dashboard sidebar */}
-            <div className="w-64 min-h-screen bg-primaryColor">
+            <div className="w-full lg:w-64 min-h-screen bg-primaryColor">
                 <ul className="menu p-4">
 
                     {/* admin dashboard */}
