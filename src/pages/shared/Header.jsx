@@ -77,7 +77,7 @@ const Header = () => {
                                     <li>
                                         <span className="text-lg text-primaryColor">{user?.displayName}</span>
                                     </li>
-                                    <li><a>Settings</a></li>
+                                    <li><NavLink to={"/dashboard"}>Dashboard</NavLink></li>
                                     <li><button onClick={handleLogOut}>Log Out</button></li>
                                 </ul>
                             </div>
