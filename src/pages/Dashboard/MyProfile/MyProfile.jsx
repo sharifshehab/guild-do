@@ -58,7 +58,7 @@ const MyProfile = () => {
 
                     <div className="mt-8 border-t border-border">
                         <h2 className="text-center">my recent posts</h2>
-                        <div className="w-full p-4 flex items-center justify-center">
+                        <div className="w-full p-4 flex items-center justify-center gap-14">
 
                             {
                                 myPosts?.length === 0 ? <p className="text-center">no post found</p> :

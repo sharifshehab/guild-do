@@ -1,0 +1,48 @@
+import { format } from "date-fns";
+
+
+const TableRow = ({ post }) => {
+    const { _id, postTitle, postDescription, postTag, UpVote, DownVote, authorName, authorImage, createdAt } = post || {}
+    const postDate = format(new Date(createdAt), "yyyy-MM-dd");
+    return (
+        <tr>
+            <td className="max-w-72">
+                <div className="space-y-1">
+                    <h3 className="text-2xl font-semibold text-primaryColor">{postTitle}</h3>
+                    <p>{postDescription.slice(0, 85)}...</p>
+                </div>
+            </td>
+            <td>
+                {postTag?.map((tag, idx) => <span key={idx}>{tag}{idx < postTag.length - 1 && ', '}</span>)}
+            </td>
+            <td>
+                30
+            </td>
+            <td>
+                <div>
+                    <h4>Upvote: {UpVote}</h4>
+                    <h4>Downvote: {DownVote}</h4>
+                </div>
+            </td>
+            <td>
+                <div className="flex items-center gap-3">
+                    <div className="avatar">
+                        <div className="mask mask-squircle h-12 w-12">
+                            <img
+                                src={authorImage}
+                                alt="Avatar Tailwind CSS Component"
+                                referrerPolicy="no-referrer"
+                            />
+                        </div>
+                    </div>
+                    <div>
+                        <div className="font-bold">{authorName}</div>
+                        <div className="text-sm opacity-50">{postDate}</div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    );
+};
+
+export default TableRow;

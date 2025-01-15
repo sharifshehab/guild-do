@@ -1,11 +1,24 @@
+import { useQuery } from "@tanstack/react-query";
 import Container from "../../../components/Container";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import TableRow from "./TableRow/TableRow";
 
 const Content = () => {
+    const axiosPublic = useAxiosPublic();
+    const { data: allPosts = [] } = useQuery({
+        queryKey: ['posts'],
+        queryFn: async () => {
+            const res = await axiosPublic.get('/posts')
+            return res.data
+        }
+    });
+    console.log(allPosts);
+
     return (
         <Container>
             <div className="grid grid-cols-3 gap-8">
                 {/* posts */}
-                <div className="h-screen bg-red-600 col-span-2">
+                <div className="h-screen bg-red-600 col-span-full lg:col-span-2">
                     <div className="overflow-x-auto">
                         <table className="table">
                             {/* head */}
@@ -19,35 +32,10 @@ const Content = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {/* row 1 */}
-                                <tr>
-                                    <td>
-                                        <div className="space-y-1">
-                                            <h3 className="text-2xl font-semibold text-primaryColor">Esports Elite</h3>
-                                            <p>If our lives are already written, it would take a courageous man to change the script....</p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        Zemlak, Daniel and Leannon
-                                    </td>
-                                    <td>15</td>
-                                    <td>30</td>
-                                    <td>
-                                        <div className="flex items-center gap-3">
-                                            <div className="avatar">
-                                                <div className="mask mask-squircle h-12 w-12">
-                                                    <img
-                                                        src="https://img.daisyui.com/images/profile/demo/2@94.webp"
-                                                        alt="Avatar Tailwind CSS Component" />
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <div className="font-bold">Hart Hagerty</div>
-                                                <div className="text-sm opacity-50">Nov 23 - 2024  02/06/25</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
+                                {/* row */}
+                                {
+                                    allPosts?.map(post => <TableRow key={post._id} post={post}></TableRow>)
+                                }
                                 
                             </tbody>
                         </table>
@@ -55,7 +43,7 @@ const Content = () => {
 
                 </div>
                 {/* sidebar */}
-                <div className="h-screen bg-blue-600"></div>
+                <div className="h-screen bg-blue-600 col-span-full lg:col-span-1"></div>
             </div>
         </Container>
     );
