@@ -48,7 +48,7 @@ const TableRow = ({ post, refetch }) => {
             </td>{/* comments */}
             <td>
                 <button onClick={() => deletePost(_id)} className="btn btn-sm">Delete post</button>
-            </td>{/* comments */}
+            </td>{/* delete */}
         </tr>
     );
 };

@@ -15,14 +15,14 @@ const Dashboard = () => {
                     </NavLink></li>
 
                     {/* user dashboard */}
-                    <li><NavLink to={"/dashboard/user-home"}>My Profile</NavLink></li>
+                    <li><NavLink to={"/dashboard/my-profile"}>My Profile</NavLink></li>
                     <li><NavLink to={"/dashboard/add-post"}>Add Post</NavLink></li>
                     <li><NavLink to={"/dashboard/my-posts"}>My Posts</NavLink></li>
                 </ul>
             </div>
 
             {/* dashboard content */}
-            <div className="flex-1 p-8">
+            <div className="w-full lg:flex-1 p-8">
                 <Outlet></Outlet>
             </div>
         </div>

@@ -24,14 +24,13 @@ const AddPost = () => {
         { value: 'vanilla', label: 'Vanilla' }
     ]
 
-    const { data: allPosts = [], refetch, isLoading } = useQuery({
-        queryKey: ['posts', user?.email],
+    const { data: myPosts = [], refetch, isLoading } = useQuery({
+        queryKey: ['myPosts', user?.email],
         queryFn: async () => {
             const res = await axiosPublic.get(`/post-count?user=${user?.email}`)
             return res.data
         }
     });
-    console.log(allPosts.posts);
 
     if (isLoading) {
         return <div className='min-h-screen flex items-center justify-center'>
@@ -40,7 +39,7 @@ const AddPost = () => {
         </div>
     }
 
-    if (allPosts.posts >= 5) {
+    if (myPosts.posts >= 5) {
         return (
             <div className='min-h-screen flex flex-col items-center justify-center space-y-3'>
                 <Link className="btn">Become a Member</Link>
@@ -63,7 +62,7 @@ const AddPost = () => {
                 postDescription: formData.post_description,
                 UpVote: parseInt(0),
                 DownVote: parseInt(0),
-                createdAt: new Date().toString()
+                createdAt: new Date()
             }
             const res = await axiosPublic.post('/posts', postData);
             if (res.data.insertedId) {

@@ -8,14 +8,13 @@ const MyPosts = () => {
     const axiosPublic = useAxiosPublic();
 
     const { data: myPosts = [], refetch, isLoading } = useQuery({
-        queryKey: ['myPosts', user?.email],
+        queryKey: ['userPosts', user?.email],
         queryFn: async () => {
             const res = await axiosPublic.get(`/posts?email=${user?.email}`);
             return res.data;
         }
     });
 
-    console.log(myPosts);
 
     return (
         <>
@@ -23,6 +22,7 @@ const MyPosts = () => {
             <div className="w-full flex flex-col items-center justify-center">
                 <h1 className="text-[2rem] font-bold text-primary leading-[36px]">My posts</h1>
             </div>
+            
             <div className="overflow-x-auto pb-32">
                 <table className="table">
                     {/* head */}
@@ -36,9 +36,7 @@ const MyPosts = () => {
                     </thead>
 
                     <tbody>
-
-                        {myPosts.map(post => <TableRow key={post._id} post={post} refetch={refetch}></TableRow>)}
-
+                        {myPosts?.map(post => <TableRow key={post._id} post={post} refetch={refetch}></TableRow>)}
                     </tbody>
                 </table>
             </div>
