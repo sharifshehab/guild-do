@@ -3,15 +3,14 @@ import { Toaster } from 'react-hot-toast';
 import { useState } from "react";
 // icons
 import { TbLoader3 } from "react-icons/tb";
-import { CgLaptop } from "react-icons/cg";
 import Container from '../../../components/Container';
 import useAuth from "../../../hooks/useAuth";
-import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import useToast from "../../../hooks/useToast";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
-const CommentForm = ({id}) => {
+const CommentForm = ({ id, title }) => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
-    const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
     const { successToast, errorToast } = useToast();
     const [loading, setLoading] = useState(false);
@@ -24,9 +23,10 @@ const CommentForm = ({id}) => {
                 name: user?.displayName,
                 email: user?.email,
                 postId: id,
+                postTitle: title,
                 comment: formData.comment
             }
-            const res = await axiosPublic.post('/comments', commentData);
+            const res = await axiosSecure.post('/comments', commentData);
             if (res.data.insertedId) {
                 reset(); // Reset form
                 // success message toast

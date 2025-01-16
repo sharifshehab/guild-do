@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Container from "../../components/Container";
 import { format } from "date-fns";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
@@ -6,22 +6,23 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../hooks/useAuth";
 import useToast from "../../hooks/useToast";
 import { Toaster } from "react-hot-toast";
+import CommentForm from "./CommentForm/CommentForm";
 import { FacebookShareButton, TwitterShareButton, WhatsappShareButton } from "react-share";
-import { FiFacebook } from "react-icons/fi";
+// icons
 import { SlSocialFacebook } from "react-icons/sl";
 import { RxTwitterLogo } from "react-icons/rx";
 import { IoLogoWhatsapp } from "react-icons/io5";
-// icons
-import { HiMiniShare } from "react-icons/hi2";
 import { FiThumbsUp, FiThumbsDown } from "react-icons/fi";
 import { LiaTagsSolid } from "react-icons/lia";
-import CommentForm from "./CommentForm/CommentForm";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const PostDetails = () => {
     const { postId } = useParams();
     const { user } = useAuth();
     const { successToast, errorToast } = useToast();
     const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
+
     const { data: post = {}, refetch, isLoading } = useQuery({
         queryKey: ['singlePost', postId],
         queryFn: async () => {
@@ -46,7 +47,7 @@ const PostDetails = () => {
         voteType: 'upvote'
     }
     const handleUpVote = async () => {
-        const res = await axiosPublic.patch(`/posts/${postId}`, upVote)
+        const res = await axiosSecure.patch(`/posts/${postId}`, upVote)
         if (res.data.modifiedCount > 0) {
             successToast("Up-vote given successfully");
             refetch();
@@ -59,7 +60,7 @@ const PostDetails = () => {
         voteType: 'downvote'
     }
     const handleDownVote = async () => {
-        const res = await axiosPublic.patch(`/posts/${postId}`, downVote)
+        const res = await axiosSecure.patch(`/posts/${postId}`, downVote)
         if (res.data.modifiedCount > 0) {
             errorToast("Down-vote given successfully")
             refetch();
@@ -125,24 +126,41 @@ const PostDetails = () => {
                     {/* social share */}
                     <div className="flex items-center gap-1">
                         <span className="text-secondaryColor font-semibold">Share:</span>
-                        <div className="flex items-center justify-center gap-2">
-                            <FacebookShareButton url={`http://localhost:5000/posts/${postId}`}>
-                                <SlSocialFacebook size={21} className="text-secondaryColor" />
-                            </FacebookShareButton>
 
-                            <TwitterShareButton url={`http://localhost:5000/posts/${postId}`}>
-                                <RxTwitterLogo size={21} className="text-secondaryColor" />
-                            </TwitterShareButton>
+                        {
+                            !user?.email ? (
+                                <div className="flex items-center justify-center gap-2">
+                                    <Link to={'/login'}>
+                                        <SlSocialFacebook size={21} className="text-secondaryColor" />
+                                    </Link>
+                                    <Link to={'/login'}>
+                                        <RxTwitterLogo size={21} className="text-secondaryColor" />
+                                    </Link>
+                                    <Link to={'/login'}>
+                                        <IoLogoWhatsapp size={21} className="text-secondaryColor" />
+                                    </Link>
+                                </div>
+                            ) : (
+                                <div className="flex items-center justify-center gap-2">
+                                    <FacebookShareButton url={`http://localhost:5000/posts/${postId}`}>
+                                        <SlSocialFacebook size={21} className="text-secondaryColor" />
+                                    </FacebookShareButton>
 
-                            <WhatsappShareButton url={`http://localhost:5000/posts/${postId}`}>
-                                <IoLogoWhatsapp size={21} className="text-secondaryColor" />
-                            </WhatsappShareButton>
-                        </div>
+                                    <TwitterShareButton url={`http://localhost:5000/posts/${postId}`}>
+                                        <RxTwitterLogo size={21} className="text-secondaryColor" />
+                                    </TwitterShareButton>
+
+                                    <WhatsappShareButton url={`http://localhost:5000/posts/${postId}`}>
+                                        <IoLogoWhatsapp size={21} className="text-secondaryColor" />
+                                    </WhatsappShareButton>
+                                </div>
+                            )
+                        }
                     </div>
                 </div>
                 <Toaster />
             </div>
-            <CommentForm id={_id}></CommentForm>
+            <CommentForm id={_id} title={postTitle}></CommentForm>
         </Container>
     );
 };

@@ -140,13 +140,13 @@ const AddPost = () => {
                                     </span>
                                 </label>
                                 {errors.author_image && <span className="text-red-500 text-sm">{errors.author_image.message}</span>}
-                            </div> {/* author name */}
+                            </div> {/* author image */}
 
                             <div className="flex flex-col gap-[5px] w-full sm:w-[50%]">
                                 <label className="relative">
                                     <input type="text"
                                         className="peer bg-darkColor border-[#e5eaf2] border outline-none ps-24 pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
-                                        {...register("post_title", { required: "Post title is required", minLength: { value: 10, message: "minimum character length is 5" } })}
+                                        {...register("post_title", { required: "Post title is required", minLength: { value: 10, message: "minimum character length is 10" } })}
                                     />
                                     <span
                                         className="absolute top-3 left-5 peer-focus:-top-3 peer-focus:bg-primaryColor peer-focus:left-2 peer-focus:scale-[0.9] peer-focus:text-secondaryColor text-[#777777] peer-focus:px-1 transition-all duration-300 ">
