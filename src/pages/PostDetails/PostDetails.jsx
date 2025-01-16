@@ -15,6 +15,7 @@ import { IoLogoWhatsapp } from "react-icons/io5";
 import { HiMiniShare } from "react-icons/hi2";
 import { FiThumbsUp, FiThumbsDown } from "react-icons/fi";
 import { LiaTagsSolid } from "react-icons/lia";
+import CommentForm from "./CommentForm/CommentForm";
 
 const PostDetails = () => {
     const { postId } = useParams();
@@ -36,7 +37,7 @@ const PostDetails = () => {
         </div>
     }
 
-    const { authorName, authorEmail, authorImage, createdAt, postTitle, postDescription, postTag, UpVote, DownVote } = post || {};
+    const { _id, authorName, authorEmail, authorImage, createdAt, postTitle, postDescription, postTag, UpVote, DownVote } = post || {};
     const postDate = format(new Date(createdAt), "yyyy-MM-dd, HH:mm a");
 
     // up-vote
@@ -138,10 +139,10 @@ const PostDetails = () => {
                             </WhatsappShareButton>
                         </div>
                     </div>
-
                 </div>
                 <Toaster />
             </div>
+            <CommentForm id={_id}></CommentForm>
         </Container>
     );
 };

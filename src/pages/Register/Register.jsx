@@ -83,7 +83,7 @@ const Register = () => {
                                 <label className="relative">
                                     <input type="text"
                                         className="peer bg-darkColor border-[#e5eaf2] border outline-none ps-28 pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
-                                        {...register("name", { required: "Name is required", minLength: {value: 5, message: "minimum character length is 5" } })}
+                                        {...register("name", { required: "Name is required", maxLength: { value: 15, message: "maximum character length is 15" } })}
                                     />
                                     <span
                                         className="absolute top-3 left-5 peer-focus:-top-3 peer-focus:bg-primaryColor peer-focus:left-2 peer-focus:scale-[0.9] peer-focus:text-secondaryColor text-[#777777] peer-focus:px-1 transition-all duration-300 ">

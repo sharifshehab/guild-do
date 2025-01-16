@@ -96,7 +96,7 @@ const AddPost = () => {
                                 <label className="relative">
                                     <input type="text"
                                         className="peer bg-darkColor border-[#e5eaf2] border outline-none ps-32 pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
-                                        {...register("author_name", { required: "Author Name is required" })}
+                                        {...register("author_name")}
                                         defaultValue={user?.displayName}
                                         readOnly
                                     />
@@ -112,7 +112,7 @@ const AddPost = () => {
                                 <label className="relative">
                                     <input type="email"
                                         className="peer bg-darkColor border-[#e5eaf2] border outline-none ps-32 pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
-                                        {...register("author_email", { required: "Author Email is required" })}
+                                        {...register("author_email")}
                                         defaultValue={user?.email}
                                         readOnly
                                     />
@@ -130,7 +130,7 @@ const AddPost = () => {
                                 <label className="relative">
                                     <input type="text"
                                         className="peer bg-darkColor border-[#e5eaf2] border outline-none ps-32 pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
-                                        {...register("author_image", { required: "Author image is required" })}
+                                        {...register("author_image")}
                                         defaultValue={user?.photoURL}
                                         readOnly
                                     />
@@ -182,7 +182,6 @@ const AddPost = () => {
                             />
 
                         </div>{/* post tags */}
-
 
                         <div className="flex flex-col gap-[5px] w-full mt-[20px]">
                             <label className="relative w-full">
