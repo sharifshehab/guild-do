@@ -50,7 +50,6 @@ const ProviderContext = ({ children }) => {
             if (currentUser?.email) {
                 axiosSecure.post('/jwt', loggedUser)
                     .then(res => {
-                        console.log('setting token on the client side',res.data);
                         setLoading(false);
                     });
             } else {
