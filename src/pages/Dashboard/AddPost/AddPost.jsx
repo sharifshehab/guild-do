@@ -194,7 +194,7 @@ const AddPost = () => {
                                     Post description
                                 </span>
                             </label>
-                            {errors.post_title && <span className="text-red-500 text-sm">{errors.post_title.message}</span>}
+                            {errors.post_description && <span className="text-red-500 text-sm">{errors.post_description.message}</span>}
                         </div>{/* post description */}
 
                     </div>{/* space-y-5 */}

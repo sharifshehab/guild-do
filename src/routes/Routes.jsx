@@ -11,6 +11,7 @@ import MyPosts from "../pages/Dashboard/MyPosts/MyPosts";
 import MyProfile from "../pages/Dashboard/MyProfile/MyProfile";
 import PostDetails from "../pages/PostDetails/PostDetails";
 import ManageUsers from "../pages/Dashboard/ManageUsers/ManageUsers";
+import MakeAnnouncement from "../pages/Dashboard/MakeAnnouncement/MakeAnnouncement";
 
 export const router = createBrowserRouter([
     {
@@ -49,6 +50,11 @@ export const router = createBrowserRouter([
                 path: "manage-users",
                 element: <ManageUsers></ManageUsers>
             },
+            {
+                path: "announcement",
+                element: <MakeAnnouncement></MakeAnnouncement>
+            },
+            
             /* user routes */
             {
                 path: "add-post",
