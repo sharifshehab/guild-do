@@ -3,7 +3,8 @@ import useAxiosPublic from "../../../../hooks/useAxiosPublic";
 
 
 const TableRow = ({ post, refetch }) => {
-    const { _id, postTitle } = post;
+    const { _id, postTitle, UpVote, DownVote } = post;
+    
     const axiosPublic = useAxiosPublic();
 
     const deletePost = (id) => {
@@ -41,7 +42,8 @@ const TableRow = ({ post, refetch }) => {
                 <h4>{postTitle}</h4>
             </td>{/* name */}
             <td>
-                <h4>5</h4>
+                <h4>Up-vote: {UpVote}</h4>
+                <h4>Down-vote: {DownVote}</h4>
             </td>{/* votes */}
             <td>
                 <button className="btn btn-sm">See comments</button>

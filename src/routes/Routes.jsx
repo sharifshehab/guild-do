@@ -10,6 +10,7 @@ import AddPost from "../pages/Dashboard/AddPost/AddPost";
 import MyPosts from "../pages/Dashboard/MyPosts/MyPosts";
 import MyProfile from "../pages/Dashboard/MyProfile/MyProfile";
 import PostDetails from "../pages/PostDetails/PostDetails";
+import ManageUsers from "../pages/Dashboard/ManageUsers/ManageUsers";
 
 export const router = createBrowserRouter([
     {
@@ -43,6 +44,12 @@ export const router = createBrowserRouter([
         path: "dashboard",
         element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
         children: [
+            // admin routes
+            {
+                path: "manage-users",
+                element: <ManageUsers></ManageUsers>
+            },
+            /* user routes */
             {
                 path: "add-post",
                 element: <AddPost></AddPost>

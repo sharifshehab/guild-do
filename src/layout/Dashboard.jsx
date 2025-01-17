@@ -9,7 +9,7 @@ const Dashboard = () => {
 
                     {/* admin dashboard */}
                     <li><NavLink to={"/dashboard/user-home"}>Admin Profile</NavLink></li>
-                    <li><NavLink to={"/dashboard/user-home"}>Manage Users</NavLink></li>
+                    <li><NavLink to={"/dashboard/manage-users"}>Manage Users</NavLink></li>
                     <li><NavLink to={"/dashboard/user-home"}>Reported Comments</NavLink></li>
                     <li><NavLink to={"/dashboard/user-home"}>Make Announcement
                     </NavLink></li>
