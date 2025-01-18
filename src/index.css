@@ -110,10 +110,10 @@ img {
   clip-path: polygon(5% 0%, 0% 45%, 0% 100%, 95% 100%, 100% 60%, 100% 0%);
 }
 
-.next-pagination-cut {
+.next-cut {
   clip-path: polygon(0% 0%, 0% 0%, 0% 100%, 85% 100%, 100% 60%, 100% 0%);
 }
-.prev-pagination-cut {
+.prev-cut {
   clip-path: polygon(0% 40%, 15% 0%, 100% 0%, 100% 100%, 85% 100%, 0% 100%);
 }
 

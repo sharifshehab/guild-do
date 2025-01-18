@@ -10,6 +10,7 @@ import { TbLoader3 } from "react-icons/tb";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import SectionTitle from "../../../components/SectionTitle";
 
 
 const AddPost = () => {
@@ -48,7 +49,6 @@ const AddPost = () => {
                 <p className="text-center">You have reached the maximum number of posts allowed for a general user.
                     <br />Upgrade to a premium membership to increase your post limit.</p>
             </div>
-
         )
     }
 
@@ -81,15 +81,13 @@ const AddPost = () => {
 
     return (
         <Container>
-            <section className="w-full">
+            <section className="px-3">
 
-                {/* title */}
-                <div className="w-full flex flex-col items-center justify-center">
-                    <h1 className="text-[2rem] font-bold text-primary leading-[36px]">Add post</h1>
-                </div>
+                {/* title */} 
+                <SectionTitle title="add post"></SectionTitle>
 
                 {/* form area */}
-                <form className="w-full mt-12 bg-secondaryColor p-10" onSubmit={handleSubmit(onSubmit)}>
+                <form className="w-full bg-secondaryColor" onSubmit={handleSubmit(onSubmit)}>
                     <div className="space-y-5">
 
                         <div className="flex flex-col sm:flex-row items-center gap-5">
@@ -97,7 +95,7 @@ const AddPost = () => {
                             <div className="flex flex-col gap-[5px] w-full sm:w-[50%]">
                                 <label className="relative">
                                     <input type="text"
-                                        className="peer bg-darkColor border-[#e5eaf2] border outline-none ps-32 pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
+                                        className="peer text-white bg-darkColor border-[#e5eaf2] border outline-none ps-32 pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
                                         {...register("author_name")}
                                         defaultValue={user?.displayName}
                                         readOnly
@@ -113,7 +111,7 @@ const AddPost = () => {
                             <div className="flex flex-col gap-[5px] w-full sm:w-[50%]">
                                 <label className="relative">
                                     <input type="email"
-                                        className="peer bg-darkColor border-[#e5eaf2] border outline-none ps-32 pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
+                                        className="peer text-white bg-darkColor border-[#e5eaf2] border outline-none ps-32 pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
                                         {...register("author_email")}
                                         defaultValue={user?.email}
                                         readOnly
@@ -131,7 +129,7 @@ const AddPost = () => {
                             <div className="flex flex-col gap-[5px] w-full sm:w-[50%]">
                                 <label className="relative">
                                     <input type="text"
-                                        className="peer bg-darkColor border-[#e5eaf2] border outline-none ps-32 pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
+                                        className="peer text-white bg-darkColor border-[#e5eaf2] border outline-none ps-32 pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
                                         {...register("author_image")}
                                         defaultValue={user?.photoURL}
                                         readOnly
@@ -147,7 +145,7 @@ const AddPost = () => {
                             <div className="flex flex-col gap-[5px] w-full sm:w-[50%]">
                                 <label className="relative">
                                     <input type="text"
-                                        className="peer bg-darkColor border-[#e5eaf2] border outline-none ps-24 pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
+                                        className="peer text-white bg-darkColor border-[#e5eaf2] border outline-none ps-24 pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
                                         {...register("post_title", { required: "Post title is required", minLength: { value: 10, message: "minimum character length is 10" } })}
                                     />
                                     <span
@@ -182,13 +180,12 @@ const AddPost = () => {
                                     </div>
                                 )}
                             />
-
                         </div>{/* post tags */}
 
                         <div className="flex flex-col gap-[5px] w-full mt-[20px]">
                             <label className="relative w-full">
                                 <textarea
-                                    className="peer min-h-72 bg-darkColor border-[#e5eaf2] border outline-none ps-[150px] pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
+                                    className="peer min-h-72 text-white bg-darkColor border-[#e5eaf2] border outline-none ps-[150px] pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
                                     {...register("post_description", { required: "Post description is required" })}
                                 ></textarea>
                                 <span
@@ -200,7 +197,7 @@ const AddPost = () => {
                         </div>{/* post description */}
 
                     </div>{/* space-y-5 */}
-                    <button type="submit" className={`py-3 px-4 border border-primaryColor outline-none mt-[10px]`}>{loading ? <TbLoader3 size={22} className="animate-spin text-[#ffffff]" /> : 'Add Post'}</button>
+                    <button type="submit" className='py-3 px-4 bg-yellow-400 font-medium outline-none mt-3 next-cut border-2 border-yellow-400 hover:border-white duration-300'>{loading ? <TbLoader3 size={22} className="animate-spin text-[#ffffff]" /> : 'Add Post'}</button>
                 </form>
                 <Toaster />
             </section>
