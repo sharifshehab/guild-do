@@ -1,40 +1,37 @@
-import { format } from "date-fns";
-import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
-import useAxiosPublic from "../../../../hooks/useAxiosPublic";
 import usePostComments from "../../../../API/usePostComments";
+import formateDate from "../../../../components/formateDate";
 
 
 const TableRow = ({ post }) => {
-    const axiosPublic = useAxiosPublic();
     const { _id, postTitle, postDescription, postTag, UpVote, DownVote, authorName, authorImage, createdAt } = post || {}
-    const postDate = format(new Date(createdAt), "yyyy-MM-dd, HH:mm a");
+    const date = formateDate(createdAt);
 
     // get specific post comments
     const [postComments] = usePostComments(postTitle)
 
     return (
         <tr>
-            <td className="max-w-72">
+            <td className="lg:px-5 py-5">
                 <div className="space-y-1">
-                    <Link to={`/post/${_id}`} className="text-2xl font-semibold text-primaryColor">{postTitle}</Link>
-                    <p>{postDescription.slice(0, 85)}...</p>
+                    <Link to={`/post/${_id}`} className="text-xl lg:text-[22px] font-semibold text-primaryColor capitalize">{postTitle}</Link>
+                    <p className="text-white">{postDescription.slice(0, 80)}...</p>
                 </div>
             </td>
             <td>
-                {postTag?.map((tag, idx) => <span key={idx}>{tag}{idx < postTag.length - 1 && ', '}</span>)}
+                {postTag?.map((tag, idx) => <span key={idx} className="text-white">{tag}{idx < postTag.length - 1 && (<span className="text-yellow-400 text-xl">, </span>)}</span>)}
             </td>
-            <td>
+            <td className="text-center text-primaryColor">
                 {postComments.length}
             </td>
             <td>
-                <div>
-                    <h4>Upvote: {UpVote}</h4>
-                    <h4>Downvote: {DownVote}</h4>
+                <div className="text-white">
+                    <h4>Upvote: <span className="text-primaryColor">{UpVote}</span></h4>
+                    <h4>Upvote: <span className="text-primaryColor">{DownVote}</span></h4>
                 </div>
             </td>
             <td>
-                <div className="flex items-center gap-3">
+                <div className="flex flex-col items-center justify-center space-y-2">
                     <div className="avatar">
                         <div className="mask mask-squircle h-12 w-12">
                             <img
@@ -44,9 +41,9 @@ const TableRow = ({ post }) => {
                             />
                         </div>
                     </div>
-                    <div>
-                        <div className="font-bold">{authorName}</div>
-                        <div className="text-sm opacity-50">{postDate}</div>
+                    <div className="text-center">
+                        <div className="font-bold text-white">{authorName}</div>
+                        <div className="text-sm text-primaryColor opacity-85">{date}</div>
                     </div>
                 </div>
             </td>

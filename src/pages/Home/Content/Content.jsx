@@ -2,7 +2,8 @@ import Container from "../../../components/Container";
 import TableRow from "./TableRow/TableRow";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
-import {  useState } from "react";
+import { useState } from "react";
+import SectionTitle from "../../../components/SectionTitle";
 
 const Content = () => {
     const axiosPublic = useAxiosPublic();
@@ -14,11 +15,11 @@ const Content = () => {
         }
     });
 
-    const itemsPerPage = 5;    
+    const itemsPerPage = 5;
 
-    const numberOfPages = Math.ceil(postsCount?.count / itemsPerPage)  
+    const numberOfPages = Math.ceil(postsCount?.count / itemsPerPage)
 
-    const pages = [...Array(numberOfPages).keys()]; 
+    const pages = [...Array(numberOfPages).keys()];
 
     const [currentPage, setCurrentPage] = useState(0);
 
@@ -44,45 +45,48 @@ const Content = () => {
     });
 
     return (
-        <Container>
-            <div className="grid grid-cols-3 gap-8">
-                {/* posts */}
-                <div className="h-screen bg-red-600 col-span-full lg:col-span-2">
-                    <div className="overflow-x-auto">
-                        <table className="table">
-                            {/* head */}
-                            <thead>
-                                <tr>
-                                    <th>Forum</th>
-                                    <th>tags</th>
-                                    <th>comments count</th>
-                                    <th>votes count</th>
-                                    <th>Author</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {/* row */}
-                                {
-                                    allPosts?.map(post => <TableRow key={post._id} post={post}></TableRow>)
-                                }
-                                
-                            </tbody>
-                        </table>
-                    </div>
+        <section>
+            <Container>
+                <SectionTitle title="Forums"></SectionTitle>
 
-                </div>
-                {/* sidebar */}
-                <div className="h-screen bg-blue-600 col-span-full lg:col-span-1"></div>
-            </div>
+                <div className="grid grid-cols-3 gap-8">
 
-            <div className="pagination">
-                <button onClick={handlePrevPage} className="px-3 py-1 bg-white text-secondaryColor">Prev</button>
-                {
-                    pages?.map(page => <button className={currentPage === page ? 'px-3 py-1 bg-yellow-400 text-secondaryColor' : 'px-3 py-1 bg-primaryColor text-secondaryColor' } onClick={() => setCurrentPage(page)} key={page}>{page + 1}</button>)
-                }                                                                                                               
-                <button onClick={handleNextPage} className="px-3 py-1 bg-white text-secondaryColor">Next</button>
-            </div>
-        </Container>
+                    <div className="min-h-screen bg-secondaryColor col-span-full lg:col-span-2 relative">
+                        <div className="overflow-x-auto">
+                            <table className="table">
+                                {/* head */}
+                                <thead className="bg-white text-darkColor text-lg capitalize">
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>tags</th>
+                                        <th>comments count</th>
+                                        <th>votes count</th>
+                                        <th>Author</th>
+                                    </tr>
+                                </thead>
+                                <tbody className="px-10">
+                                    {/* row */}
+                                    {
+                                        allPosts?.map(post => <TableRow key={post._id} post={post}></TableRow>)
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>{/* posts */}
+
+                    <div className="min-h-screen bg-blue-600 col-span-full lg:col-span-1"></div>{/* sidebar */}
+
+                    <div className="pagination col-span-2 flex justify-center">
+                        <button onClick={handlePrevPage} className="px-5 py-3 bg-yellow-400 text-secondaryColor font-semibold prev-pagination-cut">Prev</button>
+                        {
+                            pages?.map(page => <button className={currentPage === page ? 'text-lg px-5 py-[9px] bg-white opacity-95 text-darkColor ' : 'bg-white px-5 py-3 text-secondaryColor'} onClick={() => setCurrentPage(page)} key={page}>{page + 1}</button>)
+                        }
+                        <button onClick={handleNextPage} className="px-5 py-3 bg-yellow-400 text-secondaryColor font-semibold next-pagination-cut">Next</button>
+                    </div>{/* pagination */}
+
+                </div>{/* grid */}
+            </Container>
+        </section>
     );
 };
 
