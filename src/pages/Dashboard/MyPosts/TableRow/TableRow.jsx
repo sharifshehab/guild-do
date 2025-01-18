@@ -1,5 +1,6 @@
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../../../hooks/useAxiosPublic";
+import { Link } from "react-router-dom";
 
 
 const TableRow = ({ post, refetch }) => {
@@ -46,7 +47,7 @@ const TableRow = ({ post, refetch }) => {
                 <h4>Down-vote: {DownVote}</h4>
             </td>{/* votes */}
             <td>
-                <button className="btn btn-sm">See comments</button>
+                <Link to={`/dashboard/comments/${postTitle}`} className="btn btn-sm">See comments</Link>
             </td>{/* comments */}
             <td>
                 <button onClick={() => deletePost(_id)} className="btn btn-sm">Delete post</button>

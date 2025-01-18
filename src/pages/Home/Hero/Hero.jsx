@@ -1,56 +1,54 @@
+import Container from "../../../components/Container";
+import { useEffect, useState } from "react";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
 // react icons
 import { CiSearch } from "react-icons/ci";
-import { FaCircleCheck } from "react-icons/fa6";
-import Container from "../../../components/Container";
 
 const Hero = () => {
+    const axiosPublic = useAxiosPublic();
+    const [search, setSearch] = useState('');
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+        const searchText = e.target.search.value;
+        setSearch(searchText);
+    }
+
+    useEffect(() => {
+        if (search) {
+            axiosPublic.get(`/posts?search=${search}`)
+                .then(data => console.log('search ', data.data))
+        }
+    }, [search]);
+
     return (
 
-        <div className="w-full h-full bg-primaryColor">
+        <section className="relative flex flex-col items-center justify-center w-full h-[800px] bg-heroBG bg-no-repeat bg-cover bg-center my-0">
+            {/* image overlay */}
+            <div className="absolute inset-0 bg-black bg-opacity-50"></div>
 
             <Container>
-                {/* header */}
-                <header className="flex lg:flex-row flex-col gap-[50px] lg:gap-10 items-center p-8">
-                    <div className="w-full lg:w-[55%]">
-                        <h1 className="text-[40px] sm:text-[60px] font-[600] leading-[45px] sm:leading-[70px]">Let
-                            your <span className="text-[#F38160]">groceries</span> come to you</h1>
-                        <p className="text-[18px] text-gray-400 mt-2">Get fresh groceries online without stepping out to
-                            make delicious food with the freshest ingredients</p>
-                        <div className="relative my-5">
-                            <input placeholder="Search here"
-                                className="py-3 px-4 w-full outline-none rounded-l-md bg-gray-100" />
+                <div className="relative text-center z-10">
+                    <h1 className="text-4xl md:text-5xl lg:text-7xl leading-snug lg:leading-tight font-semibold uppercase text-white">
+                        Ultimate <span className="text-yellow-400">Challenges</span> With the Hottest Headlines
+                    </h1>
+                    <p className="text-xl text-yellow-400 mt-2 capitalize">
+                        Conquer the Gaming Arena and collide with Current Updates
+                    </p>
+
+                    <div className="relative my-5">
+                        <form action="#" onSubmit={handleSearch}>
+                            <input name="search" placeholder="Search with tags.."
+                                className="py-3 px-4 w-full outline-none bg-gray-100 text-secondaryColor" />
                             <button
-                                className="h-full absolute top-0 right-0 bg-[#F38160] px-3 text-white text-[1.3rem] rounded-r-md">
-                                <CiSearch /></button>
-                        </div>
-
-                        <div className="flex items-center justify-center gap-[15px]">
-                            <p className="flex items-center gap-[5px] text-gray-400 text-[1rem]">
-                                <FaCircleCheck className="text-[#F0B70D] text-[1.2rem]" />
-                                Fresh Vegetables
-                            </p>
-                            <p className="flex items-center gap-[5px] text-gray-400 text-[1rem]">
-                                <FaCircleCheck className="text-[#F0B70D] text-[1.2rem]" />
-                                100% Guarantee
-                            </p>
-                            <p className="flex items-center gap-[5px] text-gray-400 text-[1rem]">
-                                <FaCircleCheck className="text-[#F0B70D] text-[1.2rem]" />
-                                Cash on Delivery
-                            </p>
-                            <p className="flex items-center gap-[5px] text-gray-400 text-[1rem]">
-                                <FaCircleCheck className="text-[#F0B70D] text-[1.2rem]" />
-                                Fast Delivery
-                            </p>
-                        </div>
+                                className="h-full absolute top-0 right-0 bg-yellow-400 px-3 text-white text-xl">
+                                <CiSearch className="text-darkColor" />
+                            </button>
+                        </form>
                     </div>
-
-                    <div className="w-full sm:w-[40%]">
-                        <img src="https://i.ibb.co/61R7zbv/delivery-concept-handsome-african-american-deliver-AZUZTZ3-1.png"
-                            alt="image" className="w-full h-full" />
-                    </div>
-                </header>
+                </div>
             </Container>
-        </div>
+        </section>
     );
 };
 

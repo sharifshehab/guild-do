@@ -9,11 +9,13 @@ import Select from 'react-select'
 import { TbLoader3 } from "react-icons/tb";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 
 const AddPost = () => {
     const { register, handleSubmit, control, reset, formState: { errors } } = useForm();
     const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
     const { successToast, errorToast } = useToast();
     const [loading, setLoading] = useState(false);
@@ -64,7 +66,7 @@ const AddPost = () => {
                 DownVote: parseInt(0),
                 createdAt: new Date()
             }
-            const res = await axiosPublic.post('/posts', postData);
+            const res = await axiosSecure.post('/posts', postData);
             if (res.data.insertedId) {
                 reset(); // Reset form
                 successToast("Post added successful");

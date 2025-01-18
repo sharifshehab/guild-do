@@ -12,6 +12,8 @@ import MyProfile from "../pages/Dashboard/MyProfile/MyProfile";
 import PostDetails from "../pages/PostDetails/PostDetails";
 import ManageUsers from "../pages/Dashboard/ManageUsers/ManageUsers";
 import MakeAnnouncement from "../pages/Dashboard/MakeAnnouncement/MakeAnnouncement";
+import PostComments from "../pages/Dashboard/MyPosts/PostComments/PostComments";
+import ReportedActivities from "../pages/Dashboard/ReportedActivities/ReportedActivities";
 
 export const router = createBrowserRouter([
     {
@@ -51,6 +53,10 @@ export const router = createBrowserRouter([
                 element: <ManageUsers></ManageUsers>
             },
             {
+                path: "reports",
+                element: <ReportedActivities></ReportedActivities>
+            },
+            {
                 path: "announcement",
                 element: <MakeAnnouncement></MakeAnnouncement>
             },
@@ -63,6 +69,10 @@ export const router = createBrowserRouter([
             {
                 path: "my-posts",
                 element: <MyPosts></MyPosts>
+            },
+            {
+                path: "comments/:title",
+                element: <PostComments></PostComments>
             },
             {
                 path: "my-profile",

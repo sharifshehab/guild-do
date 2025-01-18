@@ -1,7 +1,7 @@
 import { format } from "date-fns";
 
 const Post = ({ post }) => {
-    const { postTitle, createdAt, postDescription, postTag } = post || {};
+    const { postTitle, createdAt } = post || {};
     const postDate = format(new Date(createdAt), "yyyy-MM-dd");
 
     return (

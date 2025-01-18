@@ -1,17 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
-import TableRow from "./TableRow/TableRow";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import TableRow from "./TableRow/TableRow";
 
-const ManageUsers = () => {
+const ReportedActivities = () => {
     const axiosSecure = useAxiosSecure();
-    const { data: allUsers = [], refetch, isLoading } = useQuery({
-        queryKey: ['allUsers'],
+
+    const { data: allReports = [], refetch, isLoading } = useQuery({
+        queryKey: ['allReports'],
         queryFn: async () => {
-            const res = await axiosSecure.get('/users')
+            const res = await axiosSecure.get('/reports')
             return res.data
         }
     });
-
 
     if (isLoading) {
         return <div className='min-h-screen flex items-center justify-center'>
@@ -22,9 +22,8 @@ const ManageUsers = () => {
 
     return (
         <>
-            {/* title */}
-            <div className="w-full flex flex-col items-center justify-center">
-                <h1 className="text-[2rem] font-bold text-primary leading-[36px]">Manage Users</h1>
+            <div className="text-center mb-10">
+                <h2 className="text-4xl underline underline-offset-8 decoration-primaryColor">All Reports</h2>
             </div>
 
             <div className="overflow-x-auto pb-32">
@@ -32,16 +31,16 @@ const ManageUsers = () => {
                     {/* head */}
                     <thead>
                         <tr className="text-sm dark:text-white">
-                            <th>User name</th>
-                            <th>User email</th>
+                            <th>Report</th>
+                            <th>Comment</th>
+                            <th>Commenter email</th>
+                            <th>Feedback</th>
                             <th>Action</th>
-                            <th>Subscription Status</th>
-                            <th>Remove</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        {allUsers?.map(user => <TableRow key={user._id} user={user} refetch={refetch}></TableRow>) }
+                        {allReports?.map(data => <TableRow key={data._id} data={data} refetch={refetch}></TableRow>)}
                     </tbody>
                 </table>
             </div>
@@ -49,4 +48,4 @@ const ManageUsers = () => {
     );
 };
 
-export default ManageUsers;
+export default ReportedActivities;

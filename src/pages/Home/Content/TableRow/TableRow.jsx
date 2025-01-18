@@ -2,6 +2,7 @@ import { format } from "date-fns";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import useAxiosPublic from "../../../../hooks/useAxiosPublic";
+import usePostComments from "../../../../API/usePostComments";
 
 
 const TableRow = ({ post }) => {
@@ -10,13 +11,7 @@ const TableRow = ({ post }) => {
     const postDate = format(new Date(createdAt), "yyyy-MM-dd, HH:mm a");
 
     // get specific post comments
-    const { data: comments = []} = useQuery({
-        queryKey: ['comments', postTitle],
-        queryFn: async () => {
-            const res = await axiosPublic.get(`/comments?title=${postTitle}`);
-            return res.data;
-        }
-    });
+    const [postComments] = usePostComments(postTitle)
 
     return (
         <tr>
@@ -30,7 +25,7 @@ const TableRow = ({ post }) => {
                 {postTag?.map((tag, idx) => <span key={idx}>{tag}{idx < postTag.length - 1 && ', '}</span>)}
             </td>
             <td>
-                {comments.length}
+                {postComments.length}
             </td>
             <td>
                 <div>

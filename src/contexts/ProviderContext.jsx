@@ -55,7 +55,6 @@ const ProviderContext = ({ children }) => {
             } else {
                 axiosSecure.post('/logout', {})
                     .then(res => {
-                        console.log('removing token from the client side', res.data);
                         setLoading(false);
                     });
             }

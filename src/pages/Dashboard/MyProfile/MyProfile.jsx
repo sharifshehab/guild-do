@@ -4,16 +4,18 @@ import useAxiosPublic from "../../../hooks/useAxiosPublic";
 // react icons
 import { MdVerified } from "react-icons/md";
 import Post from "./Post";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const MyProfile = () => {
     const { user } = useAuth();
     const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
 
     // user info
     const { data: userProfile = {} } = useQuery({
         queryKey: ['userProfile', user?.email],
         queryFn: async () => {
-            const res = await axiosPublic.get(`/users?email=${user?.email}`)
+            const res = await axiosSecure.get(`/users?email=${user?.email}`)
             return res.data
         }
     });
@@ -54,6 +56,11 @@ const MyProfile = () => {
                         <span className="">{badge}</span>
                         <h2 className="font-[600] text-[1.4rem]">{name}</h2>
                         <p className="text-text text-[0.9rem]">{email}</p>
+                        
+                        {
+                            userProfile?.warn && <h2 className="font-[600] text-3xl text-red-500">{userProfile?.warn}</h2>
+                        }
+                        
                     </div>
 
                     <div className="mt-8 border-t border-border">
