@@ -81,12 +81,12 @@ const Header = () => {
                                     </div>
                                     <ul
                                         tabIndex={0}
-                                        className="menu menu-sm dropdown-content bg-secondaryColor z-[1] mt-2 w-52 p-2 shadow">
+                                        className="menu menu-sm dropdown-content bg-yellow-400 text-base z-10 mt-2 w-52 p-2 shadow">
                                         <li>
-                                            <span className="text-lg text-primaryColor">{user?.displayName}</span>
+                                            <span className="text-white font-medium rounded-none bg-secondaryColor py-2">{user?.displayName}</span>
                                         </li>
                                         <li><NavLink to={"/dashboard"}>Dashboard</NavLink></li>
-                                        <li><button onClick={handleLogOut}>Log Out</button></li>
+                                        <li className="border-t-2 decoration-white"><button onClick={handleLogOut}>Log Out</button></li>
                                     </ul>
                                 </div>
                             </div>) :

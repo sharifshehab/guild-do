@@ -2,6 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import TableRow from "./TableRow/TableRow";
+import Loading from "../../../components/Loading";
+import SectionTitle from "../../../components/SectionTitle";
 
 const MyPosts = () => {
     const { user } = useAuth();
@@ -15,14 +17,16 @@ const MyPosts = () => {
         }
     });
 
+    if (isLoading) {
+        return (<Loading></Loading>);
+    }
+
     return (
         <>
             {/* title */}
-            <div className="w-full flex flex-col items-center justify-center">
-                <h1 className="text-[2rem] font-bold text-primary leading-[36px]">My posts</h1>
-            </div>
+            <SectionTitle title="my posts"></SectionTitle>
             
-            <div className="overflow-x-auto pb-32">
+            <div className="overflow-x-auto">
                 <table className="table">
                     {/* head */}
                     <thead>

@@ -26,8 +26,8 @@ const TableRow = ({ post }) => {
             </td>
             <td>
                 <div className="text-white">
-                    <h4>Upvote: <span className="text-primaryColor">{UpVote}</span></h4>
-                    <h4>Upvote: <span className="text-primaryColor">{DownVote}</span></h4>
+                    <h4>Up Vote: <span className="text-primaryColor">{UpVote}</span></h4>
+                    <h4>Down Vote: <span className="text-primaryColor">{DownVote}</span></h4>
                 </div>
             </td>
             <td>

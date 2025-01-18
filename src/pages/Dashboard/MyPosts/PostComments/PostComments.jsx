@@ -10,9 +10,9 @@ const PostComments = () => {
     return (
         <>
             <div className="text-center mb-10">
-                <h2 className="text-4xl underline underline-offset-8 decoration-primaryColor">{title}</h2>
+                <h2 className="text-white text-4xl underline underline-offset-8 decoration-yellow-400">{title}</h2>
             </div>
-            <h4 className="text-xl text-primaryColor font-semibold ">Total Comments: {postComments.length}</h4>
+            <h4 className="text-xl text-yellow-400 font-semibold pl-3">Total Comments: {postComments.length}</h4>
             <div className="overflow-x-auto pb-32">
                 <table className="table">
                     {/* head */}

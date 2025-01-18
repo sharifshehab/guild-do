@@ -43,29 +43,31 @@ const TableRow = ({ data }) => {
         } catch (error) {
             console.error('Post adding error:', error);
             errorToast(`There was an error while adding the report: ${error.message}`)
-        } 
+        }
     }
 
     return (
-            <tr className="dark:text-primaryColor">
-                <td className="w-3/5">
-                    <h4>{comment}</h4>
-                </td>
-                <td>
-                    <h4>{email}</h4>
-                </td>{/* email */}
-                <td>
-                    <Select
-                        defaultValue={selectedOption}
-                        onChange={setSelectedOption}
-                        options={options}
-                        isDisabled={isReported}
-                    />
-                </td>{/* Report */}
-                <td>
-                    <button onClick={handleReport} className={`btn  ${isReported ? "disabled:bg-green-400" : "disabled:bg-red-300"}`} disabled={!selectedOption || isReported}> {isReported ?  "Reported" : 'Report'}</button>
-                </td>{/* Feedback */}
-            </tr>
+        <tr className="text-yellow-400">
+            <td className="w-3/5">
+                <h4>{comment}</h4>
+            </td>
+            <td>
+                <h4>{email}</h4>
+            </td>{/* email */}
+            <td>
+                <Select
+                    defaultValue={selectedOption}
+                    onChange={setSelectedOption}
+                    options={options}
+                    isDisabled={isReported}
+                    className="gd-post-select w-28"
+                    classNamePrefix="gd-post"
+                />
+            </td>{/* Report */}
+            <td>
+                <button onClick={handleReport} className={`btn text-secondaryColor rounded-none border-2 border-white bg-yellow-400 hover:bg-yellow-500 ${isReported ? "disabled:bg-yellow-400 disabled:text-darkColor" : "disabled:bg-gray-300 disabled:text-slate-500"}`} disabled={!selectedOption || isReported}> {isReported ? "Reported" : 'Report'}</button>
+            </td>{/* Feedback */}
+        </tr>
     );
 };
 
