@@ -3,9 +3,12 @@ import { MdOutlineNotifications } from "react-icons/md";
 import Container from "../../components/Container";
 import useAuth from "../../hooks/useAuth";
 import { Link, NavLink } from "react-router-dom";
+import useAnnouncements from "../../API/useAnnouncements";
 
 const Header = () => {
     const { user, handleLogOut } = useAuth();
+    const [announcements] = useAnnouncements();
+
     const menuItems =
         <>
             <li>
@@ -45,18 +48,22 @@ const Header = () => {
                                 <div className="dropdown dropdown-end">
                                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
                                         <div className="indicator">
-                                            <MdOutlineNotifications size={23} color="#fff10f" />
-                                            <span className="badge badge-sm indicator-item">8</span>
+                                            <MdOutlineNotifications size={23} className="text-yellow-400" />
+                                            <span className="badge badge-sm indicator-item">{announcements.length}</span>
                                         </div>
                                     </div>
+
                                     <div
                                         tabIndex={0}
-                                        className="card card-compact dropdown-content bg-base-100 z-[1] mt-3 w-52 shadow">
-                                        <div className="card-body">
-                                            <span className="text-lg font-bold">8 Items</span>
-                                            <span className="text-info">Subtotal: $999</span>
-                                            <div className="card-actions">
-                                                <button className="btn btn-primary btn-block">View cart</button>
+                                        className="card card-compact dropdown-content bg-yellow-400 rounded-none z-10 mt-2 w-52 shadow">
+                                        <div className="card-body space-y-1">
+                                            {
+                                                announcements?.map(announcement => <span className="text-sm font-semibold text-darkColor border-b border-white pb-1" key={announcement._id}>{announcement.announcementTitle.slice(0, 20)}...</span>)
+                                            }
+                                            <div className="card-actions self-center">
+                                                <a href="#announcements">
+                                                    <button className="mt-3 btn rounded-none btn-block bg-secondaryColor text-yellow-400 hover:bg-darkColor duration-500">{announcements.length > 0 ? "See Announcements" : "No Announcements"}</button>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
