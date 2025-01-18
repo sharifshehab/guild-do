@@ -19,7 +19,7 @@ body {
   font-size: 16px;
   font-weight: 400;
   line-height: 1.4;
-  color: white;
+  color: var(--dark-color);
   background: none repeat scroll 0 0;
   background-color: var(--dark-color);
   margin: 0 auto;
@@ -101,7 +101,11 @@ img {
   color: var(--primary-color);
 }
 
-.both-cut {
+.title-cut {
   clip-path: polygon(92% 0%, 100% 40%, 100% 100%, 8% 100%, 0% 60%, 0% 0%);
   /* clip-path: polygon(92% 0%, 100% 50%, 100% 100%, 8% 100%, 0% 50%, 0% 0%); */
+} 
+
+.tag-cut {
+clip-path:polygon(5% 0%, 0% 45%, 0% 100%, 95% 100%, 100% 60%, 100% 0%);
 } 
