@@ -43,7 +43,7 @@ const TableRow = ({ post }) => {
                     </div>
                     <div className="text-center">
                         <div className="font-bold text-white">{authorName}</div>
-                        <div className="text-sm text-yellow-400 opacity-85">{date}</div>
+                        <div className="text-sm text-yellow-400">{date}</div>
                     </div>
                 </div>
             </td>

@@ -15,12 +15,13 @@ import MakeAnnouncement from "../pages/Dashboard/MakeAnnouncement/MakeAnnounceme
 import PostComments from "../pages/Dashboard/MyPosts/PostComments/PostComments";
 import ReportedActivities from "../pages/Dashboard/ReportedActivities/ReportedActivities";
 import Payment from "../pages/Dashboard/Payment/Payment";
+import Error from "../pages/Error/Error";
+import AdminProfile from "../pages/Dashboard/AdminProfile/AdminProfile";
 
 export const router = createBrowserRouter([
     {
         path: "/",
         element: <Root></Root>,
-        // errorElement: 
         children: [
             {
                 index: true,
@@ -49,6 +50,10 @@ export const router = createBrowserRouter([
         element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
         children: [
             // admin routes
+            {
+                path: "admin-profile",
+                element: <AdminProfile></AdminProfile>
+            },
             {
                 path: "manage-users",
                 element: <ManageUsers></ManageUsers>
@@ -84,5 +89,9 @@ export const router = createBrowserRouter([
                 element: <MyProfile></MyProfile>
             }
         ]
+    },
+    {
+        path: "*",
+        element: <Error></Error>
     }
 ]);

@@ -8,7 +8,7 @@ import useAuth from "../../hooks/useAuth";
 
 const Home = () => {
     const [announcements, isLoading] = useAnnouncements();
-    const { searchResult } = useAuth();
+    const { searchResult, setSearchResult } = useAuth();
 
     return (
         <main>
@@ -19,7 +19,7 @@ const Home = () => {
             }
             {
                 searchResult.length > 0 &&
-                <SearchResults searchData={searchResult}></SearchResults>
+                <SearchResults searchData={searchResult} setSearchResult={setSearchResult}></SearchResults>
             }
             <Categories></Categories>
             <Content></Content>

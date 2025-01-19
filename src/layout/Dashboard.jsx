@@ -7,7 +7,7 @@ const Dashboard = () => {
             <div className="w-full lg:w-64 bg-yellow-400 min-h-screen">
                 <ul className="menu">
                     {/* admin dashboard */}
-                    <li><NavLink to={"/dashboard/user-home"}>Admin Profile</NavLink></li>
+                    <li><NavLink className={({ isActive }) => isActive ? 'bg-secondaryColor font-semibold rounded-none text-white focus:bg-secondaryColor focus:text-white' : 'hover:bg-white text-darkColor rounded-none'} to={"/dashboard/admin-profile"}>Admin Profile</NavLink></li>
                     <li><NavLink className={({ isActive }) => isActive ? 'bg-secondaryColor font-semibold rounded-none text-white focus:bg-secondaryColor focus:text-white' : 'hover:bg-white text-darkColor rounded-none'} to={"/dashboard/manage-users"}>Manage Users</NavLink></li>
                     <li><NavLink className={({ isActive }) => isActive ? 'bg-secondaryColor font-semibold rounded-none text-white focus:bg-secondaryColor focus:text-white' : 'hover:bg-white text-darkColor rounded-none'} to={"/dashboard/reports"}>Reported Activities</NavLink></li>
                     <li><NavLink className={({ isActive }) => isActive ? 'bg-secondaryColor font-semibold rounded-none text-white focus:bg-secondaryColor focus:text-white' : 'hover:bg-white text-darkColor rounded-none'} to={"/dashboard/announcement"}>Make Announcement

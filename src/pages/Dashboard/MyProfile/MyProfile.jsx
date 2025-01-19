@@ -1,12 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
-// react icons
-import { MdVerified } from "react-icons/md";
 import Post from "./Post";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import SectionTitle from "../../../components/SectionTitle";
 import Container from "../../../components/Container";
+import image from "../../../assets/images/1.webp";
+// react icons
+import { MdVerified } from "react-icons/md";
+
 
 const MyProfile = () => {
     const { user } = useAuth();
@@ -23,7 +25,7 @@ const MyProfile = () => {
     });
     const { name, email, badge } = userProfile || {};
 
-    // user top 3 post
+    // user's top 3 post
     const { data: myPosts = [] } = useQuery({
         queryKey: ['userPosts', user?.email],
         queryFn: async () => {
@@ -42,7 +44,7 @@ const MyProfile = () => {
 
                     <div className="w-full lg:w-[60%] shadow-lg bg-darkColor">
 
-                        <div className="w-full h-[150px] relative bg-[url('https://img.freepik.com/premium-vector/content-writer-vector-colored-round-line-illustration_104589-2571.jpg')] bg-center">
+                        <div className={`w-full h-[200px] relative bg-profileBG bg-no-repeat bg-cover bg-right-top`}>
                             <img
                                 alt={user?.displayName}
                                 src={user?.photoURL}
@@ -56,7 +58,7 @@ const MyProfile = () => {
 
                         <div className="w-full text-center mt-16">
                             <span className={`${userProfile?.badge === "Gold" ? 'text-yellow-400' : 'text-amber-700'}`}>{badge}</span>
-                            <h2 className="font-semibold text-2xl text-yellow-400">{name}</h2>
+                            <h2 className="font-semibold text-3xl capitalize text-yellow-400">{name}</h2>
                             <p className="text-text text-base text-white">{email}</p>
                             {
                                 userProfile?.warn && <h2 className="font-[600] text-3xl text-red-500">{userProfile?.warn}</h2>

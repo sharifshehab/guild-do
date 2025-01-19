@@ -21,7 +21,6 @@ const AddPost = () => {
     const { user } = useAuth();
     const { successToast, errorToast } = useToast();
     const [loading, setLoading] = useState(false);
-    const navigate = useNavigate();
 
     const options = [
         { value: 'chocolate', label: 'Chocolate' },
@@ -52,24 +51,21 @@ const AddPost = () => {
         return <Loading></Loading>
     }
 
-    if (!userPayment.email && myPosts.length >= 4) {
+    if (!userPayment.email && myPosts.length >= 5) {
         return (
             <div className='min-h-screen flex flex-col items-center justify-center space-y-3'>
                 <Link to={'/dashboard/payment'}>
                     <button className='py-3 px-4 bg-yellow-400 font-medium outline-none mt-3 tag-cut  border-2 border-yellow-400 hover:border-white duration-300'>Become a Member</button>
                 </Link>
-
-                <p className="text-center text-white">You have reached the maximum number of posts allowed for a general user.
-                    <br />Upgrade to a premium membership to increase your post limit.</p>
+                <p className="text-center text-white leading-loose">You have reached the maximum number of posts allowed for a general user.
+                    <br />Upgrade to a premium membership with a one-time payment of just <span className="text-yellow-400 font-semibold">$50</span> to increase your post limit for lifetime.</p>
             </div>
         )
     }
 
     const onSubmit = async (formData) => {
         refetch();
-
         setLoading(true);
-
         try {
             const postData = {
                 authorName: formData.author_name,
@@ -103,7 +99,7 @@ const AddPost = () => {
                 <SectionTitle title="add post"></SectionTitle>
 
                 {/* form area */}
-                <form className="w-full bg-secondaryColor " onSubmit={handleSubmit(onSubmit)}>
+                <form className="w-full bg-secondaryColor" onSubmit={handleSubmit(onSubmit)}>
 
                     <div className="space-y-5">
 
@@ -214,7 +210,7 @@ const AddPost = () => {
 
                     </div>{/* space-y-5 */}
 
-                    <button type="submit" className='py-3 px-4 bg-yellow-400 font-medium outline-none mt-3 next-cut border-2 border-yellow-400 hover:border-white duration-300'>{loading ? <TbLoader3 size={22} className="animate-spin text-[#ffffff]" /> : 'Add Post'}</button>
+                    <button type="submit" disabled={myPosts?.length === 5} className='py-3 px-4 bg-yellow-400 font-medium outline-none mt-3 next-cut border-2 border-yellow-400 hover:border-white duration-300'>{loading ? <TbLoader3 size={22} className="animate-spin text-[#ffffff]" /> : 'Add Post'}</button>
                 </form>
                 <Toaster />
             </section>
