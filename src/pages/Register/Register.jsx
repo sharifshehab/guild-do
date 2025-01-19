@@ -158,8 +158,8 @@ const Register = () => {
                     </div>
                 </div>
 
-                <div className="section-title bg-yellow-400 inline-block px-6 p-2 mt-10 title-cut">
-                    <Link to={'/'} className="text-darkColor font-bold">Go To Home Page</Link>
+                <div className="section-title bg-yellow-400 inline-block px-6 p-2 mt-10 title-cut hover:bg-yellow-500 duration-300">
+                    <Link to={'/'} className="text-darkColor font-bold ">Go To Home Page</Link>
                 </div>
 
                 <Toaster />

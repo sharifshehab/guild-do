@@ -32,6 +32,8 @@ const MyProfile = () => {
         }
     });
 
+    console.log(userProfile.badge); /* Gold,  */
+
     return (
         <Container>
             <section className="min-h-screen">
@@ -45,7 +47,7 @@ const MyProfile = () => {
                                 alt={user?.displayName}
                                 src={user?.photoURL}
                                 referrerPolicy="no-referrer"
-                                className="w-[80px] h-[80px] rounded-full border-amber-700 border-4 absolute -bottom-12 left-1/2 transform -translate-x-1/2 object-cover"
+                                className={`w-[80px] h-[80px] rounded-full ${userProfile?.badge === "Gold" ? 'border-yellow-400' : 'border-amber-700'} border-4 absolute -bottom-12 left-1/2 transform -translate-x-1/2 object-cover`}
                             />
                             <MdVerified
                                 className="text-blue-500 p-[2px] text-[1.4rem] bg-white rounded-full absolute top-[50px] right-[4px]" />
@@ -53,7 +55,7 @@ const MyProfile = () => {
 
 
                         <div className="w-full text-center mt-16">
-                            <span className="text-amber-700">{badge}</span>
+                            <span className={`${userProfile?.badge === "Gold" ? 'text-yellow-400' : 'text-amber-700'}`}>{badge}</span>
                             <h2 className="font-semibold text-2xl text-yellow-400">{name}</h2>
                             <p className="text-text text-base text-white">{email}</p>
                             {

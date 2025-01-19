@@ -8,7 +8,7 @@ import { Toaster } from "react-hot-toast";
 import Select from 'react-select'
 import { TbLoader3 } from "react-icons/tb";
 import { useQuery } from "@tanstack/react-query";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import SectionTitle from "../../../components/SectionTitle";
 import Loading from "../../../components/Loading";
@@ -21,6 +21,7 @@ const AddPost = () => {
     const { user } = useAuth();
     const { successToast, errorToast } = useToast();
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
     const options = [
         { value: 'chocolate', label: 'Chocolate' },
@@ -28,31 +29,47 @@ const AddPost = () => {
         { value: 'vanilla', label: 'Vanilla' }
     ]
 
-    const { data: myPosts = [], refetch, isLoading } = useQuery({
-        queryKey: ['myPosts', user?.email],
+    const { data: myPosts = [], refetch, isLoading:postLoading } = useQuery({
+        queryKey: ['userPosts', user?.email],
         queryFn: async () => {
-            const res = await axiosPublic.get(`/post-count?user=${user?.email}`)
+            const res = await axiosPublic.get(`/posts?email=${user?.email}`);
+            return res.data;
+        }
+    });
+
+    const { data: userPayment = [], isLoading: paymentLoading } = useQuery({
+        queryKey: ['userPayment', user?.email],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/payments?email=${user?.email}`)
             return res.data
         }
     });
 
-    if (isLoading) {
-
+    if (postLoading) {
+        return <Loading></Loading>
+    }
+    if (paymentLoading) {
         return <Loading></Loading>
     }
 
-    if (myPosts.posts >= 5) {
+    if (!userPayment.email && myPosts.length >= 4) {
         return (
             <div className='min-h-screen flex flex-col items-center justify-center space-y-3'>
-                <Link className="btn">Become a Member</Link>
-                <p className="text-center">You have reached the maximum number of posts allowed for a general user.
+                <Link to={'/dashboard/payment'}>
+                    <button className='py-3 px-4 bg-yellow-400 font-medium outline-none mt-3 tag-cut  border-2 border-yellow-400 hover:border-white duration-300'>Become a Member</button>
+                </Link>
+
+                <p className="text-center text-white">You have reached the maximum number of posts allowed for a general user.
                     <br />Upgrade to a premium membership to increase your post limit.</p>
             </div>
         )
     }
 
     const onSubmit = async (formData) => {
+        refetch();
+
         setLoading(true);
+
         try {
             const postData = {
                 authorName: formData.author_name,
@@ -82,7 +99,7 @@ const AddPost = () => {
         <Container>
             <section className="pt-8 min-h-screen">
 
-                {/* title */} 
+                {/* title */}
                 <SectionTitle title="add post"></SectionTitle>
 
                 {/* form area */}
@@ -196,7 +213,7 @@ const AddPost = () => {
                         </div>{/* post description */}
 
                     </div>{/* space-y-5 */}
-                    
+
                     <button type="submit" className='py-3 px-4 bg-yellow-400 font-medium outline-none mt-3 next-cut border-2 border-yellow-400 hover:border-white duration-300'>{loading ? <TbLoader3 size={22} className="animate-spin text-[#ffffff]" /> : 'Add Post'}</button>
                 </form>
                 <Toaster />

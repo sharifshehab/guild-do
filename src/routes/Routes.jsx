@@ -14,6 +14,7 @@ import ManageUsers from "../pages/Dashboard/ManageUsers/ManageUsers";
 import MakeAnnouncement from "../pages/Dashboard/MakeAnnouncement/MakeAnnouncement";
 import PostComments from "../pages/Dashboard/MyPosts/PostComments/PostComments";
 import ReportedActivities from "../pages/Dashboard/ReportedActivities/ReportedActivities";
+import Payment from "../pages/Dashboard/Payment/Payment";
 
 export const router = createBrowserRouter([
     {
@@ -65,6 +66,10 @@ export const router = createBrowserRouter([
             {
                 path: "add-post",
                 element: <AddPost></AddPost>
+            },
+            {
+                path: "payment",
+                element: <Payment></Payment>
             },
             {
                 path: "my-posts",
