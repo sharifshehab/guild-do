@@ -3,10 +3,12 @@ import { useEffect, useState } from "react";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 // react icons
 import { CiSearch } from "react-icons/ci";
+import useAuth from "../../../hooks/useAuth";
 
 const Hero = () => {
     const axiosPublic = useAxiosPublic();
     const [search, setSearch] = useState('');
+    const { setSearchResult } = useAuth();
 
     const handleSearch = (e) => {
         e.preventDefault();
@@ -17,9 +19,9 @@ const Hero = () => {
     useEffect(() => {
         if (search) {
             axiosPublic.get(`/posts?search=${search}`)
-                .then(data => console.log('search ', data.data))
+                .then(data => setSearchResult(data.data));
         }
-    }, [search]);
+    }, [search, axiosPublic]);
 
     return (
 

@@ -46,7 +46,7 @@ const CommentForm = ({ id, title }) => {
 
                 {/* form area */}
                 <form className="w-full mt-12 bg-secondaryColor p-10" onSubmit={handleSubmit(onSubmit)}>
-                    <h1 className="text-[2rem] font-bold text-primary leading-[36px] mb-3">Leave a comment</h1>
+                    <h1 className="text-[2rem] font-bold text-yellow-400 leading-[36px] mb-3">Leave a comment</h1>
 
                     <div className="space-y-5">
                         {
@@ -56,7 +56,7 @@ const CommentForm = ({ id, title }) => {
                                 <div className="flex flex-col gap-[5px] w-full sm:w-[50%]">
                                     <label className="relative">
                                         <input type="text"
-                                            className="peer bg-darkColor border-[#e5eaf2] border outline-none ps-28 pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
+                                            className="peer text-white bg-darkColor border-[#e5eaf2] border outline-none ps-28 pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
                                             {...register("name")}
                                             defaultValue={user?.displayName}
                                             readOnly
@@ -72,7 +72,7 @@ const CommentForm = ({ id, title }) => {
                                 <div className="flex flex-col gap-[5px] w-full sm:w-[50%]">
                                     <label className="relative">
                                         <input type="email"
-                                            className="peer bg-darkColor border-[#e5eaf2] border outline-none ps-28 pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
+                                                className="peer text-white bg-darkColor border-[#e5eaf2] border outline-none ps-28 pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
                                             {...register("email")}
                                             defaultValue={user?.email}
                                             readOnly
@@ -90,7 +90,7 @@ const CommentForm = ({ id, title }) => {
                         <div className="flex flex-col gap-[5px] w-full mt-[20px]">
                             <label className="relative w-full">
                                 <textarea
-                                    className="peer min-h-72 bg-darkColor border-[#e5eaf2] border outline-none ps-[150px] pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
+                                    className="peer text-white min-h-72 bg-darkColor border-[#e5eaf2] border outline-none ps-[150px] pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
                                     {...register("comment", { required: "Comment is required" })}
                                 ></textarea>
                                 <span
@@ -104,8 +104,7 @@ const CommentForm = ({ id, title }) => {
 
                     </div>
 
-
-                    <button type="submit" className={`py-3 px-4 border border-primaryColor outline-none mt-[10px]`}>{loading ? <TbLoader3 size={22} className="animate-spin text-[#ffffff]" /> : 'Post Comment'}</button>
+                    <button type="submit" className='py-3 px-4 bg-yellow-400 font-medium outline-none mt-3 next-cut border-2 border-yellow-400 hover:border-white duration-300'>{loading ? <TbLoader3 size={22} className="animate-spin text-[#ffffff]" /> : 'Post Comment'}</button>
                 </form>
                 <Toaster />
             </section>

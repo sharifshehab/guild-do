@@ -11,6 +11,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import SectionTitle from "../../../components/SectionTitle";
+import Loading from "../../../components/Loading";
 
 
 const AddPost = () => {
@@ -36,10 +37,8 @@ const AddPost = () => {
     });
 
     if (isLoading) {
-        return <div className='min-h-screen flex items-center justify-center'>
-            <span className='text-primaryColor'>Loading...</span>
-            <span className="loading loading-ring loading-lg"></span>
-        </div>
+
+        return <Loading></Loading>
     }
 
     if (myPosts.posts >= 5) {
@@ -81,17 +80,17 @@ const AddPost = () => {
 
     return (
         <Container>
-            <section className="px-3">
+            <section className="pt-8 min-h-screen">
 
                 {/* title */} 
                 <SectionTitle title="add post"></SectionTitle>
 
                 {/* form area */}
-                <form className="w-full bg-secondaryColor" onSubmit={handleSubmit(onSubmit)}>
+                <form className="w-full bg-secondaryColor " onSubmit={handleSubmit(onSubmit)}>
+
                     <div className="space-y-5">
 
                         <div className="flex flex-col sm:flex-row items-center gap-5">
-
                             <div className="flex flex-col gap-[5px] w-full sm:w-[50%]">
                                 <label className="relative">
                                     <input type="text"
@@ -197,6 +196,7 @@ const AddPost = () => {
                         </div>{/* post description */}
 
                     </div>{/* space-y-5 */}
+                    
                     <button type="submit" className='py-3 px-4 bg-yellow-400 font-medium outline-none mt-3 next-cut border-2 border-yellow-400 hover:border-white duration-300'>{loading ? <TbLoader3 size={22} className="animate-spin text-[#ffffff]" /> : 'Add Post'}</button>
                 </form>
                 <Toaster />

@@ -1,17 +1,19 @@
-import { format } from "date-fns";
+import usePostComments from "../../../API/usePostComments";
+import formateDate from "../../../components/formateDate";
 
 const Post = ({ post }) => {
     const { postTitle, createdAt } = post || {};
-    const postDate = format(new Date(createdAt), "yyyy-MM-dd");
+    const date = formateDate(createdAt);
+    const [postComments] = usePostComments(postTitle);
 
     return (
         <div className="flex items-center justify-center flex-col">
-            <h2 className=" text-[1.2rem] font-[600]">{postTitle}</h2>
-            <span>{postDate}</span>
-            <div className="flex items-center justify-center gap-2">
-                <p className="text-text text-[0.9rem]">comments: 25</p>
+            <h2 className="text-white text-xl font-semibold capitalize">{postTitle}</h2>
+            <span className="text-yellow-400">{date}</span>
+            <div className="flex items-center justify-center gap-2 text-yellow-400">
+                <p className="text-text text-sm">comments: {postComments.length}</p>
                 |
-                <p className="text-text text-[0.9rem]">votes:3</p>
+                <p className="text-text text-sm">votes:3</p>
             </div>
         </div>
     );

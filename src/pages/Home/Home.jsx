@@ -3,9 +3,12 @@ import Content from "./Content/Content";
 import Hero from "./Hero/Hero";
 import Announcements from "./Announcements/Announcements";
 import useAnnouncements from "../../API/useAnnouncements";
+import SearchResults from "./SearchResults/SearchResults";
+import useAuth from "../../hooks/useAuth";
 
 const Home = () => {
     const [announcements, isLoading] = useAnnouncements();
+    const { searchResult } = useAuth();
 
     return (
         <main>
@@ -13,6 +16,10 @@ const Home = () => {
             {
                 announcements.length > 0 &&
                 <Announcements announcements={announcements} loading={isLoading}></Announcements>
+            }
+            {
+                searchResult.length > 0 &&
+                <SearchResults searchData={searchResult}></SearchResults>
             }
             <Categories></Categories>
             <Content></Content>

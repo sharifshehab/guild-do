@@ -6,6 +6,7 @@ import { TbLoader3 } from "react-icons/tb";
 import { useState } from "react";
 import useToast from "../../../hooks/useToast";
 import { Toaster } from "react-hot-toast";
+import SectionTitle from "../../../components/SectionTitle";
 
 const MakeAnnouncement = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
@@ -38,15 +39,12 @@ const MakeAnnouncement = () => {
         }
     }
 
-
     return (
         <Container>
-            <section className="w-full">
+            <section className="min-h-screen pt-8">
 
                 {/* title */}
-                <div className="w-full flex flex-col items-center justify-center">
-                    <h1 className="text-[2rem] font-bold text-primary leading-[36px]">Make Announcement</h1>
-                </div>
+                <SectionTitle title="Make Announcement"></SectionTitle>
 
                 {/* form area */}
                 <form className="w-full mt-12 bg-secondaryColor p-10" onSubmit={handleSubmit(onSubmit)}>
@@ -57,7 +55,7 @@ const MakeAnnouncement = () => {
                             <div className="flex flex-col gap-[5px] w-full sm:w-[50%]">
                                 <label className="relative">
                                     <input type="text"
-                                        className="peer bg-darkColor border-[#e5eaf2] border outline-none ps-32 pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
+                                        className="peer text-white bg-darkColor border-[#e5eaf2] border outline-none ps-32 pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
                                         {...register("author_name")}
                                         defaultValue={user?.displayName}
                                         readOnly
@@ -72,7 +70,7 @@ const MakeAnnouncement = () => {
                             <div className="flex flex-col gap-[5px] w-full sm:w-[50%]">
                                 <label className="relative">
                                     <input type="text"
-                                        className="peer bg-darkColor border-[#e5eaf2] border outline-none ps-32 pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
+                                        className="peer text-white bg-darkColor border-[#e5eaf2] border outline-none ps-32 pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
                                         {...register("author_image")}
                                         defaultValue={user?.photoURL}
                                         readOnly
@@ -90,7 +88,7 @@ const MakeAnnouncement = () => {
                             <div className="flex flex-col gap-[5px] w-full mt-[20px]">
                                 <label className="relative">
                                     <input type="text"
-                                        className="peer bg-darkColor border-[#e5eaf2] border outline-none ps-16 pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
+                                        className="peer text-white bg-darkColor border-[#e5eaf2] border outline-none ps-16 pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
                                         {...register("title", { required: "Announcement title is required", minLength: { value: 10, message: "minimum character length is 10" } })}
                                     />
                                     <span
@@ -106,7 +104,7 @@ const MakeAnnouncement = () => {
                         <div className="flex flex-col gap-[5px] w-full mt-[20px]">
                             <label className="relative w-full">
                                 <textarea
-                                    className="peer min-h-72 bg-darkColor border-[#e5eaf2] border outline-none ps-28 pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
+                                    className="peer text-white min-h-72 bg-darkColor border-[#e5eaf2] border outline-none ps-28 pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
                                     {...register("description", { required: "Announcement description is required" })}
                                 ></textarea>
                                 <span
@@ -118,7 +116,9 @@ const MakeAnnouncement = () => {
                         </div>{/* post description */}
 
                     </div>{/* space-y-5 */}
-                    <button type="submit" className={`py-3 px-4 border border-primaryColor outline-none mt-[10px]`}>{loading ? <TbLoader3 size={22} className="animate-spin text-[#ffffff]" /> : 'Add Announcement'}</button>
+
+                    <button type="submit" className='py-3 px-4 bg-yellow-400 font-medium outline-none mt-3 next-cut border-2 border-yellow-400 hover:border-white duration-300'>{loading ? <TbLoader3 size={22} className="animate-spin text-[#ffffff]" /> : 'Add Announcement'}</button>
+
                 </form>
                 <Toaster />
             </section>

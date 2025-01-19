@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import TableRow from "./TableRow/TableRow";
+import SectionTitle from "../../../components/SectionTitle";
+import Container from "../../../components/Container";
 
 const ReportedActivities = () => {
     const axiosSecure = useAxiosSecure();
@@ -21,30 +23,30 @@ const ReportedActivities = () => {
     }
 
     return (
-        <>
-            <div className="text-center mb-10">
-                <h2 className="text-4xl underline underline-offset-8 decoration-primaryColor">All Reports</h2>
-            </div>
+        <Container>
+            <section className="min-h-screen pt-8">
+                <SectionTitle title="All Reports"></SectionTitle>
 
-            <div className="overflow-x-auto pb-32">
-                <table className="table">
-                    {/* head */}
-                    <thead>
-                        <tr className="text-sm dark:text-white">
-                            <th>Report</th>
-                            <th>Comment</th>
-                            <th>Commenter email</th>
-                            <th>Feedback</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
+                <div className="overflow-x-auto pb-32">
+                    <table className="table">
+                        {/* head */}
+                        <thead>
+                            <tr className="text-sm dark:text-white">
+                                <th>Report</th>
+                                <th>Comment</th>
+                                <th>Commenter email</th>
+                                <th>Feedback</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
 
-                    <tbody>
-                        {allReports?.map(data => <TableRow key={data._id} data={data} refetch={refetch}></TableRow>)}
-                    </tbody>
-                </table>
-            </div>
-        </>
+                        <tbody>
+                            {allReports?.map(data => <TableRow key={data._id} data={data} refetch={refetch}></TableRow>)}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </Container>
     );
 };
 

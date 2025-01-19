@@ -14,20 +14,20 @@ const TableRow = ({ post }) => {
         <tr>
             <td className="lg:px-5 py-5">
                 <div className="space-y-1">
-                    <Link to={`/post/${_id}`} className="text-xl lg:text-[22px] font-semibold text-primaryColor capitalize">{postTitle}</Link>
+                    <Link to={`/post/${_id}`} className="text-xl lg:text-[22px] font-semibold text-yellow-400 capitalize">{postTitle}</Link>
                     <p className="text-white">{postDescription.slice(0, 80)}...</p>
                 </div>
             </td>
             <td>
                 {postTag?.map((tag, idx) => <span key={idx} className="text-white">{tag}{idx < postTag.length - 1 && (<span className="text-yellow-400 text-xl">, </span>)}</span>)}
             </td>
-            <td className="text-center text-primaryColor">
+            <td className="text-center text-yellow-400">
                 {postComments.length}
             </td>
             <td>
                 <div className="text-white">
-                    <h4>Up Vote: <span className="text-primaryColor">{UpVote}</span></h4>
-                    <h4>Down Vote: <span className="text-primaryColor">{DownVote}</span></h4>
+                    <h4>Up Vote: <span className="text-yellow-400">{UpVote}</span></h4>
+                    <h4>Down Vote: <span className="text-yellow-400">{DownVote}</span></h4>
                 </div>
             </td>
             <td>
@@ -43,7 +43,7 @@ const TableRow = ({ post }) => {
                     </div>
                     <div className="text-center">
                         <div className="font-bold text-white">{authorName}</div>
-                        <div className="text-sm text-primaryColor opacity-85">{date}</div>
+                        <div className="text-sm text-yellow-400 opacity-85">{date}</div>
                     </div>
                 </div>
             </td>

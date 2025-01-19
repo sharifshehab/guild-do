@@ -5,6 +5,8 @@ import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import { MdVerified } from "react-icons/md";
 import Post from "./Post";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import SectionTitle from "../../../components/SectionTitle";
+import Container from "../../../components/Container";
 
 const MyProfile = () => {
     const { user } = useAuth();
@@ -19,7 +21,7 @@ const MyProfile = () => {
             return res.data
         }
     });
-    const { _id, name, email, badge } = userProfile || {};
+    const { name, email, badge } = userProfile || {};
 
     // user top 3 post
     const { data: myPosts = [] } = useQuery({
@@ -31,52 +33,49 @@ const MyProfile = () => {
     });
 
     return (
-        <>
-            {/* title */}
-            <div className="w-full flex flex-col items-center justify-center">
-                <h1 className="text-[2rem] font-bold text-primary leading-[36px]">My Profile</h1>
-            </div>
+        <Container>
+            <section className="min-h-screen">
 
-            <div className="flex items-center justify-center">
-                <div className="w-full lg:w-[60%] shadow-lg rounded">
+                <div className="flex items-center justify-center min-h-screen">
 
-                    <div className="w-full h-[150px] relative bg-[url('https://img.freepik.com/premium-vector/content-writer-vector-colored-round-line-illustration_104589-2571.jpg')] bg-center">
-                        <img
-                            alt={user?.displayName}
-                            src={user?.photoURL}
-                            referrerPolicy="no-referrer"
-                            className="w-[80px] h-[80px] rounded-full border-secondary border-4 absolute -bottom-12 left-1/2 transform -translate-x-1/2 object-cover"
-                        />
-                        <MdVerified
-                            className="text-blue-500 p-[2px] text-[1.4rem] bg-white rounded-full absolute top-[50px] right-[4px]" />
-                    </div>
+                    <div className="w-full lg:w-[60%] shadow-lg bg-darkColor">
+
+                        <div className="w-full h-[150px] relative bg-[url('https://img.freepik.com/premium-vector/content-writer-vector-colored-round-line-illustration_104589-2571.jpg')] bg-center">
+                            <img
+                                alt={user?.displayName}
+                                src={user?.photoURL}
+                                referrerPolicy="no-referrer"
+                                className="w-[80px] h-[80px] rounded-full border-amber-700 border-4 absolute -bottom-12 left-1/2 transform -translate-x-1/2 object-cover"
+                            />
+                            <MdVerified
+                                className="text-blue-500 p-[2px] text-[1.4rem] bg-white rounded-full absolute top-[50px] right-[4px]" />
+                        </div>
 
 
-                    <div className="w-full text-center mt-16">
-                        <span className="">{badge}</span>
-                        <h2 className="font-[600] text-[1.4rem]">{name}</h2>
-                        <p className="text-text text-[0.9rem]">{email}</p>
-                        
-                        {
-                            userProfile?.warn && <h2 className="font-[600] text-3xl text-red-500">{userProfile?.warn}</h2>
-                        }
-                        
-                    </div>
-
-                    <div className="mt-8 border-t border-border">
-                        <h2 className="text-center">my recent posts</h2>
-                        <div className="w-full p-4 flex items-center justify-center gap-14">
-
+                        <div className="w-full text-center mt-16">
+                            <span className="text-amber-700">{badge}</span>
+                            <h2 className="font-semibold text-2xl text-yellow-400">{name}</h2>
+                            <p className="text-text text-base text-white">{email}</p>
                             {
-                                myPosts?.length === 0 ? <p className="text-center">no post found</p> :
-                                myPosts?.map(post => <Post key={post._id} post={post}></Post>)
+                                userProfile?.warn && <h2 className="font-[600] text-3xl text-red-500">{userProfile?.warn}</h2>
                             }
                         </div>
-                    </div>
 
-                </div>
-            </div>{/* flex */}
-        </>
+                        <div className="mt-8 border-t border-border">
+                            <div className="text-center pt-5">
+                                <SectionTitle title="my recent posts"></SectionTitle>
+                            </div>
+                            <div className="w-full pb-10 flex flex-wrap items-center justify-center gap-14">
+                                {
+                                    myPosts?.length === 0 ? <p className="text-center">no post found</p> :
+                                        myPosts?.map(post => <Post key={post._id} post={post}></Post>)
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>{/* flex */}
+            </section>
+        </Container>
     );
 };
 

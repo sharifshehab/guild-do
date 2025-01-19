@@ -114,11 +114,13 @@ const TableRow = ({ data, refetch }) => {
                     defaultValue={selectedOption}
                     onChange={setSelectedOption}
                     options={options}
+                    className="gd-post-select w-40"
+                    classNamePrefix="gd-post"
                 />
             </td>{/* Report */}
 
             <td>
-                <button onClick={handleReportAction} className={`btn disabled:bg-red-300`} disabled={!selectedOption}>Submit</button>
+                <button onClick={handleReportAction} className='btn text-secondaryColor rounded-none border-2 border-white bg-yellow-400 hover:bg-yellow-500 disabled:bg-gray-300 disabled:text-slate-500' disabled={!selectedOption}>Submit</button>
             </td>{/* Action */}
         </tr>
     );

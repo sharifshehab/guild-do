@@ -24,7 +24,7 @@ const MyPosts = () => {
 
     return (
         <Container>
-            <section>
+            <section className="min-h-screen pt-8">
                 {/* title */}
                 <SectionTitle title="my posts"></SectionTitle>
 

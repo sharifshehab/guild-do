@@ -40,14 +40,14 @@ const TableRow = ({ post, refetch }) => {
     return (
         <tr className="text-yellow-400">
             <td>
-                <h4 className="text-xl">{postTitle}</h4>
+                <h4 className="text-lg">{postTitle}</h4>
             </td>{/* name */}
             <td className="text-white">
                 <h4>Up-vote: <span className="text-yellow-400">{UpVote}</span></h4>
                 <h4>Down-vote: <span className="text-yellow-400">{DownVote}</span></h4>
             </td>{/* votes */}
             <td>
-                <Link to={`/dashboard/comments/${postTitle}`} className="btn btn-sm rounded-none border-2 bg-yellow-400">See comments</Link>
+                <Link to={`/dashboard/comments/${postTitle}`} className="btn btn-sm rounded-none border-2 bg-yellow-400 hover:bg-yellow-500">See comments</Link>
             </td>{/* comments */}
             <td>
                 <button onClick={() => deletePost(_id)} className="btn btn-sm rounded-none border-2 border-yellow-400 bg-darkColor text-white hover:text-darkColor">Delete post</button>

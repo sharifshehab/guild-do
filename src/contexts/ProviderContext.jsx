@@ -10,7 +10,9 @@ const auth = getAuth(app);
 const ProviderContext = ({ children }) => {
     const [user, setUser] = useState();
     const [loading, setLoading] = useState(true);
+    const [searchResult, setSearchResult] = useState([]);
     const axiosSecure = useAxiosSecure();
+
 
     const handleRegister = (email, password) => {
         setLoading(true);
@@ -23,7 +25,6 @@ const ProviderContext = ({ children }) => {
             photoURL: photo
         });
     }
-
 
     const handleEmailLogin = (email, password) => {
         setLoading(true);
@@ -63,12 +64,14 @@ const ProviderContext = ({ children }) => {
         return () => {
             unsubscribe();
         }
-    }, []);
+    }, [axiosSecure]);
 
     const authInfo = {
         user,
         loading,
+        searchResult,
         setLoading,
+        setSearchResult,
         handleRegister,
         setUserNameAndPhoto,
         handleEmailLogin,

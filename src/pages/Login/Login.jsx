@@ -8,6 +8,7 @@ import useToast from "../../hooks/useToast";
 import { TbLoader3 } from "react-icons/tb";
 import { useState } from "react";
 import { Toaster } from "react-hot-toast";
+import SectionTitle from "../../components/SectionTitle";
 
 const Login = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
@@ -35,25 +36,25 @@ const Login = () => {
     }
     return (
         <Container>
-            <section className="w-full">
+            <section className="w-full min-h-screen flex flex-col items-center justify-center">
 
                 {/* title */}
-                <div className="w-full flex flex-col items-center justify-center">
-                    <h1 className="text-[2rem] font-bold text-primary leading-[36px]">Login</h1>
-                </div>
+                <>
+                    <SectionTitle title="login"></SectionTitle>
+                </>
 
                 {/* form area */}
-                <form className="w-full mt-12 bg-secondaryColor p-10" onSubmit={handleSubmit(onSubmit)}>
+                <form className="mx-auto w-1/2 bg-secondaryColor p-10" onSubmit={handleSubmit(onSubmit)}>
 
                     <div className="space-y-5">
                         <div className="flex flex-col gap-[5px] w-full">
                             <label className="relative">
                                 <input type="email"
-                                    className="peer bg-darkColor border-[#e5eaf2] border outline-none ps-28 pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
+                                    className="peer text-white bg-darkColor border-[#e5eaf2] border outline-none ps-28 pe-5 py-3 w-full focus:border-yellow-400 transition-colors duration-300"
                                     {...register("email", { required: "Email is required" })}
                                 />
                                 <span
-                                    className="absolute top-3 left-5 peer-focus:-top-3 peer-focus:bg-primaryColor peer-focus:left-2 peer-focus:scale-[0.9] peer-focus:text-secondaryColor text-[#777777] peer-focus:px-1 transition-all duration-300 ">
+                                    className="absolute top-3 left-5 peer-focus:-top-3 peer-focus:bg-yellow-400 peer-focus:left-2 peer-focus:scale-[0.9] peer-focus:text-secondaryColor text-[#777777] peer-focus:px-1 transition-all duration-300 ">
                                     Your email
                                 </span>
                             </label>
@@ -63,11 +64,11 @@ const Login = () => {
                         <div className="flex flex-col gap-[5px] w-full">
                             <label className="relative">
                                 <input type="password"
-                                    className="peer bg-darkColor border-[#e5eaf2] border outline-none ps-28 pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
+                                    className="peer text-white bg-darkColor border-[#e5eaf2] border outline-none ps-28 pe-5 py-3 w-full focus:border-yellow-400 transition-colors duration-300"
                                     {...register("password", { required: "Password is required" })}
                                 />
                                 <span
-                                    className="absolute top-3 left-5 peer-focus:-top-3 peer-focus:bg-primaryColor peer-focus:left-2 peer-focus:scale-[0.9] peer-focus:text-secondaryColor text-[#777777] peer-focus:px-1 transition-all duration-300 ">
+                                    className="absolute top-3 left-5 peer-focus:-top-3 peer-focus:bg-yellow-400 peer-focus:left-2 peer-focus:scale-[0.9] peer-focus:text-secondaryColor text-[#777777] peer-focus:px-1 transition-all duration-300 ">
                                     Password
                                 </span>
                             </label>
@@ -75,17 +76,22 @@ const Login = () => {
                         </div> {/* password */}
                     </div>
 
-                    <button type="submit" className={`py-3 px-4 border border-primaryColor outline-none mt-[10px]`}>{loginLoading ? <TbLoader3 size={22} className="animate-spin text-[#ffffff]" /> : 'Login'}</button>
+                    <button type="submit" className='py-3 px-4 font-semibold bg-yellow-400 outline-none mt-3 next-cut border-2 border-yellow-400 hover:border-white duration-300'>{loginLoading ? <TbLoader3 size={22} className="animate-spin text-[#ffffff]" /> : 'Login'}</button>
                 </form>
 
                 <div className="flex flex-col items-center">
                     {/* Login and other sign-in methods */}
                     <div className="flex flex-col items-center  justify-center mt-5 space-y-4">
                         <GoogleSignIn></GoogleSignIn>
-                        <Link to="/register" className="text-white"> Don't have an account? <span className="text-gray-300 underline underline-offset-4 decoration-primaryColor">Register</span></Link>
-
+                        <Link to="/register" className="text-white"> Don't have an account? <span className="text-gray-300 underline underline-offset-4 decoration-yellow-400">Register</span></Link>
                     </div>
                 </div>
+
+
+                <div className="section-title bg-yellow-400 inline-block px-6 p-2 mt-10 title-cut">
+                    <Link to={'/'} className="text-darkColor font-bold">Go To Home Page</Link>
+                </div>
+
                 <Toaster />
             </section>
         </Container>

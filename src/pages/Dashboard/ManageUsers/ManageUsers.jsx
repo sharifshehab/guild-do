@@ -1,6 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import TableRow from "./TableRow/TableRow";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import SectionTitle from "../../../components/SectionTitle";
+import Container from "../../../components/Container";
+import Loading from "../../../components/Loading";
 
 const ManageUsers = () => {
     const axiosSecure = useAxiosSecure();
@@ -12,40 +15,36 @@ const ManageUsers = () => {
         }
     });
 
-
     if (isLoading) {
-        return <div className='min-h-screen flex items-center justify-center'>
-            <span className='text-primaryColor'>Loading...</span>
-            <span className="loading loading-ring loading-lg"></span>
-        </div>
+        return <Loading></Loading>
     }
 
     return (
-        <>
-            {/* title */}
-            <div className="w-full flex flex-col items-center justify-center">
-                <h1 className="text-[2rem] font-bold text-primary leading-[36px]">Manage Users</h1>
-            </div>
+        <Container>
+            <section className="min-h-screen pt-8">
+                {/* title */}
+                <SectionTitle title="Manage Users"></SectionTitle>
 
-            <div className="overflow-x-auto pb-32">
-                <table className="table">
-                    {/* head */}
-                    <thead>
-                        <tr className="text-sm dark:text-white">
-                            <th>User name</th>
-                            <th>User email</th>
-                            <th>Action</th>
-                            <th>Subscription Status</th>
-                            <th>Remove</th>
-                        </tr>
-                    </thead>
+                <div className="overflow-x-auto pb-32">
+                    <table className="table">
+                        {/* head */}
+                        <thead>
+                            <tr className="text-sm dark:text-white">
+                                <th>User name</th>
+                                <th>User email</th>
+                                <th>Action</th>
+                                <th>Subscription Status</th>
+                                <th>Remove</th>
+                            </tr>
+                        </thead>
 
-                    <tbody>
-                        {allUsers?.map(user => <TableRow key={user._id} user={user} refetch={refetch}></TableRow>) }
-                    </tbody>
-                </table>
-            </div>
-        </>
+                        <tbody>
+                            {allUsers?.map(user => <TableRow key={user._id} user={user} refetch={refetch}></TableRow>)}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </Container>
     );
 };
 
