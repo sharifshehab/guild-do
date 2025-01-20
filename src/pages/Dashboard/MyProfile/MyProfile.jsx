@@ -5,9 +5,7 @@ import Post from "./Post";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import SectionTitle from "../../../components/SectionTitle";
 import Container from "../../../components/Container";
-import image from "../../../assets/images/1.webp";
 // react icons
-import { MdVerified } from "react-icons/md";
 import { Helmet } from "react-helmet-async";
 
 

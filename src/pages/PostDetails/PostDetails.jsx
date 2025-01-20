@@ -15,8 +15,8 @@ import { IoLogoWhatsapp } from "react-icons/io5";
 import { FiThumbsUp, FiThumbsDown } from "react-icons/fi";
 import { LiaTagsSolid } from "react-icons/lia";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import image from "../../assets/images/2.webp";
 import { Helmet } from "react-helmet-async";
+import image from "../../assets/images/post-details-BG.webp";
 
 const PostDetails = () => {
     const { postId } = useParams();

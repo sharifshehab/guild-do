@@ -12,8 +12,7 @@ export default {
         darkColor: 'var(--dark-color)',
       },
       backgroundImage: {
-        'heroBG': "url('./assets/images/3d-render-high-tech-cyborg-warrior-wallpaper.jpg')",
-        'profileBG': "url('./assets/images/1.webp')",
+        'heroBG': "url('./assets/images/3d-render-high-tech-cyborg-warrior-wallpaper.jpg')"
       },
     },
   },
