@@ -1,7 +1,7 @@
 import Container from "../../components/Container"
 import { useForm } from "react-hook-form";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import GoogleSignIn from "../shared/GoogleSignIn";
 import useAuth from "../../hooks/useAuth";
 import { Toaster } from 'react-hot-toast';
@@ -20,7 +20,10 @@ const Register = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const axiosPublic = useAxiosPublic();
     const { handleRegister, setUserNameAndPhoto } = useAuth();
-    const { successToast, errorToast } = useToast();
+    const location = useLocation();
+    const navigate = useNavigate();
+    const from = location?.state ? location?.state : '/';
+    const { errorToast } = useToast();
     const [loading, setLoading] = useState(false);
 
     const onSubmit = async (formData) => {
@@ -49,10 +52,8 @@ const Register = () => {
             if (res.data.insertedId) {
                 console.log(res.data);
             }
-
             reset(); // Reset form
-            // success message toast
-            successToast("Registration Successful");
+            navigate(from, { replace: true });
         } catch (error) {
             console.error('Registration error:', error);
             if (error.code === "auth/email-already-in-use") {

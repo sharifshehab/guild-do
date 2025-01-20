@@ -21,6 +21,12 @@ import pathOfExile from "../../../assets/images/Path-of-Exile-2.png";
 import teamFightTactics from "../../../assets/images/teamfight-tactics.png";
 
 const Content = () => {
+
+    const [sort, setSort] = useState(false);
+    const handleSort = () => {
+        setSort(!sort);
+    }
+
     const axiosPublic = useAxiosPublic();
     const { data: postsCount = { count: 0 } } = useQuery({
         queryKey: ['postsCount'],
@@ -29,18 +35,10 @@ const Content = () => {
             return res.data;
         }
     });
-
     const itemsPerPage = 5;
-
-    console.log('postsCount', postsCount);
-
     const numberOfPages = Math.ceil(postsCount?.count / itemsPerPage)
-
     const pages = [...Array(numberOfPages).keys()];
-
     const [currentPage, setCurrentPage] = useState(0);
-
-
     /* Go to Next / Previous page */
     const handlePrevPage = () => {
         if (currentPage > 0) {
@@ -54,23 +52,25 @@ const Content = () => {
     }
 
     const { data: allPosts = [] } = useQuery({
-        queryKey: ['allPosts', currentPage],
+        queryKey: ['allPosts', currentPage, sort],
         queryFn: async () => {
-            const res = await axiosPublic.get(`/posts?page=${currentPage}&size=${itemsPerPage}`);
+            const res = await axiosPublic.get(`/posts?page=${currentPage}&size=${itemsPerPage}&popularity=${sort}`);
             return res.data;
         }
     });
 
-
     return (
         <section>
             <Container>
-               
-
                 <div className="grid grid-cols-3 gap-10">
                         
                     <div className=" col-span-full lg:col-span-2 relative">
-                        <SectionTitle title="Forums"></SectionTitle>
+
+                        <div className="flex items-baseline justify-between">
+                            <SectionTitle title="Forums"></SectionTitle>
+                            <button className="bg-white text-darkColor font-semibold ps-2 pe-4 py-2 next-cut border-s-4 border-yellow-400 hover:bg-slate-200 transition-all duration-300" onClick={handleSort}>Sort by Popularity</button>
+                        </div>
+
                         <div className="overflow-x-auto min-h-screen bg-secondaryColor">
                             <table className="table">
                                 {/* head */}

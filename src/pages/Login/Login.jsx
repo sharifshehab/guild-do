@@ -14,10 +14,12 @@ import { Helmet } from "react-helmet-async";
 const Login = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const { setLoading, handleEmailLogin } = useAuth();
+
     const location = useLocation();
     const navigate = useNavigate();
     const from = location?.state ? location?.state : '/';
-    const { successToast, errorToast } = useToast();
+
+    const { errorToast } = useToast();
     const [loginLoading, setLoginLoading] = useState(false);
 
     const onSubmit = async (formData) => {
@@ -25,7 +27,6 @@ const Login = () => {
         try {
             await handleEmailLogin(formData.email, formData.password);
             reset();
-            successToast('Login successful');
             navigate(from, { replace: true });
         } catch (error) {
             errorToast(`Login error: ${error.message}`)
