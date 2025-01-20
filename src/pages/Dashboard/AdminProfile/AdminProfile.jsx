@@ -10,6 +10,7 @@ import useToast from "../../../hooks/useToast";
 import { useForm } from "react-hook-form";
 import { TbLoader3 } from "react-icons/tb";
 import { Toaster } from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const AdminProfile = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
@@ -53,7 +54,8 @@ const AdminProfile = () => {
         setLoading(true);
         try {
             const data = {
-                tag: formData.tag_name,
+                value: formData.tag_name,
+                label: formData.tag_name.toUpperCase()
             }
             const res = await axiosSecure.post('/tags', data);
             if (res.data.insertedId) {
@@ -69,89 +71,92 @@ const AdminProfile = () => {
     }
 
     return (
-        <Container>
-            <section className="min-h-screen pt-8">
-                <SectionTitle title="Admin Dashboard"></SectionTitle>
-                <div className="grid lg:grid-cols-6 justify-center items-center gap-5 mb-14">
+        <>
+            <Helmet><title>GuildDo - Admin Profile</title></Helmet>
+            <Container>
+                <section className="min-h-screen pt-8">
+                    <SectionTitle title="Admin Dashboard"></SectionTitle>
+                    <div className="grid lg:grid-cols-6 justify-center items-center gap-5 mb-14">
 
-                    <div className="col-span-2">
-                        <div className="bg-white shadow-2xl p-6 flex items-center justify-center flex-col title-cut">
-                            <img
-                                alt={user?.displayName}
-                                src={user?.photoURL}
-                                referrerPolicy="no-referrer"
-                                className="w-[150px] h-[150px] object-cover rounded-full"
-                            />
-                            <h3 className="text-2xl font-semibold capitalize mt-4">
-                                {user?.displayName}
-                            </h3>
-                            <p className="text-text text-sm">  {user?.email}</p>
+                        <div className="col-span-2">
+                            <div className="bg-white shadow-2xl p-6 flex items-center justify-center flex-col title-cut">
+                                <img
+                                    alt={user?.displayName}
+                                    src={user?.photoURL}
+                                    referrerPolicy="no-referrer"
+                                    className="w-[150px] h-[150px] object-cover rounded-full"
+                                />
+                                <h3 className="text-2xl font-semibold capitalize mt-4">
+                                    {user?.displayName}
+                                </h3>
+                                <p className="text-text text-sm">  {user?.email}</p>
+                            </div>
                         </div>
-                    </div>
 
-                    <div className="h-[220px]">
-                        <ResponsiveContainer width="100%" height="100%">
-                            <PieChart width={300} height={220}>
-                                <Pie
-                                    data={data}
-                                    cx="50%"
-                                    cy="50%"
-                                    labelLine={false}
-                                    label={renderCustomizedLabel}
-                                    outerRadius={80}
-                                    fill="#8884d8"
-                                    dataKey="value"
-                                >
-                                    {data.map((entry, index) => (
-                                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                                    ))}
-                                </Pie>
-                            </PieChart>
-                        </ResponsiveContainer>
-                    </div>{/* chart */}
+                        <div className="h-[220px]">
+                            <ResponsiveContainer width="100%" height="100%">
+                                <PieChart width={300} height={220}>
+                                    <Pie
+                                        data={data}
+                                        cx="50%"
+                                        cy="50%"
+                                        labelLine={false}
+                                        label={renderCustomizedLabel}
+                                        outerRadius={80}
+                                        fill="#8884d8"
+                                        dataKey="value"
+                                    >
+                                        {data.map((entry, index) => (
+                                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                        ))}
+                                    </Pie>
+                                </PieChart>
+                            </ResponsiveContainer>
+                        </div>{/* chart */}
 
-                    <div className="bg-darkColor rounded-none flex items-center">
-                        <div className="card-body text-center">
-                            <h3 className="text-4xl text-white">{posts}</h3>
-                            <h2 className="text-xl text-yellow-400">Total Posts</h2>
+                        <div className="bg-darkColor rounded-none flex items-center">
+                            <div className="card-body text-center">
+                                <h3 className="text-4xl text-white">{posts}</h3>
+                                <h2 className="text-xl text-yellow-400">Total Posts</h2>
+                            </div>
+                        </div>{/* posts */}
+                        <div className="bg-darkColor rounded-none flex items-center">
+                            <div className="card-body text-center">
+                                <h3 className="text-4xl text-white">{comments}</h3>
+                                <h2 className="text-xl text-yellow-400">Total comments</h2>
+                            </div>
+                        </div>{/* comments */}
+                        <div className="bg-darkColor rounded-none flex items-center">
+                            <div className="card-body text-center">
+                                <h3 className="text-4xl text-white">{users}</h3>
+                                <h2 className="text-xl text-yellow-400">Total users</h2>
+                            </div>
+                        </div>{/* users */}
+                    </div>{/* grid */}
+
+                    {/* form area */}
+
+                    <form className="mx-auto lg:w-2/4 bg-darkColor p-6 border-t-2 border-yellow-400" onSubmit={handleSubmit(onSubmit)}>
+                        <h1 className="text-white text-3xl font-semibold capitalize mb-5 text-center">Add new tag</h1>
+                        <div className="flex flex-col gap-[5px]">
+                            <label className="relative">
+                                <input type="text"
+                                    className="peer text-white bg-darkColor border-[#e5eaf2] border outline-none ps-24 pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
+                                    {...register("tag_name", { required: "Tag name is required" })}
+                                />
+                                <span
+                                    className="absolute top-3 left-5 peer-focus:-top-3 peer-focus:bg-primaryColor peer-focus:left-2 peer-focus:scale-[0.9] peer-focus:text-secondaryColor text-[#777777] peer-focus:px-1 transition-all duration-300 ">
+                                    Tag Name
+                                </span>
+                            </label>
+                            {errors.tag_name && <span className="text-red-500 text-sm">{errors.tag_name.message}</span>}
                         </div>
-                    </div>{/* posts */}
-                    <div className="bg-darkColor rounded-none flex items-center">
-                        <div className="card-body text-center">
-                            <h3 className="text-4xl text-white">{comments}</h3>
-                            <h2 className="text-xl text-yellow-400">Total comments</h2>
-                        </div>
-                    </div>{/* comments */}
-                    <div className="bg-darkColor rounded-none flex items-center">
-                        <div className="card-body text-center">
-                            <h3 className="text-4xl text-white">{users}</h3>
-                            <h2 className="text-xl text-yellow-400">Total users</h2>
-                        </div>
-                    </div>{/* users */}
-                </div>{/* grid */}
-
-                {/* form area */}
-
-                <form className="mx-auto lg:w-2/4 bg-darkColor p-6 border-t-2 border-yellow-400" onSubmit={handleSubmit(onSubmit)}>
-                    <h1 className="text-white text-3xl font-semibold capitalize mb-5 text-center">Add new tag</h1>
-                    <div className="flex flex-col gap-[5px]">
-                        <label className="relative">
-                            <input type="text"
-                                className="peer text-white bg-darkColor border-[#e5eaf2] border outline-none ps-32 pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
-                                {...register("tag_name", { required: "Tag name is required" })}
-                            />
-                            <span
-                                className="absolute top-3 left-5 peer-focus:-top-3 peer-focus:bg-primaryColor peer-focus:left-2 peer-focus:scale-[0.9] peer-focus:text-secondaryColor text-[#777777] peer-focus:px-1 transition-all duration-300 ">
-                                Tag Name
-                            </span>
-                        </label>
-                        {errors.tag_name && <span className="text-red-500 text-sm">{errors.tag_name.message}</span>}
-                    </div>
-                    <button type="submit" className='py-3 px-4 bg-yellow-400 font-medium outline-none mt-3 next-cut border-2 border-yellow-400 hover:border-white duration-300'>{loading ? <TbLoader3 size={22} className="animate-spin text-[#ffffff]" /> : 'Add tag'}</button>
-                </form>
-            </section>
-            <Toaster/>
-        </Container>
+                        <button type="submit" className='py-3 px-4 bg-yellow-400 font-medium outline-none mt-3 next-cut border-2 border-yellow-400 hover:border-white duration-300'>{loading ? <TbLoader3 size={22} className="animate-spin text-[#ffffff]" /> : 'Add tag'}</button>
+                    </form>
+                </section>
+                <Toaster />
+            </Container>
+        </>
     );
 };
 

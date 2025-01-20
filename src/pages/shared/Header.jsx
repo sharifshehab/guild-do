@@ -4,10 +4,13 @@ import Container from "../../components/Container";
 import useAuth from "../../hooks/useAuth";
 import { Link, NavLink } from "react-router-dom";
 import useAnnouncements from "../../API/useAnnouncements";
+import useAdmin from "../../API/useAdmin";
 
 const Header = () => {
     const { user, handleLogOut } = useAuth();
     const [announcements] = useAnnouncements();
+    const [isAdmin] = useAdmin();
+    console.log(isAdmin);
 
     const menuItems =
         <>
@@ -15,7 +18,7 @@ const Header = () => {
                 <NavLink className={({ isActive }) => isActive ? 'text-base text-primaryColor font-semibold' : 'hover:text-yellow-300 text-base text-white font-semibold'} to='/'>Home</NavLink>
             </li>
             <li>
-                <NavLink className={({ isActive }) => isActive ? 'text-base text-primaryColor font-semibold' : 'hover:text-yellow-300 text-base text-white font-semibold'} to='/membership'>Membership</NavLink>
+                <NavLink className={({ isActive }) => isActive ? 'text-base text-primaryColor font-semibold' : 'hover:text-yellow-300 text-base text-white font-semibold'} to='/dashboard/payment'>Membership</NavLink>
             </li>
         </>
     return (
@@ -85,7 +88,13 @@ const Header = () => {
                                         <li>
                                             <span className="text-white font-medium rounded-none bg-secondaryColor py-2 hover:bg-secondaryColor">{user?.displayName}</span>
                                         </li>
-                                        <li><NavLink to={"/dashboard"} className={`hover:rounded-none hover:bg-transparent hover:font-semibold`}>Dashboard</NavLink></li>
+                                        {
+                                            user && isAdmin && <li><NavLink to={"/dashboard/admin-profile"} className={`hover:rounded-none hover:bg-transparent hover:font-semibold`}>Dashboard</NavLink></li>
+                                        }
+
+                                        {
+                                            user && !isAdmin && <li><NavLink to={"/dashboard/my-profile"} className={`hover:rounded-none hover:bg-transparent hover:font-semibold`}>Dashboard</NavLink></li>
+                                        }
                                         <li className="border-t-2 decoration-white"><button onClick={handleLogOut} className="hover:rounded-none hover:bg-transparent hover:font-semibold">Log Out</button></li>
                                     </ul>
                                 </div>

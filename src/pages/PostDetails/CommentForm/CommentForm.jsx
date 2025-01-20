@@ -42,7 +42,7 @@ const CommentForm = ({ id, title }) => {
 
     return (
         <Container>
-            <section className="w-full">
+            <section className="w-full mb-20">
 
                 {/* form area */}
                 <form className="w-full mt-12 bg-secondaryColor p-10" onSubmit={handleSubmit(onSubmit)}>

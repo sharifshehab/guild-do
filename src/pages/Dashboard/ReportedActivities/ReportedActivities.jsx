@@ -3,26 +3,51 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import TableRow from "./TableRow/TableRow";
 import SectionTitle from "../../../components/SectionTitle";
 import Container from "../../../components/Container";
+import { Helmet } from "react-helmet-async";
+import Loading from "../../../components/Loading";
+import { useState } from "react";
 
 const ReportedActivities = () => {
     const axiosSecure = useAxiosSecure();
 
-    const { data: allReports = [], refetch, isLoading } = useQuery({
-        queryKey: ['allReports'],
+    const { data: reportCounts = { count: 0 } } = useQuery({
+         queryKey: ['reportCounts'],
         queryFn: async () => {
-            const res = await axiosSecure.get('/reports')
+            const res = await axiosSecure.get('/reportCounts');
+            return res.data;
+        }
+    });
+    const itemsPerPage = 10;
+    const numberOfPages = Math.ceil(reportCounts?.count / itemsPerPage)
+    const pages = [...Array(numberOfPages).keys()];
+    const [currentPage, setCurrentPage] = useState(0);
+    /* Go to Next / Previous page */
+    const handlePrevPage = () => {
+        if (currentPage > 0) {
+            setCurrentPage(currentPage - 1);
+        }
+    }
+    const handleNextPage = () => {
+        if (currentPage < pages?.length - 1) {
+            setCurrentPage(currentPage + 1);
+        }
+    }
+
+    const { data: allReports = [], refetch, isLoading } = useQuery({
+        queryKey: ['allReports', currentPage, itemsPerPage],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/reports?page=${currentPage}&size=${itemsPerPage}`)
             return res.data
         }
     });
 
     if (isLoading) {
-        return <div className='min-h-screen flex items-center justify-center'>
-            <span className='text-primaryColor'>Loading...</span>
-            <span className="loading loading-ring loading-lg"></span>
-        </div>
+        return <Loading></Loading>
     }
 
     return (
+        <>
+        <Helmet><title>GuildDo - Reports</title></Helmet>
         <Container>
             <section className="min-h-screen pt-8">
                 <SectionTitle title="All Reports"></SectionTitle>
@@ -44,9 +69,18 @@ const ReportedActivities = () => {
                             {allReports?.map(data => <TableRow key={data._id} data={data} refetch={refetch}></TableRow>)}
                         </tbody>
                     </table>
-                </div>
+                    </div>
+                    
+                    <div className="pagination col-span-2 flex justify-center">
+                        <button onClick={handlePrevPage} className="px-5 py-3 bg-yellow-400 text-secondaryColor font-semibold prev-cut">Prev</button>
+                        {
+                            pages?.map(page => <button className={currentPage === page ? 'text-lg px-5 py-[9px] bg-white opacity-95 text-darkColor ' : 'bg-white px-5 py-3 text-secondaryColor'} onClick={() => setCurrentPage(page)} key={page}>{page + 1}</button>)
+                        }
+                        <button onClick={handleNextPage} className="px-5 py-3 bg-yellow-400 text-secondaryColor font-semibold next-cut">Next</button>
+                    </div>{/* pagination */}
             </section>
-        </Container>
+            </Container>
+        </>
     );
 };
 

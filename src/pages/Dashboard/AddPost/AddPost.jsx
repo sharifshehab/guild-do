@@ -8,27 +8,24 @@ import { Toaster } from "react-hot-toast";
 import Select from 'react-select'
 import { TbLoader3 } from "react-icons/tb";
 import { useQuery } from "@tanstack/react-query";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import SectionTitle from "../../../components/SectionTitle";
 import Loading from "../../../components/Loading";
+import useTags from "../../../API/useTags";
+import { Helmet } from "react-helmet-async";
 
 
 const AddPost = () => {
     const { register, handleSubmit, control, reset, formState: { errors } } = useForm();
     const axiosPublic = useAxiosPublic();
     const axiosSecure = useAxiosSecure();
+    const [allTags] = useTags();
     const { user } = useAuth();
     const { successToast, errorToast } = useToast();
     const [loading, setLoading] = useState(false);
 
-    const options = [
-        { value: 'chocolate', label: 'Chocolate' },
-        { value: 'strawberry', label: 'Strawberry' },
-        { value: 'vanilla', label: 'Vanilla' }
-    ]
-
-    const { data: myPosts = [], refetch, isLoading:postLoading } = useQuery({
+    const { data: myPosts = [], refetch, isLoading: postLoading } = useQuery({
         queryKey: ['userPosts', user?.email],
         queryFn: async () => {
             const res = await axiosPublic.get(`/posts?email=${user?.email}`);
@@ -92,129 +89,133 @@ const AddPost = () => {
     }
 
     return (
-        <Container>
-            <section className="pt-8 min-h-screen">
+        <>
+            <Helmet><title>GuildDo - Add Post</title></Helmet>
+            <Container>
+                <section className="py-8 min-h-screen">
 
-                {/* title */}
-                <SectionTitle title="add post"></SectionTitle>
+                    {/* title */}
+                    <SectionTitle title="add post"></SectionTitle>
 
-                {/* form area */}
-                <form className="w-full bg-secondaryColor" onSubmit={handleSubmit(onSubmit)}>
+                    {/* form area */}
+                    <form className="w-full bg-secondaryColor" onSubmit={handleSubmit(onSubmit)}>
 
-                    <div className="space-y-5">
+                        <div className="space-y-5">
 
-                        <div className="flex flex-col sm:flex-row items-center gap-5">
-                            <div className="flex flex-col gap-[5px] w-full sm:w-[50%]">
-                                <label className="relative">
-                                    <input type="text"
-                                        className="peer text-white bg-darkColor border-[#e5eaf2] border outline-none ps-32 pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
-                                        {...register("author_name")}
-                                        defaultValue={user?.displayName}
-                                        readOnly
-                                    />
-                                    <span
-                                        className="absolute top-3 left-5 peer-focus:-top-3 peer-focus:bg-primaryColor peer-focus:left-2 peer-focus:scale-[0.9] peer-focus:text-secondaryColor text-[#777777] peer-focus:px-1 transition-all duration-300 ">
-                                        Author Name
-                                    </span>
-                                </label>
-                                {errors.author_name && <span className="text-red-500 text-sm">{errors.author_name.message}</span>}
-                            </div> {/* author name */}
-
-                            <div className="flex flex-col gap-[5px] w-full sm:w-[50%]">
-                                <label className="relative">
-                                    <input type="email"
-                                        className="peer text-white bg-darkColor border-[#e5eaf2] border outline-none ps-32 pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
-                                        {...register("author_email")}
-                                        defaultValue={user?.email}
-                                        readOnly
-                                    />
-                                    <span
-                                        className="absolute top-3 left-5 peer-focus:-top-3 peer-focus:bg-primaryColor peer-focus:left-2 peer-focus:scale-[0.9] peer-focus:text-secondaryColor text-[#777777] peer-focus:px-1 transition-all duration-300 ">
-                                        Author email
-                                    </span>
-                                </label>
-                                {errors.author_email && <span className="text-red-500 text-sm">{errors.author_email.message}</span>}
-                            </div> {/* author email */}
-                        </div> {/* first-row */}
-
-                        <div className="flex flex-col sm:flex-row items-center gap-5">
-                            <div className="flex flex-col gap-[5px] w-full sm:w-[50%]">
-                                <label className="relative">
-                                    <input type="text"
-                                        className="peer text-white bg-darkColor border-[#e5eaf2] border outline-none ps-32 pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
-                                        {...register("author_image")}
-                                        defaultValue={user?.photoURL}
-                                        readOnly
-                                    />
-                                    <span
-                                        className="absolute top-3 left-5 peer-focus:-top-3 peer-focus:bg-primaryColor peer-focus:left-2 peer-focus:scale-[0.9] peer-focus:text-secondaryColor text-[#777777] peer-focus:px-1 transition-all duration-300 ">
-                                        Author image
-                                    </span>
-                                </label>
-                                {errors.author_image && <span className="text-red-500 text-sm">{errors.author_image.message}</span>}
-                            </div> {/* author image */}
-
-                            <div className="flex flex-col gap-[5px] w-full sm:w-[50%]">
-                                <label className="relative">
-                                    <input type="text"
-                                        className="peer text-white bg-darkColor border-[#e5eaf2] border outline-none ps-24 pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
-                                        {...register("post_title", { required: "Post title is required", minLength: { value: 10, message: "minimum character length is 10" } })}
-                                    />
-                                    <span
-                                        className="absolute top-3 left-5 peer-focus:-top-3 peer-focus:bg-primaryColor peer-focus:left-2 peer-focus:scale-[0.9] peer-focus:text-secondaryColor text-[#777777] peer-focus:px-1 transition-all duration-300 ">
-                                        Post title
-                                    </span>
-                                </label>
-                                {errors.post_title && <span className="text-red-500 text-sm">{errors.post_title.message}</span>}
-                            </div> {/* post title */}
-                        </div> {/* second-row */}
-
-                        <div className="flex flex-col gap-[5px] w-full mt-[20px]">
-
-                            <Controller
-                                name="post_tags"
-                                control={control}
-                                rules={{ required: "Post tag is required" }}
-                                render={({ field, fieldState }) => (
-                                    <div>
-                                        <Select
-                                            {...field}
-                                            options={options}
-                                            isMulti={true}
-                                            onChange={(selectedOption) => field.onChange(selectedOption)}
-                                            onBlur={field.onBlur}
-                                            value={field.value || []}
-                                            placeholder="Select post tags"
-                                            className="gd-post-select"
-                                            classNamePrefix="gd-post"
+                            <div className="flex flex-col sm:flex-row items-center gap-5">
+                                <div className="flex flex-col gap-[5px] w-full sm:w-[50%]">
+                                    <label className="relative">
+                                        <input type="text"
+                                            className="peer text-white bg-darkColor border-[#e5eaf2] border outline-none ps-32 pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
+                                            {...register("author_name")}
+                                            defaultValue={user?.displayName}
+                                            readOnly
                                         />
-                                        {fieldState.error && <span className="text-red-500 text-sm">{fieldState.error.message}</span>}
-                                    </div>
-                                )}
-                            />
-                        </div>{/* post tags */}
+                                        <span
+                                            className="absolute top-3 left-5 peer-focus:-top-3 peer-focus:bg-primaryColor peer-focus:left-2 peer-focus:scale-[0.9] peer-focus:text-secondaryColor text-[#777777] peer-focus:px-1 transition-all duration-300 ">
+                                            Author Name
+                                        </span>
+                                    </label>
+                                    {errors.author_name && <span className="text-red-500 text-sm">{errors.author_name.message}</span>}
+                                </div> {/* author name */}
 
-                        <div className="flex flex-col gap-[5px] w-full mt-[20px]">
-                            <label className="relative w-full">
-                                <textarea
-                                    className="peer min-h-72 text-white bg-darkColor border-[#e5eaf2] border outline-none ps-[150px] pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
-                                    {...register("post_description", { required: "Post description is required" })}
-                                ></textarea>
-                                <span
-                                    className=" absolute top-3 left-5 peer-focus:-top-3 peer-focus:bg-primaryColor peer-focus:left-2 peer-focus:scale-[0.9] peer-focus:text-secondaryColor text-[#777777] peer-focus:px-1 transition-all duration-300 ">
-                                    Post description
-                                </span>
-                            </label>
-                            {errors.post_description && <span className="text-red-500 text-sm">{errors.post_description.message}</span>}
-                        </div>{/* post description */}
+                                <div className="flex flex-col gap-[5px] w-full sm:w-[50%]">
+                                    <label className="relative">
+                                        <input type="email"
+                                            className="peer text-white bg-darkColor border-[#e5eaf2] border outline-none ps-32 pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
+                                            {...register("author_email")}
+                                            defaultValue={user?.email}
+                                            readOnly
+                                        />
+                                        <span
+                                            className="absolute top-3 left-5 peer-focus:-top-3 peer-focus:bg-primaryColor peer-focus:left-2 peer-focus:scale-[0.9] peer-focus:text-secondaryColor text-[#777777] peer-focus:px-1 transition-all duration-300 ">
+                                            Author email
+                                        </span>
+                                    </label>
+                                    {errors.author_email && <span className="text-red-500 text-sm">{errors.author_email.message}</span>}
+                                </div> {/* author email */}
+                            </div> {/* first-row */}
 
-                    </div>{/* space-y-5 */}
+                            <div className="flex flex-col sm:flex-row items-center gap-5">
+                                <div className="flex flex-col gap-[5px] w-full sm:w-[50%]">
+                                    <label className="relative">
+                                        <input type="text"
+                                            className="peer text-white bg-darkColor border-[#e5eaf2] border outline-none ps-32 pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
+                                            {...register("author_image")}
+                                            defaultValue={user?.photoURL}
+                                            readOnly
+                                        />
+                                        <span
+                                            className="absolute top-3 left-5 peer-focus:-top-3 peer-focus:bg-primaryColor peer-focus:left-2 peer-focus:scale-[0.9] peer-focus:text-secondaryColor text-[#777777] peer-focus:px-1 transition-all duration-300 ">
+                                            Author image
+                                        </span>
+                                    </label>
+                                    {errors.author_image && <span className="text-red-500 text-sm">{errors.author_image.message}</span>}
+                                </div> {/* author image */}
 
-                    <button type="submit" disabled={myPosts?.length === 5} className='py-3 px-4 bg-yellow-400 font-medium outline-none mt-3 next-cut border-2 border-yellow-400 hover:border-white duration-300'>{loading ? <TbLoader3 size={22} className="animate-spin text-[#ffffff]" /> : 'Add Post'}</button>
-                </form>
-                <Toaster />
-            </section>
-        </Container>
+                                <div className="flex flex-col gap-[5px] w-full sm:w-[50%]">
+                                    <label className="relative">
+                                        <input type="text"
+                                            className="peer text-white bg-darkColor border-[#e5eaf2] border outline-none ps-24 pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
+                                            {...register("post_title", { required: "Post title is required", minLength: { value: 10, message: "minimum character length is 10" } })}
+                                        />
+                                        <span
+                                            className="absolute top-3 left-5 peer-focus:-top-3 peer-focus:bg-primaryColor peer-focus:left-2 peer-focus:scale-[0.9] peer-focus:text-secondaryColor text-[#777777] peer-focus:px-1 transition-all duration-300 ">
+                                            Post title
+                                        </span>
+                                    </label>
+                                    {errors.post_title && <span className="text-red-500 text-sm">{errors.post_title.message}</span>}
+                                </div> {/* post title */}
+                            </div> {/* second-row */}
+
+                            <div className="flex flex-col gap-[5px] w-full mt-[20px]">
+
+                                <Controller
+                                    name="post_tags"
+                                    control={control}
+                                    rules={{ required: "Post tag is required" }}
+                                    render={({ field, fieldState }) => (
+                                        <div>
+                                            <Select
+                                                {...field}
+                                                options={allTags}
+                                                isMulti={true}
+                                                onChange={(selectedOption) => field.onChange(selectedOption)}
+                                                onBlur={field.onBlur}
+                                                isSearchable={false}
+                                                value={field.value || []}
+                                                placeholder="Select post tags"
+                                                className="gd-post-select"
+                                                classNamePrefix="gd-post"
+                                            />
+                                            {fieldState.error && <span className="text-red-500 text-sm">{fieldState.error.message}</span>}
+                                        </div>
+                                    )}
+                                />
+                            </div>{/* post tags */}
+
+                            <div className="flex flex-col gap-[5px] w-full mt-[20px]">
+                                <label className="relative w-full">
+                                    <textarea
+                                        className="peer min-h-72 text-white bg-darkColor border-[#e5eaf2] border outline-none ps-[150px] pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
+                                        {...register("post_description", { required: "Post description is required" })}
+                                    ></textarea>
+                                    <span
+                                        className=" absolute top-3 left-5 peer-focus:-top-3 peer-focus:bg-primaryColor peer-focus:left-2 peer-focus:scale-[0.9] peer-focus:text-secondaryColor text-[#777777] peer-focus:px-1 transition-all duration-300 ">
+                                        Post description
+                                    </span>
+                                </label>
+                                {errors.post_description && <span className="text-red-500 text-sm">{errors.post_description.message}</span>}
+                            </div>{/* post description */}
+
+                        </div>{/* space-y-5 */}
+
+                        <button type="submit" disabled={myPosts?.length === 5} className='py-3 px-4 bg-yellow-400 font-medium outline-none mt-3 next-cut border-2 border-yellow-400 hover:border-white duration-300'>{loading ? <TbLoader3 size={22} className="animate-spin text-[#ffffff]" /> : 'Add Post'}</button>
+                    </form>
+                    <Toaster />
+                </section>
+            </Container>
+        </>
     );
 };
 

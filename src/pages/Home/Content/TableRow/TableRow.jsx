@@ -2,13 +2,12 @@ import { Link } from "react-router-dom";
 import usePostComments from "../../../../API/usePostComments";
 import formateDate from "../../../../components/formateDate";
 
-
 const TableRow = ({ post }) => {
     const { _id, postTitle, postDescription, postTag, UpVote, DownVote, authorName, authorImage, createdAt } = post || {}
     const date = formateDate(createdAt);
 
     // get specific post comments
-    const [postComments] = usePostComments(postTitle)
+    const [postComments] = usePostComments(postTitle);
 
     return (
         <tr>

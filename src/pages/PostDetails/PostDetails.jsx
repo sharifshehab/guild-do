@@ -16,6 +16,7 @@ import { FiThumbsUp, FiThumbsDown } from "react-icons/fi";
 import { LiaTagsSolid } from "react-icons/lia";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import image from "../../assets/images/2.webp";
+import { Helmet } from "react-helmet-async";
 
 const PostDetails = () => {
     const { postId } = useParams();
@@ -69,99 +70,102 @@ const PostDetails = () => {
     }
 
     return (
-        <Container>
-            <div className="w-full shadow-lg bg-secondaryColor my-20">
-                <div className="flex w-full justify-between items-center p-4">
-                    <div className="flex items-center gap-4">
+        <>
+            <Helmet><title>GuildDo - Forum Details</title></Helmet>
+            <Container>
+                <div className="w-full shadow-lg bg-secondaryColor mt-20">
+                    <div className="flex w-full justify-between items-center p-4">
+                        <div className="flex items-center gap-4">
 
-                        <div className="mask mask-squircle h-12 w-12">
-                            <img
-                                src={authorImage}
-                                alt="Avatar Tailwind CSS Component"
-                                referrerPolicy="no-referrer"
-                            />
-                        </div>
+                            <div className="mask mask-squircle h-12 w-12">
+                                <img
+                                    src={authorImage}
+                                    alt="Avatar Tailwind CSS Component"
+                                    referrerPolicy="no-referrer"
+                                />
+                            </div>
 
-                        <div>
-                            <h2 className="font-[500] text-[1.2rem] text-yellow-400">{authorName}</h2>
-                            <p className="text-white text-[0.9rem]">{postDate}</p>
+                            <div>
+                                <h2 className="font-[500] text-[1.2rem] text-yellow-400">{authorName}</h2>
+                                <p className="text-white text-[0.9rem]">{postDate}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div className="relative">
-                    <img
-                        src={image}
-                        alt=""
-                        className="w-full h-[250px] object-cover"
-                    />
-                    <div className="absolute inset-0 bg-black opacity-65"></div> {/* Overlay */}
-                    <h2 className="text-primaryColor text-3xl lg:text-5xl font-semibold absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">{postTitle}</h2>
-                </div>
+                    <div className="relative">
+                        <img
+                            src={image}
+                            alt=""
+                            className="w-full h-[250px] object-cover"
+                        />
+                        <div className="absolute inset-0 bg-black opacity-65"></div> {/* Overlay */}
+                        <h2 className="text-primaryColor text-3xl lg:text-5xl font-semibold absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">{postTitle}</h2>
+                    </div>
 
-                <div className="p-4">
-                    <button className="flex items-end gap-2">
-                        <LiaTagsSolid className="text-yellow-400" size={22} />
-                        {postTag?.map((tag, idx) => <span key={idx} className="text-white">{tag}{idx < postTag.length - 1 && (<span className="text-yellow-400 text-xl">, </span>)}</span>)}
-                    </button>
-                </div>
-
-                <p className="text-white p-6">
-                    {postDescription}
-                </p>
-
-                <div className="flex items-center justify-between w-full p-4 ">
-                    <div className="flex gap-3">
-
-                        <button className="flex items-center justify-center gap-1" onClick={handleUpVote}>
-                            <FiThumbsUp className="text-2xl p-1 text-yellow-400" size={25} /> <span className="text-white">{UpVote}</span>
-                        </button>
-
-                        <button className="flex items-center justify-center gap-1" onClick={handleDownVote}>
-                            <FiThumbsDown className="text-2xl p-1 text-yellow-400" size={25} /> <span className="text-white">{DownVote}</span>
+                    <div className="p-4">
+                        <button className="flex items-end gap-2">
+                            <LiaTagsSolid className="text-yellow-400" size={22} />
+                            {postTag?.map((tag, idx) => <span key={idx} className="text-white">{tag}{idx < postTag.length - 1 && (<span className="text-yellow-400 text-xl">, </span>)}</span>)}
                         </button>
                     </div>
 
-                    {/* social share */}
-                    <div className="flex items-center gap-1">
-                        <span className="text-yellow-400 font-semibold">Share:</span>
+                    <p className="text-white p-6">
+                        {postDescription}
+                    </p>
 
-                        {
-                            !user?.email ? (
-                                <div className="flex items-center justify-center gap-2">
-                                    <Link to={'/login'}>
-                                        <SlSocialFacebook size={21} className="text-white" />
-                                    </Link>
-                                    <Link to={'/login'}>
-                                        <RxTwitterLogo size={21} className="text-white" />
-                                    </Link>
-                                    <Link to={'/login'}>
-                                        <IoLogoWhatsapp size={21} className="text-white" />
-                                    </Link>
-                                </div>
-                            ) : (
-                                <div className="flex items-center justify-center gap-2">
-                                    <FacebookShareButton url={`http://localhost:5000/posts/${postId}`}>
-                                        <SlSocialFacebook size={21} className="text-white" />
-                                    </FacebookShareButton>
+                    <div className="flex items-center justify-between w-full p-4 ">
+                        <div className="flex gap-3">
 
-                                    <TwitterShareButton url={`http://localhost:5000/posts/${postId}`}>
-                                        <RxTwitterLogo size={21} className="text-white" />
-                                    </TwitterShareButton>
+                            <button className="flex items-center justify-center gap-1" onClick={handleUpVote}>
+                                <FiThumbsUp className="text-2xl p-1 text-yellow-400" size={25} /> <span className="text-white">{UpVote}</span>
+                            </button>
 
-                                    <WhatsappShareButton url={`http://localhost:5000/posts/${postId}`}>
-                                        <IoLogoWhatsapp size={21} className="text-white" />
-                                    </WhatsappShareButton>
-                                </div>
-                            )
-                        }
+                            <button className="flex items-center justify-center gap-1" onClick={handleDownVote}>
+                                <FiThumbsDown className="text-2xl p-1 text-yellow-400" size={25} /> <span className="text-white">{DownVote}</span>
+                            </button>
+                        </div>
+
+                        {/* social share */}
+                        <div className="flex items-center gap-1">
+                            <span className="text-yellow-400 font-semibold">Share:</span>
+
+                            {
+                                !user?.email ? (
+                                    <div className="flex items-center justify-center gap-2">
+                                        <Link to={'/login'}>
+                                            <SlSocialFacebook size={21} className="text-white" />
+                                        </Link>
+                                        <Link to={'/login'}>
+                                            <RxTwitterLogo size={21} className="text-white" />
+                                        </Link>
+                                        <Link to={'/login'}>
+                                            <IoLogoWhatsapp size={21} className="text-white" />
+                                        </Link>
+                                    </div>
+                                ) : (
+                                    <div className="flex items-center justify-center gap-2">
+                                        <FacebookShareButton url={`http://localhost:5000/posts/${postId}`}>
+                                            <SlSocialFacebook size={21} className="text-white" />
+                                        </FacebookShareButton>
+
+                                        <TwitterShareButton url={`http://localhost:5000/posts/${postId}`}>
+                                            <RxTwitterLogo size={21} className="text-white" />
+                                        </TwitterShareButton>
+
+                                        <WhatsappShareButton url={`http://localhost:5000/posts/${postId}`}>
+                                            <IoLogoWhatsapp size={21} className="text-white" />
+                                        </WhatsappShareButton>
+                                    </div>
+                                )
+                            }
+                        </div>
                     </div>
-                </div>
 
-                <Toaster />
-            </div>
-            <CommentForm id={_id} title={postTitle}></CommentForm>
-        </Container>
+                    <Toaster />
+                </div>
+                <CommentForm id={_id} title={postTitle}></CommentForm>
+            </Container>
+        </>
     );
 };
 

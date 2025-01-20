@@ -17,6 +17,8 @@ const Content = () => {
 
     const itemsPerPage = 5;
 
+    console.log('postsCount', postsCount);
+
     const numberOfPages = Math.ceil(postsCount?.count / itemsPerPage)
 
     const pages = [...Array(numberOfPages).keys()];
@@ -37,12 +39,13 @@ const Content = () => {
     }
 
     const { data: allPosts = [] } = useQuery({
-        queryKey: ['allPosts', currentPage, itemsPerPage],
+        queryKey: ['allPosts', currentPage],
         queryFn: async () => {
             const res = await axiosPublic.get(`/posts?page=${currentPage}&size=${itemsPerPage}`);
             return res.data;
         }
     });
+
 
     return (
         <section>
@@ -83,7 +86,6 @@ const Content = () => {
                         }
                         <button onClick={handleNextPage} className="px-5 py-3 bg-yellow-400 text-secondaryColor font-semibold next-cut">Next</button>
                     </div>{/* pagination */}
-
                 </div>{/* grid */}
             </Container>
         </section>

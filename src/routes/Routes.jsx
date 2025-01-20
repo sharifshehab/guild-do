@@ -3,7 +3,6 @@ import Root from "../layout/Root";
 import Home from "../pages/Home/Home";
 import Register from "../pages/Register/Register";
 import Login from "../pages/Login/Login";
-import Membership from "../pages/Membership/Membership";
 import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../layout/Dashboard";
 import AddPost from "../pages/Dashboard/AddPost/AddPost";
@@ -17,6 +16,7 @@ import ReportedActivities from "../pages/Dashboard/ReportedActivities/ReportedAc
 import Payment from "../pages/Dashboard/Payment/Payment";
 import Error from "../pages/Error/Error";
 import AdminProfile from "../pages/Dashboard/AdminProfile/AdminProfile";
+import AdminRoute from "./adminRoute";
 
 export const router = createBrowserRouter([
     {
@@ -26,10 +26,6 @@ export const router = createBrowserRouter([
             {
                 index: true,
                 element: <Home></Home>
-            },
-            {
-                path: "/membership",
-                element: <PrivateRoute><Membership></Membership></PrivateRoute>
             },
             {
                 path: "post/:postId",
@@ -52,21 +48,20 @@ export const router = createBrowserRouter([
             // admin routes
             {
                 path: "admin-profile",
-                element: <AdminProfile></AdminProfile>
+                element: <AdminRoute><AdminProfile></AdminProfile></AdminRoute>
             },
             {
                 path: "manage-users",
-                element: <ManageUsers></ManageUsers>
+                element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute>
             },
             {
                 path: "reports",
-                element: <ReportedActivities></ReportedActivities>
+                element: <AdminRoute><ReportedActivities></ReportedActivities></AdminRoute>
             },
             {
                 path: "announcement",
-                element: <MakeAnnouncement></MakeAnnouncement>
+                element: <AdminRoute><MakeAnnouncement></MakeAnnouncement></AdminRoute>
             },
-            
             /* user routes */
             {
                 path: "add-post",
