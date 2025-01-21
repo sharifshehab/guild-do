@@ -13,7 +13,7 @@ const Home = () => {
 
     return (
         <>
-            <Helmet><title>GuildDo - Home</title></Helmet>
+            <Helmet><title>GuildDo - Uniting Gamers | Home</title></Helmet>
             <main>
                 <Hero></Hero>
                 {

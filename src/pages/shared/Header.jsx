@@ -5,6 +5,7 @@ import useAuth from "../../hooks/useAuth";
 import { Link, NavLink } from "react-router-dom";
 import useAnnouncements from "../../API/useAnnouncements";
 import useAdmin from "../../API/useAdmin";
+import logo from "../../assets/images/logo.png";
 
 const Header = () => {
     const { user, handleLogOut } = useAuth();
@@ -14,10 +15,10 @@ const Header = () => {
     const menuItems =
         <>
             <li>
-                <NavLink className={({ isActive }) => isActive ? 'text-base text-primaryColor font-semibold' : 'hover:text-yellow-300 text-base text-white font-semibold'} to='/'>Home</NavLink>
+                <NavLink className={({ isActive }) => isActive ? 'text-base text-yellow-400 font-semibold focus:bg-transparent focus:text-yellow-400' : 'hover:text-yellow-400 text-base text-white font-semibold'} to='/'>Home</NavLink>
             </li>
             <li>
-                <NavLink className={({ isActive }) => isActive ? 'text-base text-primaryColor font-semibold' : 'hover:text-yellow-300 text-base text-white font-semibold'} to='/dashboard/payment'>Membership</NavLink>
+                <NavLink className={({ isActive }) => isActive ? 'text-base text-yellow-400 font-semibold' : 'hover:text-yellow-400 text-base text-white font-semibold focus:bg-transparent focus:text-yellow-400'} to='/dashboard/payment'>Membership</NavLink>
             </li>
         </>
     return (
@@ -27,16 +28,15 @@ const Header = () => {
                     <div className="navbar-start">
                         <div className="dropdown">
                             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-                                <HiBars3BottomLeft size={25} color="#fff10f" />
+                                <HiBars3BottomLeft size={30} color="#facc15" />
                             </div>
                             <ul
                                 tabIndex={0}
-                                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                                className="menu menu-sm dropdown-content bg-darkColor z-10 mt-3 w-52 p-2 shadow">
                                 {menuItems}
                             </ul>
                         </div>
-                        <a className="text-xl ">GuildDo</a>
-
+                        <a className="text-xl"><img src={logo} alt="" /></a>
                     </div>
                     <div className="navbar-center hidden lg:flex">
                         <ul className="menu menu-horizontal px-1">
@@ -57,7 +57,7 @@ const Header = () => {
 
                                     <div
                                         tabIndex={0}
-                                        className="card card-compact dropdown-content bg-yellow-400 rounded-none z-10 mt-2 w-52 shadow">
+                                        className="card card-compact dropdown-content bg-yellow-400 rounded-none z-10 mt-3 w-52 shadow">
                                         <div className="card-body space-y-1">
                                             {
                                                 announcements?.map(announcement => <span className="text-sm font-semibold text-darkColor border-b border-white pb-1" key={announcement._id}>{announcement.announcementTitle.slice(0, 20)}...</span>)
@@ -83,9 +83,9 @@ const Header = () => {
                                     </div>
                                     <ul
                                         tabIndex={0}
-                                        className="menu menu-sm dropdown-content bg-yellow-400 text-base z-10 mt-2 w-52 p-2 shadow">
-                                        <li>
-                                            <span className="text-white font-medium rounded-none bg-secondaryColor py-2 hover:bg-secondaryColor">{user?.displayName}</span>
+                                        className="menu menu-sm dropdown-content bg-yellow-400 text-base z-10 mt-3 w-52 p-1 shadow space-y-1">
+                                        <li className="text-white font-medium rounded-none bg-secondaryColor hover:bg-secondaryColor">
+                                            <h4 className="block text-center text-base">{user?.displayName}</h4>
                                         </li>
                                         {
                                             user && isAdmin && <li><NavLink to={"/dashboard/admin-profile"} className={`hover:rounded-none hover:bg-transparent hover:font-semibold`}>Dashboard</NavLink></li>

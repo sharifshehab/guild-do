@@ -15,15 +15,18 @@ const MyProfile = () => {
     const axiosPublic = useAxiosPublic();
     const axiosSecure = useAxiosSecure();
 
+
     // user info
     const { data: userProfile = {} } = useQuery({
         queryKey: ['userProfile', user?.email],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/users?email=${user?.email}`)
+            const res = await axiosSecure.get(`/users/${user.email}?email=${user.email}`)
             return res.data
         }
     });
     const { name, email, badge } = userProfile || {};
+
+    console.log(user.email);
 
     // user's top 3 post
     const { data: myPosts = [] } = useQuery({
@@ -51,8 +54,7 @@ const MyProfile = () => {
                                     referrerPolicy="no-referrer"
                                     className={`w-[80px] h-[80px] z-20 rounded-full ${userProfile?.badge === "Gold" ? 'border-yellow-400' : 'border-amber-700'} border-4 absolute -bottom-12 left-1/2 transform -translate-x-1/2 object-cover`}
                                 />
-                                <span className={`absolute top-5 z-10 right-[29%] md:right-[39%] lg:right-[41%] badge badge-md bg-secondaryColor pt-1 ps-4 rounded-none badge-cut ${userProfile?.badge === "Gold" ? 'text-yellow-400' : 'text-amber-700'} `}>{badge}</span>
-
+                                <span className={`absolute top-5 z-10 ${userProfile?.badge === "Gold" ? 'right-[29%]' : 'right-[25%]'} ${userProfile?.badge === "Gold" ? 'md:right-[39%]' : 'md:right-[37%]'}  ${userProfile?.badge === "Gold" ? 'lg:right-[41%]' : 'lg:right-[39%]'} badge badge-md bg-secondaryColor pt-[3px] ps-4 rounded-none badge-cut ${userProfile?.badge === "Gold" ? 'text-yellow-400' : 'text-amber-700'}`}>{badge}</span>
                             </div>
 
                             <div className="w-full text-center mt-16">
