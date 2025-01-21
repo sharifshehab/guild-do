@@ -16,7 +16,7 @@ const TableRow = ({ data, refetch }) => {
     const { successToast, errorToast } = useToast();
 
     const options = [
-        { value: 'delete', label: 'Delete the Comment ' },
+        { value: 'delete', label: 'Delete the Comment' },
         { value: 'warn', label: 'Warn the User' },
         { value: 'remove', label: 'Remove the User' }
     ]

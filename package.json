@@ -27,6 +27,7 @@
     "react-router-dom": "^7.1.1",
     "react-select": "^5.9.0",
     "react-share": "^5.1.2",
+    "react-stickynode": "^5.0.1",
     "recharts": "^2.15.0",
     "sort-by": "^1.2.0",
     "sweetalert2": "^11.15.10"
