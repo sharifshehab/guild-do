@@ -38,7 +38,7 @@ const ManageUsers = () => {
     const { data: allUsers = [], refetch, isLoading } = useQuery({
         queryKey: ['allUsers', currentPage, itemsPerPage],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/users?page=${currentPage}&size=${itemsPerPage}`)
+            const res = await axiosSecure.get(`/users/${user.email}?page=${currentPage}&size=${itemsPerPage}`)
             return res.data
         }
     });

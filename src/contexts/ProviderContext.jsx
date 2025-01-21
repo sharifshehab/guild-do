@@ -58,7 +58,6 @@ const ProviderContext = ({ children }) => {
                         setLoading(false);
                     });
             }
-            setLoading(false);
         });
 
         return () => {

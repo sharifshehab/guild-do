@@ -3,6 +3,7 @@ import useAdmin from "../API/useAdmin";
 
 const Dashboard = () => {
     const [isAdmin] = useAdmin();
+
     return (
         <div className="flex flex-col lg:flex-row items-center justify-center">
             {/* dashboard sidebar */}
