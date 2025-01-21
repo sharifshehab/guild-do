@@ -68,6 +68,7 @@ const TableRow = ({ data, refetch }) => {
                 // warn the user
                 axiosSecure.patch(`/users/warn/${commenterEmail}`)
                     .then(res => {
+                        console.log(res?.data);
                         if (res?.data?.modifiedCount > 0) {
                             // delete report
                             axiosSecure.delete(`reports/${_id}`)
@@ -80,7 +81,18 @@ const TableRow = ({ data, refetch }) => {
                                 icon: "success",
                                 confirmButtonColor: "#2b3440",
                             });
-                            // refetch();
+                        } else if (res?.data?.acknowledged === true && res?.data?.matchedCount === 1) {
+                            // delete report
+                            axiosSecure.delete(`reports/${_id}`)
+                                .then(res => {
+                                    refetch();
+                                });
+                            Swal.fire({
+                                title: "Already Warned!",
+                                text: "This user has already been warned.",
+                                icon: "success",
+                                confirmButtonColor: "#2b3440",
+                            });
                         }
                     });
             }

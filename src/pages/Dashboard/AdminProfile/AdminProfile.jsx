@@ -74,7 +74,7 @@ const AdminProfile = () => {
         <>
             <Helmet><title>GuildDo - Admin Profile</title></Helmet>
             <Container>
-                <section className="min-h-screen pt-8">
+                <section className="min-h-screen py-8">
                     <SectionTitle title="Admin Dashboard"></SectionTitle>
                     <div className="grid lg:grid-cols-6 justify-center items-center gap-5 mb-14">
 

@@ -5,13 +5,34 @@ import useAuth from "../../hooks/useAuth";
 import { Link, NavLink } from "react-router-dom";
 import useAnnouncements from "../../API/useAnnouncements";
 import useAdmin from "../../API/useAdmin";
+import Loading from "../../components/Loading";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
 
 const Header = () => {
     const { user, handleLogOut } = useAuth();
     const [announcements] = useAnnouncements();
-    const [isAdmin] = useAdmin();
-    console.log(isAdmin);
+    
+    // const axiosSecure = useAxiosSecure();
+    // const { data: admin, isLoading: isAdminLoading } = useQuery({
+    //     queryKey: ['isAdmin', user?.email],
+    //     enabled: !loading,
+    //     queryFn: async () => {
+    //         const res = await axiosSecure.get(`/users/admin/${user.email}`);
+    //         return res.data.admin;
+    //     }
+    // });
+    // console.log(admin);
 
+
+
+
+    const [isAdmin, isAdminLoading] = useAdmin();
+    if (isAdminLoading) {
+        return <Loading></Loading>
+    }
+
+    
     const menuItems =
         <>
             <li>
@@ -89,7 +110,7 @@ const Header = () => {
                                             <span className="text-white font-medium rounded-none bg-secondaryColor py-2 hover:bg-secondaryColor">{user?.displayName}</span>
                                         </li>
                                         {
-                                            user && isAdmin && <li><NavLink to={"/dashboard/admin-profile"} className={`hover:rounded-none hover:bg-transparent hover:font-semibold`}>Dashboard</NavLink></li>
+                                            user && isAdmin && <li><NavLink to={"/dashboard/admin-profile"} className={`hover:rounded-none hover:bg-transparent hover:font-semibold`}>ashboard</NavLink></li>
                                         }
 
                                         {

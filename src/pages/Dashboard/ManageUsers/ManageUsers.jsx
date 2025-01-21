@@ -6,9 +6,11 @@ import Container from "../../../components/Container";
 import Loading from "../../../components/Loading";
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
+import useAuth from "../../../hooks/useAuth";
 
 const ManageUsers = () => {
     const axiosSecure = useAxiosSecure();
+    const { user } = useAuth();
 
     const { data: userCounts = { count: 0 } } = useQuery({
         queryKey: ['userCounts'],
@@ -67,18 +69,23 @@ const ManageUsers = () => {
                             </thead>
 
                             <tbody>
-                                {allUsers?.map(user => <TableRow key={user._id} user={user} refetch={refetch}></TableRow>)}
+                                {allUsers?.length === 0 ? <p className="text-white py-5">No user found!</p> :
+                                    allUsers?.map(user => <TableRow key={user._id} user={user} refetch={refetch}></TableRow>)
+                                }
                             </tbody>
                         </table>
                     </div>
 
-                    <div className="pagination col-span-2 flex justify-center">
-                        <button onClick={handlePrevPage} className="px-5 py-3 bg-yellow-400 text-secondaryColor font-semibold prev-cut">Prev</button>
-                        {
-                            pages?.map(page => <button className={currentPage === page ? 'text-lg px-5 py-[9px] bg-white opacity-95 text-darkColor ' : 'bg-white px-5 py-3 text-secondaryColor'} onClick={() => setCurrentPage(page)} key={page}>{page + 1}</button>)
-                        }
-                        <button onClick={handleNextPage} className="px-5 py-3 bg-yellow-400 text-secondaryColor font-semibold next-cut">Next</button>
-                    </div>{/* pagination */}
+                    {allUsers?.length !== 0 &&
+                        <div className="pagination col-span-2 flex justify-center">
+                            <button onClick={handlePrevPage} className="px-5 py-3 bg-yellow-400 text-secondaryColor font-semibold prev-cut">Prev</button>
+                            {
+                                pages?.map(page => <button className={currentPage === page ? 'text-lg px-5 py-[9px] bg-white opacity-95 text-darkColor ' : 'bg-white px-5 py-3 text-secondaryColor'} onClick={() => setCurrentPage(page)} key={page}>{page + 1}</button>)
+                            }
+                            <button onClick={handleNextPage} className="px-5 py-3 bg-yellow-400 text-secondaryColor font-semibold next-cut">Next</button>
+                        </div>
+                    }
+
                 </section>
             </Container>
         </>

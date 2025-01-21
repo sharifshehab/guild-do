@@ -11,7 +11,7 @@ const ReportedActivities = () => {
     const axiosSecure = useAxiosSecure();
 
     const { data: reportCounts = { count: 0 } } = useQuery({
-         queryKey: ['reportCounts'],
+        queryKey: ['reportCounts'],
         queryFn: async () => {
             const res = await axiosSecure.get('/reportCounts');
             return res.data;
@@ -47,38 +47,41 @@ const ReportedActivities = () => {
 
     return (
         <>
-        <Helmet><title>GuildDo - Reports</title></Helmet>
-        <Container>
-            <section className="min-h-screen pt-8">
-                <SectionTitle title="All Reports"></SectionTitle>
+            <Helmet><title>GuildDo - Reports</title></Helmet>
+            <Container>
+                <section className="min-h-screen pt-8">
+                    <SectionTitle title="All Reports"></SectionTitle>
 
-                <div className="overflow-x-auto pb-32">
-                    <table className="table">
-                        {/* head */}
-                        <thead>
-                            <tr className="text-sm dark:text-white">
-                                <th>Report</th>
-                                <th>Comment</th>
-                                <th>Commenter email</th>
-                                <th>Feedback</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
+                    <div className="overflow-x-auto pb-32">
+                        <table className="table">
+                            {/* head */}
+                            <thead>
+                                <tr className="text-sm dark:text-white">
+                                    <th>Report</th>
+                                    <th>Comment</th>
+                                    <th>Commenter email</th>
+                                    <th>Feedback</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
 
-                        <tbody>
-                            {allReports?.map(data => <TableRow key={data._id} data={data} refetch={refetch}></TableRow>)}
-                        </tbody>
-                    </table>
+                            <tbody>
+                                {allReports?.length === 0 ? <p className="text-white py-5">No report found</p> :
+                                    allReports?.map(data => <TableRow key={data._id} data={data} refetch={refetch}></TableRow>)}
+                            </tbody>
+                        </table>
                     </div>
-                    
-                    <div className="pagination col-span-2 flex justify-center">
-                        <button onClick={handlePrevPage} className="px-5 py-3 bg-yellow-400 text-secondaryColor font-semibold prev-cut">Prev</button>
-                        {
-                            pages?.map(page => <button className={currentPage === page ? 'text-lg px-5 py-[9px] bg-white opacity-95 text-darkColor ' : 'bg-white px-5 py-3 text-secondaryColor'} onClick={() => setCurrentPage(page)} key={page}>{page + 1}</button>)
-                        }
-                        <button onClick={handleNextPage} className="px-5 py-3 bg-yellow-400 text-secondaryColor font-semibold next-cut">Next</button>
-                    </div>{/* pagination */}
-            </section>
+
+                    {allReports?.length !== 0 &&
+                        <div className="pagination col-span-2 flex justify-center">
+                            <button onClick={handlePrevPage} className="px-5 py-3 bg-yellow-400 text-secondaryColor font-semibold prev-cut">Prev</button>
+                            {
+                                pages?.map(page => <button className={currentPage === page ? 'text-lg px-5 py-[9px] bg-white opacity-95 text-darkColor ' : 'bg-white px-5 py-3 text-secondaryColor'} onClick={() => setCurrentPage(page)} key={page}>{page + 1}</button>)
+                            }
+                            <button onClick={handleNextPage} className="px-5 py-3 bg-yellow-400 text-secondaryColor font-semibold next-cut">Next</button>
+                        </div>
+                    }
+                </section>
             </Container>
         </>
     );

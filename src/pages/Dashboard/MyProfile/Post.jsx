@@ -2,7 +2,7 @@ import usePostComments from "../../../API/usePostComments";
 import formateDate from "../../../components/formateDate";
 
 const Post = ({ post }) => {
-    const { postTitle, createdAt } = post || {};
+    const { postTitle, UpVote, DownVote, createdAt } = post || {};
     const date = formateDate(createdAt);
     const [postComments] = usePostComments(postTitle);
 
@@ -13,7 +13,7 @@ const Post = ({ post }) => {
             <div className="flex items-center justify-center gap-2 text-yellow-400">
                 <p className="text-text text-sm">comments: {postComments.length}</p>
                 |
-                <p className="text-text text-sm">votes:3</p>
+                <p className="text-text text-sm">votes - Up: {UpVote}, Down: {DownVote} </p>
             </div>
         </div>
     );
