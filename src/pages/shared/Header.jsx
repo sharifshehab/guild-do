@@ -38,7 +38,7 @@ const Header = () => {
                                     {menuItems}
                                 </ul>
                             </div>
-                            <a className="text-xl"><img src={logo} alt="" /></a>
+                            <a className="text-xl"><img src={logo} alt="guildDo website logo" /></a>
                         </div>
                         <div className="navbar-center hidden lg:flex">
                             <ul className="menu menu-horizontal px-1">
@@ -75,7 +75,7 @@ const Header = () => {
                                     {/* profile */}
                                     <div className="dropdown dropdown-end">
                                         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                                            <div className="w-10 rounded-full">
+                                            <div className="w-10 rounded-full border-2 border-yellow-400">
                                                 <img
                                                     alt={user?.displayName}
                                                     src={user?.photoURL}
@@ -100,7 +100,7 @@ const Header = () => {
                                         </ul>
                                     </div>
                                 </div>) :
-                                    <Link to={"/login"} className="btn bg-primaryColor">Join US</Link>
+                                    <Link to={"/login"} className="btn bg-yellow-400 border-l-2 rounded-none next-cut hover:bg-yellow-500 transition-all duration-300">Join US</Link>
                             }
                         </div>
                     </nav>
