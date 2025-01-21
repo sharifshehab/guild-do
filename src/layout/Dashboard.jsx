@@ -7,7 +7,7 @@ const Dashboard = () => {
     return (
         <div className="flex flex-col lg:flex-row items-center justify-center">
             {/* dashboard sidebar */}
-            <div className="w-full lg:w-64 bg-yellow-400 min-h-screen">
+            <div className="w-full lg:w-64 bg-yellow-400 self-stretch">
                 <ul className="menu">
                     {isAdmin ?
                         (
@@ -29,8 +29,7 @@ const Dashboard = () => {
                     }
                 </ul>
 
-
-                <div className="text-center h-full">
+                <div className="text-center">
                     <Link to={'/'} className="bg-secondaryColor text-yellow-400 block py-3 hover:opacity-95">Home Page</Link>
                 </div>
             </div >

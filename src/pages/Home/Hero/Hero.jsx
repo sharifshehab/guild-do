@@ -26,9 +26,9 @@ const Hero = () => {
 
     return (
         <>
-            <section className="relative flex flex-col items-center justify-center w-full h-[800px] bg-heroBG bg-no-repeat bg-cover bg-center my-0">
+            <section className="relative flex flex-col items-center justify-center w-full h-[810px] bg-heroBG bg-no-repeat bg-cover bg-center my-0">
                 {/* image overlay */}
-                <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+                <div className="absolute inset-0 bg-black bg-opacity-55"></div>
 
                 <Container>
                     <div className="relative text-center z-10">
