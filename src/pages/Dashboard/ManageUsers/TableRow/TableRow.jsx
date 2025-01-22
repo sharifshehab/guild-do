@@ -1,4 +1,3 @@
-import { Toaster } from "react-hot-toast";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import useToast from "../../../../hooks/useToast";
 import Swal from "sweetalert2";
@@ -8,28 +7,29 @@ const TableRow = ({ user, refetch }) => {
     const { errorToast } = useToast();
     const axiosSecure = useAxiosSecure();
 
-    const handleRole = async (id) => {
+    const handleRole = (id) => {
         try {
-
             Swal.fire({
                 title: "Are you sure you want make this user an Admin?",
                 icon: "warning",
                 showCancelButton: true,
-                confirmButtonColor: "#d33",
+                confirmButtonColor: "#ecc013",
                 cancelButtonColor: "#2b3440",
                 confirmButtonText: "Yes, make Admin!"
             }).then((result) => {
                 if (result.isConfirmed) {
-                    const res = axiosSecure.patch(`/users/admin/${id}`);
-                    if (res.data.modifiedCount > 0) {
-                        refetch();
-                        Swal.fire({
-                            title: "Admin!",
-                            text: `${name} is now an Admin`,
-                            icon: "success",
-                            confirmButtonColor: "#2b3440",
+                    axiosSecure.patch(`/users/admin/${id}`)
+                        .then(res => {
+                            if (res.data.modifiedCount > 0) {
+                                refetch();
+                                Swal.fire({
+                                    title: "Admin!",
+                                    text: `${name} is now an Admin`,
+                                    icon: "success",
+                                    confirmButtonColor: "#2b3440",
+                                });
+                            }
                         });
-                    }
                 }
             });
         } catch (error) {
@@ -37,7 +37,7 @@ const TableRow = ({ user, refetch }) => {
         }
     }
 
-    const handleDelete = async () => {
+    const handleDelete = () => {
         try {
             Swal.fire({
                 title: "Are you sure you want to delete this user?",
@@ -90,7 +90,6 @@ const TableRow = ({ user, refetch }) => {
                     <button onClick={handleDelete} className="btn text-white rounded-none border-2 border-yellow-400 bg-darkColor hover:text-darkColor">Delete</button>
                 </td>{/* delete user */}
             </tr>
-            <Toaster />
         </>
     );
 };

@@ -26,7 +26,7 @@ const Header = () => {
         <Sticky enabled={true} innerZ={20}>
             <header className="bg-secondaryColor border-b border-slate-300">
                 <Container>
-                    <nav className="navbar p-0 items-stretch">
+                    <nav className="navbar p-0">
                         <div className="navbar-start">
                             <div className="dropdown">
                                 <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -86,7 +86,7 @@ const Header = () => {
                                         <ul
                                             tabIndex={0}
                                             className="menu menu-sm dropdown-content bg-yellow-400 text-base z-10 mt-3 w-52 p-1 shadow space-y-1">
-                                            <li className="text-white font-medium rounded-none bg-secondaryColor hover:bg-secondaryColor">
+                                            <li className="text-white font-medium rounded-none bg-secondaryColor hover:bg-secondaryColor cursor-not-allowed" style={{ pointerEvents: "none" }}>
                                                 <h4 className="block text-center text-base">{user?.displayName}</h4>
                                             </li>
                                             {
@@ -100,7 +100,7 @@ const Header = () => {
                                         </ul>
                                     </div>
                                 </div>) :
-                                    <Link to={"/login"} className="btn bg-yellow-400 border-l-2 rounded-none next-cut hover:bg-yellow-500 transition-all duration-300">Join US</Link>
+                                    <Link to={"/login"} className="p-3 bg-yellow-400 border-l-4 font-medium rounded-none next-cut hover:bg-yellow-500 transition-all duration-300">Join US</Link>
                             }
                         </div>
                     </nav>

@@ -12,7 +12,7 @@ const CommentForm = ({ id, title }) => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
-    const { successToast, errorToast } = useToast();
+    const { successToast } = useToast();
     const [loading, setLoading] = useState(false);
 
     const onSubmit = async (formData) => {
@@ -34,7 +34,6 @@ const CommentForm = ({ id, title }) => {
             }
         } catch (error) {
             console.error('Comment posting error:', error);
-            errorToast(`There was an error while posting the comment: ${error.message}`)
         } finally {
             setLoading(false);
         }

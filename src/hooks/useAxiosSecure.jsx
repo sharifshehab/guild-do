@@ -16,9 +16,10 @@ const useAxiosSecure = () => {
             return res;
         }, error => {
             console.log('error tracked in the interceptor', error.response);
-            if (error.response.status === 401) {
-                window.location.href = "/login";
-            }else if (error.response.status === 403) {
+            // if (error.response.status === 401) {
+            //     window.location.href = "/login";
+            // } 
+            if (error.response.status === 403) {
                 auth?.handleLogOut()
                     .then(() => {
                         window.location.href = "/login";

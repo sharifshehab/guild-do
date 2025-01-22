@@ -1,5 +1,6 @@
 import { Link, NavLink, Outlet } from "react-router-dom";
 import useAdmin from "../API/useAdmin";
+import { IoMdArrowBack } from "react-icons/io";
 
 const Dashboard = () => {
     const [isAdmin] = useAdmin();
@@ -29,8 +30,8 @@ const Dashboard = () => {
                     }
                 </ul>
 
-                <div className="text-center">
-                    <Link to={'/'} className="bg-secondaryColor text-yellow-400 block py-3 hover:opacity-95">Home Page</Link>
+                <div className="bg-secondaryColor">
+                    <Link to={'/'} className="ps-5 text-yellow-400 py-3 hover:opacity-95 flex items-center justify-start gap-2"> <IoMdArrowBack size={20} />Home Page</Link>
                 </div>
             </div >
 

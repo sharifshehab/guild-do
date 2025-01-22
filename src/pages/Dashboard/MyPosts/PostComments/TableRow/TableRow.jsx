@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Select from 'react-select';
 import useAxiosSecure from '../../../../../hooks/useAxiosSecure';
 import useToast from '../../../../../hooks/useToast';
+import CommentModal from '../../../../../components/CommentModal';
 
 const TableRow = ({ data }) => {
     const { _id, comment, email, } = data || {}
@@ -47,12 +48,12 @@ const TableRow = ({ data }) => {
     }
 
     return (
-        <tr className="text-yellow-400">
-            <td className="w-3/5">
-                <h4>{comment}</h4>
+        <tr >
+            <td>
+                <h4 className='text-yellow-400'>{comment.length > 20 ? (<>{comment.slice(0, 20)}...<CommentModal comment={comment} commenterEmail={email}></CommentModal></>): comment}</h4>
             </td>
             <td>
-                <h4>{email}</h4>
+                <h4 className='text-yellow-400'>{email}</h4>
             </td>{/* email */}
             <td>
                 <Select
@@ -67,6 +68,7 @@ const TableRow = ({ data }) => {
             <td>
                 <button onClick={handleReport} className={`btn text-secondaryColor rounded-none border-2 border-white bg-yellow-400 hover:bg-yellow-500 ${isReported ? "disabled:bg-yellow-400 disabled:text-darkColor" : "disabled:bg-gray-300 disabled:text-slate-500"}`} disabled={!selectedOption || isReported}> {isReported ? "Reported" : 'Report'}</button>
             </td>{/* Feedback */}
+
         </tr>
     );
 };

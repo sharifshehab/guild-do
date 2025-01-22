@@ -43,7 +43,7 @@ const MyProfile = () => {
             <Container>
                 <section className="min-h-screen">
 
-                    <div className="flex items-center justify-center min-h-screen">
+                    <div className="flex items-center justify-center min-h-screen my-10">
 
                         <div className="w-full lg:w-[60%] shadow-lg bg-darkColor">
 
@@ -73,7 +73,7 @@ const MyProfile = () => {
                                 <div className="text-center pt-5">
                                     <SectionTitle title="my recent posts"></SectionTitle>
                                 </div>
-                                <div className="w-full pb-10 flex flex-wrap items-center justify-center gap-7 lg:gap-14">
+                                <div className="w-full pb-10 flex flex-wrap items-center justify-center gap-7 lg:gap-14 p-5">
                                     {
                                         myPosts?.length === 0 ? <p className="text-center text-white">No post found</p> :
                                             myPosts?.map(post => <Post key={post._id} post={post}></Post>)

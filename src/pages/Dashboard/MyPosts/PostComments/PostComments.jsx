@@ -5,15 +5,13 @@ import { Toaster } from "react-hot-toast";
 import Container from "../../../../components/Container";
 
 const PostComments = () => {
-    const { title } = useParams();
-    const [postComments] = usePostComments(title);
+    const { postId } = useParams();
+    const [postComments] = usePostComments(postId);
 
     return (
         <Container>
             <section className="min-h-screen pt-8">
-                <div className="text-center mb-10">
-                    <h2 className="text-white text-4xl underline underline-offset-8 decoration-yellow-400">{title}</h2>
-                </div>
+
                 <h4 className="text-xl text-yellow-400 font-semibold pl-3">Total Comments: {postComments.length}</h4>
                 <div className="overflow-x-auto pb-32">
                     <table className="table">

@@ -7,6 +7,8 @@ import Loading from "../../../components/Loading";
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 import useAuth from "../../../hooks/useAuth";
+import { Toaster } from "react-hot-toast";
+import { CiSearch } from "react-icons/ci";
 
 const ManageUsers = () => {
     const axiosSecure = useAxiosSecure();
@@ -35,13 +37,23 @@ const ManageUsers = () => {
         }
     }
 
+    const [search, setSearch] = useState('');
+
+
     const { data: allUsers = [], refetch, isLoading } = useQuery({
-        queryKey: ['allUsers', currentPage, itemsPerPage],
+        queryKey: ['allUsers', currentPage, itemsPerPage, search],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/users/${user.email}?page=${currentPage}&size=${itemsPerPage}`)
+            const res = await axiosSecure.get(`/users/${user.email}?page=${currentPage}&size=${itemsPerPage}&search=${search}`)
             return res.data
         }
     });
+
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+        const searchText = e.target.search.value;
+        setSearch(searchText);
+    }
 
     if (isLoading) {
         return <Loading></Loading>
@@ -54,6 +66,17 @@ const ManageUsers = () => {
                 <section className="min-h-screen pt-8">
                     {/* title */}
                     <SectionTitle title="Manage Users"></SectionTitle>
+
+                    <div className="relative my-5">
+                        <form action="#" onSubmit={handleSearch}>
+                            <input name="search" placeholder="Search with tags.."
+                                className="py-3 px-4 w-full outline-none bg-gray-100 text-secondaryColor" />
+                            <button
+                                className="h-full absolute top-0 right-0 bg-yellow-400 px-3 text-white text-xl">
+                                <CiSearch className="text-darkColor" />
+                            </button>
+                        </form>
+                    </div>
 
                     <div className="overflow-x-auto pb-32">
                         <table className="table">
@@ -85,8 +108,8 @@ const ManageUsers = () => {
                             <button onClick={handleNextPage} className="px-5 py-3 bg-yellow-400 text-secondaryColor font-semibold next-cut">Next</button>
                         </div>
                     }
-
                 </section>
+                <Toaster />
             </Container>
         </>
     );

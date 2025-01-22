@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 
 const TableRow = ({ post, refetch }) => {
     const { _id, postTitle, UpVote, DownVote } = post;
-    
     const axiosPublic = useAxiosPublic();
 
     const deletePost = (id) => {
@@ -47,7 +46,7 @@ const TableRow = ({ post, refetch }) => {
                 <h4>Down-vote: <span className="text-yellow-400">{DownVote}</span></h4>
             </td>{/* votes */}
             <td>
-                <Link to={`/dashboard/comments/${postTitle}`} className="btn btn-sm rounded-none border-2 bg-yellow-400 hover:bg-yellow-500">See comments</Link>
+                <Link to={`/dashboard/comments/${_id}`} className="btn btn-sm rounded-none border-2 bg-yellow-400 hover:bg-yellow-500">See comments</Link>
             </td>{/* comments */}
             <td>
                 <button onClick={() => deletePost(_id)} className="btn btn-sm rounded-none border-2 border-yellow-400 bg-darkColor text-white hover:text-darkColor">Delete post</button>

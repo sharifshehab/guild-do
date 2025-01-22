@@ -21,7 +21,7 @@ const MyPosts = () => {
             return res.data;
         }
     });
-    const itemsPerPage = 3;
+    const itemsPerPage = 10;
     const numberOfPages = Math.ceil(postCounts?.count / itemsPerPage)
     const pages = [...Array(numberOfPages).keys()];
     const [currentPage, setCurrentPage] = useState(0);

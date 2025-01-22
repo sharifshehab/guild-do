@@ -76,7 +76,7 @@ export const router = createBrowserRouter([
                 element: <MyPosts></MyPosts>
             },
             {
-                path: "comments/:title",
+                path: "comments/:postId",
                 element: <PostComments></PostComments>
             },
             {
