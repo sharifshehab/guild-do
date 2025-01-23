@@ -210,7 +210,7 @@ const AddPost = () => {
 
                         </div>{/* space-y-5 */}
 
-                        <button type="submit" disabled={!userPayment.email && myPosts.length >= 5} className='py-3 px-4 bg-yellow-400 font-medium outline-none mt-3 next-cut border-2 border-yellow-400 cursor-pointer hover:border-white duration-300'>{loading ? <TbLoader3 size={22} className="animate-spin text-[#ffffff]" /> : 'Add Post'}</button>
+                        <button type="submit" disabled={!userPayment.email && myPosts.length >= 4} className='py-3 px-4 bg-yellow-400 font-medium outline-none mt-3 next-cut border-2 border-yellow-400 cursor-pointer hover:border-white duration-300'>{loading ? <TbLoader3 size={22} className="animate-spin text-[#ffffff]" /> : 'Add Post'}</button>
                     </form>
                     <Toaster />
                 </section>

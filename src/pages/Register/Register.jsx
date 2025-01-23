@@ -50,7 +50,7 @@ const Register = () => {
             }
             const res = await axiosPublic.post('/users', userInfo);
             if (res.data.insertedId) {
-                console.log(res.data);
+                // console.log(res.data);
             }
             reset(); // Reset form
             navigate(from, { replace: true });
@@ -72,7 +72,7 @@ const Register = () => {
         <>
             <Helmet><title>GuildDo - Register</title></Helmet>
             <Container>
-                <section className="w-full min-h-screen flex flex-col items-center justify-center">
+                <section className="w-full min-h-screen flex flex-col items-center justify-center py-5">
 
                     {/* title */}
                     <>

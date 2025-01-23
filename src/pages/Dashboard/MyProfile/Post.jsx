@@ -2,9 +2,9 @@ import usePostComments from "../../../API/usePostComments";
 import formateDate from "../../../components/formateDate";
 
 const Post = ({ post }) => {
-    const { postTitle, UpVote, DownVote, createdAt } = post || {};
+    const { _id,postTitle, UpVote, DownVote, createdAt } = post || {};
     const date = formateDate(createdAt);
-    const [postComments] = usePostComments(postTitle);
+    const [postComments] = usePostComments(_id);
 
     return (
         <div className="flex items-center justify-center flex-col">

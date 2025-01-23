@@ -10,7 +10,7 @@ const SingleAnnouncement = ({ announcement }) => {
                 <h3 className="capitalize text-3xl font-semibold text-yellow-400 break-all">{announcementTitle}</h3>
                 <span className="text-yellow-400 opacity-95 text-xs border px-2 pt-1">{date}</span>
             </div>
-            <p className="leading-relaxed">{announcementDescription}</p>
+            <p className="leading-relaxed text-white">{announcementDescription}</p>
         </div>
     );
 };

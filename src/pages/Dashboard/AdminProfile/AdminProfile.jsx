@@ -91,7 +91,7 @@ const AdminProfile = () => {
                                 </h3>
                                 <p className="text-text text-sm">  {user?.email}</p>
                             </div>
-                        </div>
+                        </div> {/* admin profile */}
 
                         <div className="h-[220px]">
                             <ResponsiveContainer width="100%" height="100%">
@@ -112,6 +112,11 @@ const AdminProfile = () => {
                                     </Pie>
                                 </PieChart>
                             </ResponsiveContainer>
+                            <div>
+                                <div className="badge badge-lg rounded-none bg-[#0088fe] py-2 font-medium">Post</div>
+                                <div className="badge badge-lg rounded-none bg-[#00c49f] py-2 font-medium">Comment</div>
+                                <div className="badge badge-lg rounded-none bg-[#ff8042] py-2 font-medium">User</div>
+                            </div>
                         </div>{/* chart */}
 
                         <div className="bg-darkColor rounded-none flex items-center">
@@ -120,22 +125,24 @@ const AdminProfile = () => {
                                 <h2 className="text-xl text-yellow-400">Total Posts</h2>
                             </div>
                         </div>{/* posts */}
-                        <div className="bg-darkColor rounded-none flex items-center">
+
+                        <div className="bg-darkColor rounded-none flex items-center mt-10 lg:mt-0">
                             <div className="card-body text-center">
                                 <h3 className="text-4xl text-white">{comments}</h3>
                                 <h2 className="text-xl text-yellow-400">Total comments</h2>
                             </div>
                         </div>{/* comments */}
-                        <div className="bg-darkColor rounded-none flex items-center">
+
+                        <div className="bg-darkColor rounded-none flex items-center  mt-10 lg:mt-0">
                             <div className="card-body text-center">
                                 <h3 className="text-4xl text-white">{users}</h3>
                                 <h2 className="text-xl text-yellow-400">Total users</h2>
                             </div>
                         </div>{/* users */}
+
                     </div>{/* grid */}
 
                     {/* form area */}
-
                     <form className="mx-auto lg:w-2/4 bg-darkColor p-6 border-t-2 border-yellow-400" onSubmit={handleSubmit(onSubmit)}>
                         <h1 className="text-white text-3xl font-semibold capitalize mb-5 text-center">Add new tag</h1>
                         <div className="flex flex-col gap-[5px]">

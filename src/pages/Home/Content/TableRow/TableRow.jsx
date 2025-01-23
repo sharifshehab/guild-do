@@ -4,16 +4,16 @@ import formateDate from "../../../../components/formateDate";
 
 const TableRow = ({ post }) => {
     const { _id, postTitle, postDescription, postTag, UpVote, DownVote, authorName, authorImage, createdAt } = post || {}
-    const date = formateDate(createdAt);
+    const date = formateDate(createdAt, "yyyy-MM-dd, HH:mm a");
 
     // get specific post comments
-    const [postComments] = usePostComments(postTitle);
+    const [postComments] = usePostComments(_id);
 
     return (
         <tr>
             <td className="lg:px-5 py-5">
                 <div className="space-y-1">
-                    <Link to={`/post/${_id}`} className="text-xl lg:text-[22px] font-semibold text-yellow-400 capitalize">{postTitle}</Link>
+                    <Link to={`/post/${_id}`} className="text-xl lg:text-[22px] font-semibold text-yellow-400">{postTitle}</Link>
                     <p className="text-white">{postDescription.slice(0, 80)}...</p>
                 </div>
             </td>

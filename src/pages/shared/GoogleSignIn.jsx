@@ -23,7 +23,7 @@ const GoogleSignIn = () => {
 
                 axiosPublic.post('/users', userInfo)
                     .then(res => {
-                        console.log(res.data);
+                        // console.log(res.data);
                     })
                 navigate(from, { replace: true }); 
             }).catch((error) => {

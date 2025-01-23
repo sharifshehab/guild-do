@@ -11,7 +11,6 @@ const PostComments = () => {
     return (
         <Container>
             <section className="min-h-screen pt-8">
-
                 <h4 className="text-xl text-yellow-400 font-semibold pl-3">Total Comments: {postComments.length}</h4>
                 <div className="overflow-x-auto pb-32">
                     <table className="table">

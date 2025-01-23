@@ -40,7 +40,7 @@ const Login = () => {
         <>
             <Helmet><title>GuildDo - Login</title></Helmet>
             <Container>
-                <section className="w-full min-h-screen flex flex-col items-center justify-center">
+                <section className="w-full min-h-screen flex flex-col items-center justify-center py-5">
 
                     {/* title */}
                     <>
@@ -48,7 +48,7 @@ const Login = () => {
                     </>
 
                     {/* form area */}
-                    <form className="mx-auto w-1/2 bg-secondaryColor p-10" onSubmit={handleSubmit(onSubmit)}>
+                    <form className="mx-auto w-full md:w-1/2 bg-secondaryColor p-10" onSubmit={handleSubmit(onSubmit)}>
 
                         <div className="space-y-5">
                             <div className="flex flex-col gap-[5px] w-full">

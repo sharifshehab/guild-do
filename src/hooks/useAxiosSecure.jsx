@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useEffect } from "react";
 import useAuth from "./useAuth";
-import Loading from "../components/Loading";
 
 const axiosSecure = axios.create({
     baseURL: 'https://guild-do-server.vercel.app',
@@ -15,10 +14,7 @@ const useAxiosSecure = () => {
         axiosSecure.interceptors.response.use(res => {
             return res;
         }, error => {
-            console.log('error tracked in the interceptor', error.response);
-            // if (error.response.status === 401) {
-            //     window.location.href = "/login";
-            // } 
+            // console.log('error tracked in the interceptor', error.response);
             if (error.response.status === 403) {
                 auth?.handleLogOut()
                     .then(() => {

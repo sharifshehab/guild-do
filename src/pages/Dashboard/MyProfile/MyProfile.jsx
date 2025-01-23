@@ -26,7 +26,7 @@ const MyProfile = () => {
     });
     const { name, email, badge } = userProfile || {};
 
-    console.log(user.email);
+    // console.log(user.email);
 
     // user's top 3 post
     const { data: myPosts = [] } = useQuery({

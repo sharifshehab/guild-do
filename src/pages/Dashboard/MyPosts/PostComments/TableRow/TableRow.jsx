@@ -68,7 +68,6 @@ const TableRow = ({ data }) => {
             <td>
                 <button onClick={handleReport} className={`btn text-secondaryColor rounded-none border-2 border-white bg-yellow-400 hover:bg-yellow-500 ${isReported ? "disabled:bg-yellow-400 disabled:text-darkColor" : "disabled:bg-gray-300 disabled:text-slate-500"}`} disabled={!selectedOption || isReported}> {isReported ? "Reported" : 'Report'}</button>
             </td>{/* Feedback */}
-
         </tr>
     );
 };

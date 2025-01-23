@@ -76,7 +76,7 @@ const MyPosts = () => {
                     </div>
 
                     {myPosts?.length !== 0 &&
-                        <div className="pagination col-span-2 flex justify-center">
+                        <div className="pagination col-span-2 flex justify-center my-5">
                             <button onClick={handlePrevPage} className="px-5 py-3 bg-yellow-400 text-secondaryColor font-semibold prev-cut">Prev</button>
                             {
                                 pages?.map(page => <button className={currentPage === page ? 'text-lg px-5 py-[9px] bg-white opacity-95 text-darkColor ' : 'bg-white px-5 py-3 text-secondaryColor'} onClick={() => setCurrentPage(page)} key={page}>{page + 1}</button>)

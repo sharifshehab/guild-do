@@ -99,7 +99,7 @@ const PostDetails = () => {
                             className="w-full h-[250px] object-cover"
                         />
                         <div className="absolute inset-0 bg-black opacity-65"></div> {/* Overlay */}
-                        <h2 className="text-primaryColor text-3xl lg:text-5xl font-semibold absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">{postTitle}</h2>
+                        <h2 className="text-primaryColor text-center text-2xl md:text-3xl lg:text-5xl font-semibold absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">{postTitle}</h2>
                     </div>
 
                     <div className="p-4">
@@ -116,13 +116,34 @@ const PostDetails = () => {
                     <div className="flex items-center justify-between w-full p-4 ">
                         <div className="flex gap-3">
 
-                            <button className="flex items-center justify-center gap-1" onClick={handleUpVote}>
-                                <FiThumbsUp className="text-2xl p-1 text-yellow-400" size={25} /> <span className="text-white">{UpVote}</span>
-                            </button>
+                            {
+                                !user?.email ? (
+                                    <>
+                                        <Link to={'/login'}>
+                                            <button className="flex items-center justify-center gap-1">
+                                                <FiThumbsUp className="text-2xl p-1 text-yellow-400" size={25} /> <span className="text-white">{UpVote}</span>
+                                            </button>
+                                        </Link>
 
-                            <button className="flex items-center justify-center gap-1" onClick={handleDownVote}>
-                                <FiThumbsDown className="text-2xl p-1 text-yellow-400" size={25} /> <span className="text-white">{DownVote}</span>
-                            </button>
+                                        <Link to={'/login'}>
+                                            <button className="flex items-center justify-center gap-1" onClick={handleDownVote}>
+                                                <FiThumbsDown className="text-2xl p-1 text-yellow-400" size={25} /> <span className="text-white">{DownVote}</span>
+                                            </button>
+                                        </Link>
+                                    </>
+                                ) : (
+                                        <>
+                                            <button className="flex items-center justify-center gap-1" onClick={handleUpVote}>
+                                                <FiThumbsUp className="text-2xl p-1 text-yellow-400" size={25} /> <span className="text-white">{UpVote}</span>
+                                            </button>
+
+                                            <button className="flex items-center justify-center gap-1" onClick={handleDownVote}>
+                                                <FiThumbsDown className="text-2xl p-1 text-yellow-400" size={25} /> <span className="text-white">{DownVote}</span>
+                                            </button>
+                                        </>
+                                )
+                            }
+
                         </div>
 
                         {/* social share */}
@@ -164,7 +185,7 @@ const PostDetails = () => {
                     <Toaster />
                 </div>
                 <CommentForm id={_id} title={postTitle}></CommentForm>
-            </Container>
+            </Container >
         </>
     );
 };

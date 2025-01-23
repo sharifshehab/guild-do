@@ -7,6 +7,7 @@ import Container from '../../../components/Container';
 import useAuth from "../../../hooks/useAuth";
 import useToast from "../../../hooks/useToast";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 const CommentForm = ({ id, title }) => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
@@ -71,7 +72,7 @@ const CommentForm = ({ id, title }) => {
                                 <div className="flex flex-col gap-[5px] w-full sm:w-[50%]">
                                     <label className="relative">
                                         <input type="email"
-                                                className="peer text-white bg-darkColor border-[#e5eaf2] border outline-none ps-28 pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
+                                            className="peer text-white bg-darkColor border-[#e5eaf2] border outline-none ps-28 pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
                                             {...register("email")}
                                             defaultValue={user?.email}
                                             readOnly
@@ -99,11 +100,18 @@ const CommentForm = ({ id, title }) => {
                             </label>
                             {errors.comment && <span className="text-red-500 text-sm">{errors.comment.message}</span>}
                         </div>{/* post description */}
-
-
                     </div>
 
-                    <button type="submit" className='py-3 px-4 bg-yellow-400 font-medium outline-none mt-3 next-cut border-2 border-yellow-400 hover:border-white duration-300'>{loading ? <TbLoader3 size={22} className="animate-spin text-[#ffffff]" /> : 'Post Comment'}</button>
+                    {
+                        !user?.email ? (
+                            <Link to={'/login'}>
+                                <button className='py-3 px-4 bg-yellow-400 font-medium outline-none mt-3 next-cut border-2 border-yellow-400 hover:border-white duration-300'>{loading ? <TbLoader3 size={22} className="animate-spin text-[#ffffff]" /> : 'Post Comment'}</button>
+                            </Link>
+                        ) : (
+                            <button type="submit" className='py-3 px-4 bg-yellow-400 font-medium outline-none mt-3 next-cut border-2 border-yellow-400 hover:border-white duration-300'>{loading ? <TbLoader3 size={22} className="animate-spin text-[#ffffff]" /> : 'Post Comment'}</button>
+                        )
+                    }
+
                 </form>
                 <Toaster />
             </section>
