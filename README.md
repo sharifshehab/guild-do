@@ -8,9 +8,10 @@ The purpose of GuildDo is to create a dynamic online community where gamers can 
 
 ## Technologies used:
 - **React Router**
+- **Context API**
 - **Firebase**
 - **Tanstack Query**
-- **JWT**
+- **Axios**
 
 ## Key features:
 1. **Forums are sortable by popularity, based on the average of user ratings.**
