@@ -8,6 +8,7 @@ import useAuth from "../../hooks/useAuth";
 import { Helmet } from "react-helmet-async";
 import About from "./About/About";
 import Newsletter from "./Newsletter/Newsletter";
+import Players from "./Players/Players";
 
 const Home = () => {
     const [announcements, isLoading] = useAnnouncements();
@@ -30,6 +31,7 @@ const Home = () => {
                 <Content></Content>
                 <About></About>
                 <Newsletter></Newsletter>
+                <Players></Players>
             </main>
         </>
     );
