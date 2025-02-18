@@ -33,7 +33,7 @@ const Hero = () => {
                 <Container>
                     <div className="relative text-center z-10">
                         <h1 className="text-4xl md:text-5xl lg:text-7xl leading-snug lg:leading-tight font-semibold uppercase text-white">
-                            Ultimate <span className="text-yellow-400">Challenges</span> With the Hottest Headlines
+                            Ultimate <span className="text-yellow-400">Challeng</span> With the Hottest Headlines
                         </h1>
                         <p className="text-xl text-yellow-400 mt-2 capitalize">
                             Conquer the Gaming Arena and collide with Current Updates
