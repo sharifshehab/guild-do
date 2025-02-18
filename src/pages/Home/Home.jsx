@@ -9,6 +9,7 @@ import { Helmet } from "react-helmet-async";
 import About from "./About/About";
 import Newsletter from "./Newsletter/Newsletter";
 import Players from "./Players/Players";
+import Testimonials from "./Testimonials/Testimonials";
 
 const Home = () => {
     const [announcements, isLoading] = useAnnouncements();
@@ -32,6 +33,7 @@ const Home = () => {
                 <About></About>
                 <Newsletter></Newsletter>
                 <Players></Players>
+                <Testimonials></Testimonials>
             </main>
         </>
     );
