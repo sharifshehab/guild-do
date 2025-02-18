@@ -1,12 +1,12 @@
 import Container from "../../../components/Container";
-import img from "../../../assets/images/393678090_1022226672255558_4711665666845711563_n-removebg-preview.png";
+import img from "../../../assets/images/about-gun-image.png";
 const About = () => {
   return (
     <section>
       <Container>
         <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
           <div className="basis-2/5">
-            <img src={img} alt="" className="w-full h-full"/>
+            <img src={img} alt="" className="w-full h-full" />
           </div>
           {/* image */}
           <div className="basis-2/4 space-y-5">
@@ -19,9 +19,16 @@ const About = () => {
               of action-packed adventures, immersive role-playing games, or
               intense multiplayer battles, we have something for everyone.
             </p>
-            <button className="px-5 py-3 bg-yellow-400 text-secondaryColor font-semibold title-cut border-x-4 border-white hover:opacity-90 duration-300">
+            <button className="px-5 py-3 bg-yellow-400 text-secondaryColor font-semibold title-cut border-x-4 border-white hover:bg-yellow-500 transition-all duration-300">
               View More
             </button>
+
+            {/* <Link
+              to={"/login"}
+              className="p-3 text-secondaryColor bg-yellow-400 border-l-4 font-medium rounded-none next-cut hover:bg-yellow-500 transition-all duration-300"
+            >
+              Join US
+            </Link> */}
           </div>
           {/* context */}
         </div>

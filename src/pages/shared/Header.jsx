@@ -118,7 +118,7 @@ const Header = () => {
                                         </ul>
                                     </div>
                                 </div>) :
-                                    <Link to={"/login"} className="p-3 bg-yellow-400 border-l-4 font-medium rounded-none next-cut hover:bg-yellow-500 transition-all duration-300">Join US</Link>
+                                    <Link to={"/login"} className="p-3 text-secondaryColor bg-yellow-400 border-l-4 font-medium rounded-none next-cut hover:bg-yellow-500 transition-all duration-300">Join US</Link>
                             }
                         </div>
                     </nav>

@@ -7,6 +7,7 @@ import SearchResults from "./SearchResults/SearchResults";
 import useAuth from "../../hooks/useAuth";
 import { Helmet } from "react-helmet-async";
 import About from "./About/About";
+import Newsletter from "./Newsletter/Newsletter";
 
 const Home = () => {
     const [announcements, isLoading] = useAnnouncements();
@@ -28,6 +29,7 @@ const Home = () => {
                 <Categories></Categories>
                 <Content></Content>
                 <About></About>
+                <Newsletter></Newsletter>
             </main>
         </>
     );
