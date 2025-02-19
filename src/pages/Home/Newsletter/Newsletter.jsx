@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import Container from "../../../components/Container";
 import useToast from "../../../hooks/useToast";
+import { Toaster } from "react-hot-toast";
 
 const Newsletter = () => {
   const {
@@ -12,7 +13,7 @@ const Newsletter = () => {
 
   const onSubmit = async (formData) => {
     if (formData.email) {
-      successToast("Email added successful");
+      successToast("Email Subscription successful");
       reset(); // Reset form
     }
   };
@@ -46,6 +47,7 @@ const Newsletter = () => {
             </button>
           </div>
         </form>
+        <Toaster />
       </Container>
     </section>
   );

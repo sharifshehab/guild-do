@@ -19,6 +19,7 @@ import AdminProfile from "../pages/Dashboard/AdminProfile/AdminProfile";
 import AdminRoute from "./adminRoute";
 import Contact from "../pages/Contact/Contact";
 import About from "../pages/About/About";
+import AdminDashboard from "../pages/Dashboard/AdminDashboard/AdminDashboard";
 
 export const router = createBrowserRouter([
     {
@@ -57,6 +58,10 @@ export const router = createBrowserRouter([
         element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
         children: [
             // admin routes
+            {
+                path: "admin-dashboard",
+                element: <AdminRoute><AdminDashboard></AdminDashboard></AdminRoute>
+            },
             {
                 path: "admin-profile",
                 element: <AdminRoute><AdminProfile></AdminProfile></AdminRoute>

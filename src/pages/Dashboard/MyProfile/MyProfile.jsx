@@ -15,7 +15,6 @@ const MyProfile = () => {
     const axiosPublic = useAxiosPublic();
     const axiosSecure = useAxiosSecure();
 
-
     // user info
     const { data: userProfile = {} } = useQuery({
         queryKey: ['userProfile', user?.email],
