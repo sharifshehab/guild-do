@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import Container from "../../../components/Container";
 import SectionTitle from "../../../components/SectionTitle";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Loading from "../../../components/Loading";
 import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts";
 import { Toaster } from "react-hot-toast";
@@ -26,15 +25,13 @@ const UserDashboard = () => {
     },
   });
 
-    
   if (isLoading) {
     return <Loading></Loading>;
   }
-  
 
   const data = [
     { name: "Posts", value: myPosts.length },
-    { name: "Comments", value: myPosts.length },
+    // { name: "Comments", value: myPosts.length },
   ];
   const COLORS = ["#0088FE", "#00C49F", "#FF8042"];
   const RADIAN = Math.PI / 180;
@@ -99,9 +96,9 @@ const UserDashboard = () => {
                 <div className="badge badge-lg rounded-none bg-[#0088fe] py-2 font-medium">
                   Post
                 </div>
-                <div className="badge badge-lg rounded-none bg-[#00c49f] py-2 font-medium">
+                {/* <div className="badge badge-lg rounded-none bg-[#00c49f] py-2 font-medium">
                   Comment
-                </div>
+                </div> */}
               </div>
             </div>
             {/* chart */}
@@ -112,12 +109,12 @@ const UserDashboard = () => {
               </div>
             </div>
             {/* posts */}
-            <div className="bg-darkColor rounded-none flex items-center mt-10 lg:mt-0">
+            {/* <div className="bg-darkColor rounded-none flex items-center mt-10 lg:mt-0">
               <div className="card-body text-center">
                 <h3 className="text-4xl text-white">{myPosts.length}</h3>
                 <h2 className="text-xl text-yellow-400">Total comments</h2>
               </div>
-            </div>
+            </div> */}
             {/* comments */}
           </div>
           {/* grid */}
