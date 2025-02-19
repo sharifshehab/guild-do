@@ -20,6 +20,7 @@ import AdminRoute from "./adminRoute";
 import Contact from "../pages/Contact/Contact";
 import About from "../pages/About/About";
 import AdminDashboard from "../pages/Dashboard/AdminDashboard/AdminDashboard";
+import UserDashboard from "../pages/Dashboard/UserDashboard/UserDashboard";
 
 export const router = createBrowserRouter([
     {
@@ -98,6 +99,10 @@ export const router = createBrowserRouter([
             {
                 path: "my-profile",
                 element: <MyProfile></MyProfile>
+            },
+            {
+                path: "user-dashboard",
+                element: <UserDashboard></UserDashboard>
             }
         ]
     },
