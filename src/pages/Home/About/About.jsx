@@ -13,14 +13,15 @@ const About = () => {
           </div>
           {/* image */}
           <div className="basis-2/4 space-y-5">
-            <h3 className="capitalize text-4xl lg:text-6xl font-semibold leading-tight">
-              discover Our Extensive Game Pass Library
+            <h3 className="capitalize text-4xl lg:text-6xl text-yellow-400 font-semibold leading-tight">
+              Connect, Dominate, and Rise — Gaming Legacy Awaits!
             </h3>
-            <p>
-              Dive into the latest and greatest in gaming with our curated
-              selection of this season's must-play titles. Whether you're a fan
-              of action-packed adventures, immersive role-playing games, or
-              intense multiplayer battles, we have something for everyone.
+            <p className="text-white leading-relaxed">
+              GuildDo, is the ultimate online destination for gamers to connect,
+              share, and stay in the loop with everything gaming! Whether you're
+              a casual player, a competitive esports enthusiast, or just someone
+              who loves staying updated on the latest in the gaming world,
+              GuildDo is your go-to hub.
             </p>
 
             <Link

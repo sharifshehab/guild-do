@@ -9,7 +9,6 @@ import useToast from "../../hooks/useToast";
 import { useState } from "react";
 // icons
 import { TbLoader3 } from "react-icons/tb";
-import { CgLaptop } from "react-icons/cg";
 import SectionTitle from "../../components/SectionTitle";
 import { Helmet } from "react-helmet-async";
 
