@@ -49,16 +49,17 @@ const AdminProfile = () => {
                 Role: {role}
               </h3>
 
-              <h3 className="text-xl lg:text-2xl font-semibold capitalize mt-4">
+              <h3 className="text-xl lg:text-2xl font-semibold capitalize mt-4 col-span-2 lg:col-span-1 text-center lg:text-left ">
                 Name: {name}
               </h3>
-              <h3 className="text-xl lg:text-2xl font-semibold capitalize mt-4">
+
+              <h3 className="text-xl lg:text-2xl font-semibold capitalize mt-4 col-span-2 lg:col-span-1 text-center lg:text-left ">
                 Email: {email}
               </h3>
-              <h3 className="text-xl lg:text-2xl font-semibold capitalize mt-4">
+              <h3 className="text-xl lg:text-2xl font-semibold capitalize mt-4 col-span-2 lg:col-span-1 text-center lg:text-left ">
                 Number: {phoneNumber}
               </h3>
-              <h3 className="text-xl lg:text-2xl font-semibold capitalize mt-4">
+              <h3 className="text-xl lg:text-2xl font-semibold capitalize mt-4 col-span-2 lg:col-span-1 text-center lg:text-left ">
                 Address: {Address}
               </h3>
             </div>
