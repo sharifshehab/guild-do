@@ -17,6 +17,7 @@ import Payment from "../pages/Dashboard/Payment/Payment";
 import Error from "../pages/Error/Error";
 import AdminProfile from "../pages/Dashboard/AdminProfile/AdminProfile";
 import AdminRoute from "./adminRoute";
+import Contact from "../pages/Contact/Contact";
 
 export const router = createBrowserRouter([
     {
@@ -30,6 +31,10 @@ export const router = createBrowserRouter([
             {
                 path: "post/:postId",
                 element: <PostDetails></PostDetails>
+            },
+            {
+                path: "contact",
+                element: <Contact></Contact>
             }
         ]
     },

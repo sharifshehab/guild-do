@@ -31,9 +31,9 @@ const Home = () => {
                 <Categories></Categories>
                 <Content></Content>
                 <About></About>
-                <Newsletter></Newsletter>
                 <Players></Players>
                 <Testimonials></Testimonials>
+                <Newsletter></Newsletter>
             </main>
         </>
     );

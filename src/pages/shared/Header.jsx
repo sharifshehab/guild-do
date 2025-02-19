@@ -14,19 +14,50 @@ const Header = () => {
     const [announcements] = useAnnouncements();
     const [isAdmin, isAdminPending, isAdminLoading] = useAdmin();
 
-    if (isAdminPending || isAdminLoading) {
-        return <Loading></Loading>
-    }
+    // if (isAdminPending || isAdminLoading) {
+    //     return <Loading></Loading>
+    // }
 
-    const menuItems =
-        <>
-            <li>
-                <NavLink className={({ isActive }) => isActive ? 'text-base text-yellow-400 font-semibold focus:bg-transparent focus:text-yellow-400' : 'hover:text-yellow-400 text-base text-white font-semibold'} to='/'>Home</NavLink>
-            </li>
-            <li>
-                <NavLink className={({ isActive }) => isActive ? 'text-base text-yellow-400 font-semibold' : 'hover:text-yellow-400 text-base text-white font-semibold focus:bg-transparent focus:text-yellow-400'} to='/dashboard/payment'>Membership</NavLink>
-            </li>
-        </>
+    const menuItems = (
+      <>
+        <li>
+          <NavLink
+            className={({ isActive }) =>
+              isActive
+                ? "text-base text-yellow-400 font-semibold focus:bg-transparent focus:text-yellow-400"
+                : "hover:text-yellow-400 text-base text-white font-semibold"
+            }
+            to="/"
+          >
+            Home
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            className={({ isActive }) =>
+              isActive
+                ? "text-base text-yellow-400 font-semibold"
+                : "hover:text-yellow-400 text-base text-white font-semibold focus:bg-transparent focus:text-yellow-400"
+            }
+            to="/dashboard/payment"
+          >
+            Membership
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            className={({ isActive }) =>
+              isActive
+                ? "text-base text-yellow-400 font-semibold"
+                : "hover:text-yellow-400 text-base text-white font-semibold focus:bg-transparent focus:text-yellow-400"
+            }
+            to="/contact"
+          >
+            Contact
+          </NavLink>
+        </li>
+      </>
+    );
     return (
         <Sticky enabled={true} innerZ={20}>
             <header className="bg-secondaryColor border-b border-slate-300">

@@ -1,6 +1,9 @@
 import Container from "../../../components/Container";
-import img from "../../../assets/images/team-s-4-720x840.webp";
 import SectionTitle from "../../../components/SectionTitle";
+import player01Image from "../../../assets/images/team-s-4-720x840.webp";
+import player02Image from "../../../assets/images/team-s-6-720x840.webp";
+import player03Image from "../../../assets/images/team-s-2-720x840.webp";
+import player04Image from "../../../assets/images/team-s-1-720x840.webp";
 
 const Players = () => {
   return (
@@ -11,11 +14,26 @@ const Players = () => {
           <div className="space-y-4">
             <div className="relative">
               <img
-                src={img}
+                src={player03Image}
                 alt=""
                 className="img-cut border-2 border-yellow-400 hover:border-white transition-all duration-300"
               />
-              <h4 className="absolute bottom-2 right-0 text-lg text-yellow-400 border-b-2 border-white">
+              <h4 className="absolute bottom-2 right-0 text-yellow-400 border-b-2 border-white">
+                PRIMARY ATTACKER
+              </h4>
+            </div>
+            <h3 className="text-3xl text-white">JORGE STRIKER</h3>
+          </div>
+          {/* single player */}
+
+          <div className="space-y-4">
+            <div className="relative">
+              <img
+                src={player02Image}
+                alt=""
+                className="img-cut border-2 border-yellow-400 hover:border-white transition-all duration-300"
+              />
+              <h4 className="absolute bottom-2 right-0 text-yellow-400 border-b-2 border-white">
                 STEALTHY ATTACKER
               </h4>
             </div>
@@ -26,12 +44,12 @@ const Players = () => {
           <div className="space-y-4">
             <div className="relative">
               <img
-                src={img}
+                src={player01Image}
                 alt=""
                 className="img-cut border-2 border-yellow-400 hover:border-white transition-all duration-300"
               />
-              <h4 className="absolute bottom-2 right-0 text-lg text-yellow-400 border-b-2 border-white">
-                STEALTHY ATTACKER
+              <h4 className="absolute bottom-2 right-0 text-yellow-400 border-b-2 border-white">
+                FRONTLINE DEFENDER
               </h4>
             </div>
             <h3 className="text-3xl text-white">JORGE STRIKER</h3>
@@ -41,27 +59,12 @@ const Players = () => {
           <div className="space-y-4">
             <div className="relative">
               <img
-                src={img}
+                src={player04Image}
                 alt=""
                 className="img-cut border-2 border-yellow-400 hover:border-white transition-all duration-300"
               />
-              <h4 className="absolute bottom-2 right-0 text-lg text-yellow-400 border-b-2 border-white">
-                STEALTHY ATTACKER
-              </h4>
-            </div>
-            <h3 className="text-3xl text-white">JORGE STRIKER</h3>
-          </div>
-          {/* single player */}
-
-          <div className="space-y-4">
-            <div className="relative">
-              <img
-                src={img}
-                alt=""
-                className="img-cut border-2 border-yellow-400 hover:border-white transition-all duration-300"
-              />
-              <h4 className="absolute bottom-2 right-0 text-lg text-yellow-400 border-b-2 border-white">
-                STEALTHY ATTACKER
+              <h4 className="absolute bottom-2 right-0 text-yellow-400 border-b-2 border-white">
+                MASTER STRATEGIST
               </h4>
             </div>
             <h3 className="text-3xl text-white">JORGE STRIKER</h3>
