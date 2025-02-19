@@ -30,7 +30,7 @@ const Contact = () => {
         </div>
 
         {/* form area */}
-        <form className="mt-32">
+        <form className="mt-28">
           <div className="flex flex-col sm:flex-row items-center gap-[30px]">
             <div className="flex flex-col gap-[5px] w-full sm:w-[50%]">
               <label className="text-yellow-400">First Name</label>
@@ -49,7 +49,7 @@ const Contact = () => {
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-center gap-[30px] mt-10">
+          <div className="flex flex-col sm:flex-row items-center gap-[30px] mt-5">
             <div className="flex flex-col gap-[5px] w-full sm:w-[50%]">
               <label className="text-yellow-400">Email Address</label>
               <input
@@ -67,9 +67,9 @@ const Contact = () => {
             </div>
           </div>
 
-          <div className="flex flex-col gap-[5px] w-full mt-10">
+          <div className="flex flex-col gap-[5px] w-full mt-5">
             <label className="text-yellow-400">Write Message</label>
-            <textarea className="peer min-h-40 border-gray-300 border-b resize-none outline-none w-full bg-transparent transition-colors focus:border-yellow-400 duration-300"></textarea>
+            <textarea className="peer min-h-32 border-gray-300 border-b resize-none outline-none w-full bg-transparent transition-colors focus:border-yellow-400 duration-300"></textarea>
           </div>
 
           <div className="w-full flex items-center sm:items-end justify-center sm:justify-end mt-5">

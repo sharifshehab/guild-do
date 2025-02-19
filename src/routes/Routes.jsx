@@ -18,6 +18,7 @@ import Error from "../pages/Error/Error";
 import AdminProfile from "../pages/Dashboard/AdminProfile/AdminProfile";
 import AdminRoute from "./adminRoute";
 import Contact from "../pages/Contact/Contact";
+import About from "../pages/About/About";
 
 export const router = createBrowserRouter([
     {
@@ -31,6 +32,11 @@ export const router = createBrowserRouter([
             {
                 path: "post/:postId",
                 element: <PostDetails></PostDetails>
+            },
+            {
+                path: "about",
+                // element: <PrivateRoute><About></About></PrivateRoute>
+                element: <About></About>
             },
             {
                 path: "contact",

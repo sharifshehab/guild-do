@@ -51,6 +51,18 @@ const Header = () => {
                 ? "text-base text-yellow-400 font-semibold"
                 : "hover:text-yellow-400 text-base text-white font-semibold focus:bg-transparent focus:text-yellow-400"
             }
+            to="/about"
+          >
+            About
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            className={({ isActive }) =>
+              isActive
+                ? "text-base text-yellow-400 font-semibold"
+                : "hover:text-yellow-400 text-base text-white font-semibold focus:bg-transparent focus:text-yellow-400"
+            }
             to="/contact"
           >
             Contact

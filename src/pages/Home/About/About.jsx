@@ -1,5 +1,8 @@
 import Container from "../../../components/Container";
 import img from "../../../assets/images/about-gun-image.png";
+import { Link } from "react-router-dom";
+
+
 const About = () => {
   return (
     <section>
@@ -19,16 +22,13 @@ const About = () => {
               of action-packed adventures, immersive role-playing games, or
               intense multiplayer battles, we have something for everyone.
             </p>
-            <button className="px-5 py-3 bg-yellow-400 text-secondaryColor font-semibold title-cut border-x-4 border-white hover:bg-yellow-500 transition-all duration-300">
-              View More
-            </button>
 
-            {/* <Link
-              to={"/login"}
-              className="p-3 text-secondaryColor bg-yellow-400 border-l-4 font-medium rounded-none next-cut hover:bg-yellow-500 transition-all duration-300"
+            <Link
+              to={"/about"}
+              className="px-5 py-3 inline-block bg-yellow-400 text-secondaryColor font-semibold title-cut border-x-4 border-white hover:bg-yellow-500 transition-all duration-300"
             >
-              Join US
-            </Link> */}
+              Read More
+            </Link>
           </div>
           {/* context */}
         </div>
