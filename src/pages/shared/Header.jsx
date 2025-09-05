@@ -14,63 +14,70 @@ const Header = () => {
     const [announcements] = useAnnouncements();
     const [isAdmin, isAdminPending, isAdminLoading] = useAdmin();
 
-    // if (isAdminPending || isAdminLoading) {
-    //     return <Loading></Loading>
-    // }
 
     const menuItems = (
-      <>
-        <li>
-          <NavLink
-            className={({ isActive }) =>
-              isActive
-                ? "text-base text-yellow-400 font-semibold focus:bg-transparent focus:text-yellow-400"
-                : "hover:text-yellow-400 text-base text-white font-semibold"
-            }
-            to="/"
-          >
-            Home
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            className={({ isActive }) =>
-              isActive
-                ? "text-base text-yellow-400 font-semibold"
-                : "hover:text-yellow-400 text-base text-white font-semibold focus:bg-transparent focus:text-yellow-400"
-            }
-            to="/dashboard/payment"
-          >
-            Membership
-          </NavLink>
-        </li>
-        {user && (
-          <li>
-            <NavLink
-              className={({ isActive }) =>
-                isActive
-                  ? "text-base text-yellow-400 font-semibold"
-                  : "hover:text-yellow-400 text-base text-white font-semibold focus:bg-transparent focus:text-yellow-400"
-              }
-              to="/about"
-            >
-              About
-            </NavLink>
-          </li>
-        )}
-        <li>
-          <NavLink
-            className={({ isActive }) =>
-              isActive
-                ? "text-base text-yellow-400 font-semibold"
-                : "hover:text-yellow-400 text-base text-white font-semibold focus:bg-transparent focus:text-yellow-400"
-            }
-            to="/contact"
-          >
-            Contact
-          </NavLink>
-        </li>
-      </>
+        <>
+            <li>
+                <NavLink
+                    className={({ isActive }) =>
+                        isActive
+                            ? "active text-base font-semibold"
+                            : "not-active hover:text-white text-base text-white font-semibold"
+                    }
+                    to="/"
+                >
+                    Home
+                </NavLink>
+            </li>
+            <li>
+                <NavLink
+                    className={({ isActive }) =>
+                        isActive
+                            ? "active text-base font-semibold"
+                            : "not-active hover:text-white text-base text-white font-semibold"
+                    }
+                    to="/about"
+                >
+                    About
+                </NavLink>
+            </li>
+            <li>
+                <NavLink
+                    className={({ isActive }) =>
+                        isActive
+                            ? "active text-base font-semibold"
+                            : "not-active hover:text-white text-base text-white font-semibold"
+                    }
+                    to="/dashboard/payment"
+                >
+                    Membership
+                </NavLink>
+            </li>
+            <li>
+                <NavLink
+                    className={({ isActive }) =>
+                        isActive
+                            ? "active text-base font-semibold"
+                            : "not-active hover:text-white text-base text-white font-semibold"
+                    }
+                    to="/contact"
+                >
+                    Announcement
+                </NavLink>
+            </li>
+            <li>
+                <NavLink
+                    className={({ isActive }) =>
+                        isActive
+                            ? "active text-base font-semibold"
+                            : "not-active hover:text-white text-base text-white font-semibold"
+                    }
+                    to="/contact"
+                >
+                    Contact
+                </NavLink>
+            </li>
+        </>
     );
     return (
         <Sticky enabled={true} innerZ={20}>
@@ -91,7 +98,7 @@ const Header = () => {
                             <a className="text-xl"><img src={logo} alt="guildDo website logo" /></a>
                         </div>
                         <div className="navbar-center hidden lg:flex">
-                            <ul className="menu menu-horizontal px-1">
+                            <ul className="menu menu-horizontal px-1 space-x-1">
                                 {menuItems}
                             </ul>
                         </div>
@@ -163,7 +170,7 @@ const Header = () => {
                                         </ul>
                                     </div>
                                 </div>) :
-                                    <Link to={"/login"} className="p-3 text-secondaryColor bg-yellow-400 border-l-4 font-medium rounded-none next-cut hover:bg-yellow-500 transition-all duration-300">Join US</Link>
+                                    <Link to={"/login"} className="px-3 py-2 text-secondaryColor bg-yellow-400 border-l-4 font-medium rounded-none next-cut hover:border-r-4 hover:border-l-0 transition-all duration-200">Join US</Link>
                             }
                         </div>
                     </nav>

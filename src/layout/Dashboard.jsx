@@ -1,9 +1,11 @@
 import { Link, NavLink, Outlet } from "react-router-dom";
 import useAdmin from "../API/useAdmin";
 import { IoMdArrowBack } from "react-icons/io";
+import Loading from "../components/Loading";
 
 const Dashboard = () => {
-    const [isAdmin] = useAdmin();
+  const [isAdmin, isAdminLoading, isAdminPending] = useAdmin();
+
 
     return (
       <div className="flex flex-col lg:flex-row items-center justify-center">

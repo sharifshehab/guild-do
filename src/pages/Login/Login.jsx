@@ -85,9 +85,9 @@ const Login = () => {
 
                     <div className="flex flex-col items-center">
                         {/* Login and other sign-in methods */}
-                        <div className="flex flex-col items-center  justify-center mt-5 space-y-4">
+                        <div className="flex flex-col items-center justify-center mt-5 space-y-4">
                             <GoogleSignIn></GoogleSignIn>
-                            <Link to="/register" className="text-white"> Don't have an account? <span className="text-gray-300 underline underline-offset-4 decoration-yellow-400">Register</span></Link>
+                            <Link to="/register" className="text-white"> Don't have an account? <span className="text-yellow-400 hover:underline underline-offset-4 decoration-yellow-400 transition-all duration-700 ease-in-out">Register</span></Link>
                         </div>
                     </div>
 

@@ -124,3 +124,52 @@ img {
 .img-cut {
     clip-path: polygon(0 0, 100% 0, 100% 88%, 54% 88%, 42% 100%, 0 100%);
 }
+
+.active {
+  background-color: transparent !important;
+  color: #facc15  !important;
+}
+.active:active {
+  background-color: transparent !important;
+}
+.not-active:focus {
+  background-color: transparent !important;
+}
+
+/* Menu hover */
+a {
+  text-decoration: none;
+  position: relative;
+}
+
+a::before,
+a::after {
+  content: "";
+  position: absolute;
+  display: block;
+  border: 0 solid transparent;
+  width: 0%;
+  height: 0%;
+  transition: all 0.3s ease;
+}
+
+a::after {
+  top: 0;
+  left: 0;
+  border-top: 2px solid transparent;
+  border-left: 2px solid transparent;
+}
+
+a::before {
+  right: 0;
+  bottom: 0;
+  border-bottom: 2px solid transparent;
+  border-right: 2px solid transparent;
+}
+
+a:hover::before,
+a:hover::after {
+  width: 10px;
+  height: 10px;
+  border-color: #fabf1c;
+}
