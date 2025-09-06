@@ -23,6 +23,7 @@ body {
   background: none repeat scroll 0 0;
   background-color: var(--dark-color);
   margin: 0 auto;
+  overflow-x: hidden;
 }
 
 main>section {
@@ -125,6 +126,15 @@ img {
     clip-path: polygon(0 0, 100% 0, 100% 88%, 54% 88%, 42% 100%, 0 100%);
 }
 
+.testimonial-img-cut {
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 54% 85%, 42% 100%, 0 100%);
+}
+
+.newsletter-cut {
+  clip-path: polygon(6% 0, 100% 0%, 100% 100%, 0% 100%);
+}
+
+/* Menu active style */
 .active {
   background-color: transparent !important;
   color: #facc15  !important;
@@ -137,13 +147,13 @@ img {
 }
 
 /* Menu hover */
-a {
+.main-menu a {
   text-decoration: none;
   position: relative;
 }
 
-a::before,
-a::after {
+.main-menu a::before,
+.main-menu a::after {
   content: "";
   position: absolute;
   display: block;
@@ -153,23 +163,28 @@ a::after {
   transition: all 0.3s ease;
 }
 
-a::after {
+.main-menu a::after {
   top: 0;
   left: 0;
   border-top: 2px solid transparent;
   border-left: 2px solid transparent;
 }
 
-a::before {
+.main-menu a::before {
   right: 0;
   bottom: 0;
   border-bottom: 2px solid transparent;
   border-right: 2px solid transparent;
 }
 
-a:hover::before,
-a:hover::after {
+.main-menu a:hover::before,
+.main-menu a:hover::after {
   width: 10px;
   height: 10px;
   border-color: #fabf1c;
+}
+
+/* wave chart */
+.recharts-default-legend{
+  display: none;
 }

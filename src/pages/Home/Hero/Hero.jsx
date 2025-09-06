@@ -20,13 +20,27 @@ const Hero = () => {
     useEffect(() => {
         if (search) {
             axiosPublic.get(`/posts?search=${search}`)
-                .then(data => setSearchResult(data.data));
+                .then(data => {
+                    setSearchResult(data.data);
+                    if (data.data) {
+
+                        setTimeout(() => {
+                            const element = document.getElementById("searchResults");
+                            if (element) {
+                                const yOffset = -100; // adjust this to match your navbar/header height
+                                const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                                window.scrollTo({ top: y, behavior: "smooth" });
+                            }
+                        }, 100);
+
+                    }
+                });
         }
     }, [search, axiosPublic]);
 
     return (
         <>
-            <section className="relative flex flex-col items-center justify-center w-full h-[810px] bg-heroBG bg-no-repeat bg-cover bg-center my-0">
+            <section className="relative flex flex-col items-center justify-center w-full h-[920px] bg-heroBG bg-no-repeat bg-cover bg-center my-0">
                 {/* image overlay */}
                 <div className="absolute inset-0 bg-black bg-opacity-55"></div>
 

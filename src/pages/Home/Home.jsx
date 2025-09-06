@@ -21,12 +21,12 @@ const Home = () => {
             <main>
                 <Hero></Hero>
                 {
-                    announcements.length > 0 &&
-                    <Announcements announcements={announcements} loading={isLoading}></Announcements>
-                }
-                {
                     searchResult.length > 0 &&
                     <SearchResults searchData={searchResult} setSearchResult={setSearchResult}></SearchResults>
+                }
+                {
+                    announcements.length > 0 &&
+                    <Announcements announcements={announcements} loading={isLoading}></Announcements>
                 }
                 <Categories></Categories>
                 <Content></Content>

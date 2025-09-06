@@ -8,11 +8,11 @@ const About = () => {
     <section>
       <Container>
         <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
-          <div className="basis-2/5">
+          <div className="basis-2/5" data-aos="zoom-in" data-aos-duration={1300} data-aos-offset={200} >
             <img src={img} alt="" className="w-full h-full" />
           </div>
           {/* image */}
-          <div className="basis-2/4 space-y-5">
+          <div className="basis-2/4 space-y-5" data-aos="fade-left" data-aos-delay={500} data-aos-offset={200}>
             <h3 className="capitalize text-4xl lg:text-6xl text-yellow-400 font-semibold leading-tight">
               Connect, Dominate, and Rise — Gaming Legacy Awaits!
             </h3>

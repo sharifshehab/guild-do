@@ -18,11 +18,11 @@ const About = () => {
     <section className="my-40">
       <Container>
         <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
-          <div className="basis-2/5">
+          <div className="basis-2/5" data-aos="zoom-in" data-aos-duration={1300} data-aos-offset={200}>
             <img src={img} alt="" className="w-full h-full" />
           </div>
           {/* image */}
-          <div className="basis-2/4 space-y-5">
+          <div className="basis-2/4 space-y-5" data-aos="fade-left" data-aos-delay={500} data-aos-offset={200}>
             <h3 className="capitalize text-4xl lg:text-6xl font-semibold text-yellow-400 leading-tight">
               Connect, Dominate, and Rise — Gaming Legacy Awaits!
             </h3>
@@ -67,7 +67,7 @@ const About = () => {
         <div className="mt-10">
           <SectionTitle title="Strikers"></SectionTitle>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="space-y-4">
+            <div className="space-y-4" data-aos="fade-right" data-aos-duration={800}>
               <div className="relative">
                 <img
                   src={player03Image}
@@ -82,7 +82,7 @@ const About = () => {
             </div>
             {/* single player */}
 
-            <div className="space-y-4">
+            <div className="space-y-4" data-aos="fade-up" data-aos-duration={900}>
               <div className="relative">
                 <img
                   src={player02Image}
@@ -97,7 +97,7 @@ const About = () => {
             </div>
             {/* single player */}
 
-            <div className="space-y-4">
+            <div className="space-y-4" data-aos="fade-up" data-aos-duration={900}>
               <div className="relative">
                 <img
                   src={player01Image}
@@ -112,7 +112,7 @@ const About = () => {
             </div>
             {/* single player */}
 
-            <div className="space-y-4">
+            <div className="space-y-4" data-aos="fade-left" data-aos-duration={800}>
               <div className="relative">
                 <img
                   src={player04Image}

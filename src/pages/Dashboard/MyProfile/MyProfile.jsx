@@ -8,6 +8,7 @@ import Container from "../../../components/Container";
 import { Helmet } from "react-helmet-async";
 // react icons
 import { ImWarning } from "react-icons/im";
+import formateDate from "../../../components/formateDate";
 
 const MyProfile = () => {
   const { user } = useAuth();
@@ -24,22 +25,12 @@ const MyProfile = () => {
       return res.data;
     },
   });
-  const { name, email, badge, phoneNumber, Address } = userProfile || {};
-
-  /* 
-
-        {
- 
-    "name": "Daniel Wilson ",
-    "email": "danielwilson@gmail.com",
-    "badge": "Bronze",
-    "warn": "Warning",
-    "phoneNumber": "+880174579013647",
-    " ": "East Alipur, Dhaka, Bangladesh"
-}
-
-*/
-
+  const { name, email, badge, phoneNumber, Address, about } = userProfile || {};
+  const date = userProfile?.joiningDate
+    ? formateDate(userProfile.joiningDate, "yyyy-MM-dd")
+    : "Loading...";
+  
+  
   // user's top 3 post
   const { data: myPosts = [] } = useQuery({
     queryKey: ["userPosts", user?.email],
@@ -69,7 +60,7 @@ const MyProfile = () => {
                   alt={name}
                   src={user?.photoURL}
                   referrerPolicy="no-referrer"
-                  className="w-[150px] h-[150px] object-cover rounded-full"
+                  className="w-[150px] h-[150px] object-cover rounded-full border border-white"
                 />
                 <div className="grid grid-cols-1 md:grid-cols-2 items-center justify-center">
                   <h3
@@ -98,30 +89,55 @@ const MyProfile = () => {
                       <ImWarning className="text-red-600" size={25} />
                     </div>
                   )}
-
-                  <h3 className="text-xl lg:text-2xl font-semibold capitalize mt-4 col-span-2 lg:col-span-1  text-center lg:text-left">
-                    Name: {name}
-                  </h3>
-
-                  <h3 className="text-xl lg:text-2xl font-semibold capitalize mt-4 col-span-2 lg:col-span-1  text-center lg:text-left">
-                    Email: {email}
-                  </h3>
-                  <h3 className="text-xl lg:text-2xl font-semibold capitalize mt-4 col-span-2 lg:col-span-1  text-center lg:text-left">
-                    Number: {phoneNumber}
-                  </h3>
-                  <h3 className="text-xl lg:text-2xl font-semibold capitalize mt-4 col-span-2 lg:col-span-1  text-center lg:text-left">
-                    Address: {Address}
-                  </h3>
                 </div>
               </div>
               {/* admin profile */}
 
+              <div className="grid grid-cols-6 gap-6 mt-10">
+
+                <div className="col-span-full lg:col-span-2 bg-black p-6 pe-5 border-t-4 border-yellow-400">
+
+                  <h3 className="text-yellow-400 text-2xl uppercase underline underline-offset-4 decoration-white">Info</h3>
+
+                  <div className="mt-8 flex items-start gap-6">
+
+                    <div className="space-y-5 xl:block lg:hidden">
+                      <h5 className="text-white font-semibold text-lg">Full Name:</h5>
+                      <h5 className="text-white font-semibold text-lg">E-mail:</h5>
+                      <h5 className="text-white font-semibold text-lg">Mobile:</h5>
+                      <h5 className="text-white font-semibold text-lg">Address:</h5>
+                      <h5 className="text-white font-semibold text-lg">Joining Date:</h5>
+                    </div> {/* title */}
+
+                    <div className="space-y-5">
+                      <p className="text-slate-300  text-lg">{name}</p>
+                      <p className="text-slate-300  text-lg">{email}</p>
+                      <p className="text-slate-300  text-lg">{phoneNumber}</p>
+                      <p className="text-slate-300 text-lg ">
+                        {Address}
+                      </p>
+                      <p className="text-slate-300  text-lg">{date}</p>
+                    </div> {/* data */}
+
+                  </div> {/* info wrap */}
+
+                </div>{/* info */}
+
+                <div className="col-span-full lg:col-span-4 bg-black p-6 border-t-4 border-yellow-400">
+                  <>
+                    <h3 className="text-yellow-400 text-2xl uppercase underline underline-offset-4 decoration-white">About</h3>
+                    <p className="my-5 text-slate-300 leading-loose text-base">{about}</p>
+                  </>
+                </div> {/* about */}
+              </div>
+              {/* user data */}
+
               {/* posts */}
-              <div className="mt-7 border-t border-border">
-                <div className="text-center pt-5">
+              <div className="mt-7">
+                <div className="text-center pt-10">
                   <SectionTitle title="my recent posts"></SectionTitle>
                 </div>
-                <div className="w-full pb-10 flex flex-wrap items-center justify-center gap-7 lg:gap-14 p-5">
+                <div className="w-full pb-20">
                   {myPosts?.length === 0 ? (
                     <p className="text-center text-white">No post found</p>
                   ) : (

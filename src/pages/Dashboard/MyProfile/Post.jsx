@@ -7,10 +7,10 @@ const Post = ({ post }) => {
     const [postComments] = usePostComments(_id);
 
     return (
-        <div className="flex items-center justify-center flex-col">
+        <div className="border-b-2 p-5 space-y-1">
             <h2 className="text-white text-xl font-semibold capitalize">{postTitle}</h2>
-            <span className="text-yellow-400">{date}</span>
-            <div className="flex items-center justify-center gap-2 text-yellow-400">
+            <p className="text-yellow-400">{date}</p>
+            <div className="flex justify-start gap-3 text-yellow-400">
                 <p className="text-text text-sm">comments: {postComments.length}</p>
                 |
                 <p className="text-text text-sm">votes - Up: {UpVote}, Down: {DownVote} </p>

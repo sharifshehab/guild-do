@@ -11,7 +11,7 @@ const Players = () => {
       <Container>
         <SectionTitle title="Strikers"></SectionTitle>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <div className="space-y-4">
+          <div className="space-y-4" data-aos="fade-right" data-aos-duration={800}>
             <div className="relative">
               <img
                 src={player03Image}
@@ -26,7 +26,7 @@ const Players = () => {
           </div>
           {/* single player */}
 
-          <div className="space-y-4">
+          <div className="space-y-4" data-aos="fade-up" data-aos-duration={900}>
             <div className="relative">
               <img
                 src={player02Image}
@@ -41,7 +41,7 @@ const Players = () => {
           </div>
           {/* single player */}
 
-          <div className="space-y-4">
+          <div className="space-y-4" data-aos="fade-up" data-aos-duration={900}>
             <div className="relative">
               <img
                 src={player01Image}
@@ -56,7 +56,7 @@ const Players = () => {
           </div>
           {/* single player */}
 
-          <div className="space-y-4">
+          <div className="space-y-4" data-aos="fade-left" data-aos-duration={800}>
             <div className="relative">
               <img
                 src={player04Image}

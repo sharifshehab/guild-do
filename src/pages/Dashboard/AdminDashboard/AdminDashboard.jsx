@@ -2,14 +2,16 @@ import { useQuery } from "@tanstack/react-query";
 import Container from "../../../components/Container";
 import SectionTitle from "../../../components/SectionTitle";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import Loading from "../../../components/Loading";
-import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts";
 import { useState } from "react";
 import useToast from "../../../hooks/useToast";
 import { useForm } from "react-hook-form";
 import { TbLoader3 } from "react-icons/tb";
 import { Toaster } from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
+import { Legend, Area, ResponsiveContainer, Bar, ComposedChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Cell, Pie, PieChart } from 'recharts';
+
 
 const AdminDashboard = () => {
   const {
@@ -22,51 +24,29 @@ const AdminDashboard = () => {
   const { successToast, errorToast } = useToast();
   const axiosSecure = useAxiosSecure();
 
-  const { data: totalDocuments = {}, isLoading } = useQuery({
+
+  // Getting documents(post, comment, user) in number
+  const { data: totalDocuments = {}, isLoading: documentCountLoading } = useQuery({
     queryKey: ["totalDocuments"],
     queryFn: async () => {
       const res = await axiosSecure.get("/document-count");
       return res.data;
     },
   });
-  if (isLoading) {
-    return <Loading></Loading>;
-  }
-  const { posts, comments, users } = totalDocuments || {};
+  const { posts, comments, users } = totalDocuments || []
 
-  const data = [
+  // Chart data
+  const documentCount = [
     { name: "Posts", value: posts },
     { name: "Comments", value: comments },
     { name: "Users", value: users },
   ];
-  const COLORS = ["#0088FE", "#00C49F", "#FF8042"];
-  const RADIAN = Math.PI / 180;
-  const renderCustomizedLabel = ({
-    cx,
-    cy,
-    midAngle,
-    innerRadius,
-    outerRadius,
-    percent,
-    index,
-  }) => {
-    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-    const x = cx + radius * Math.cos(-midAngle * RADIAN);
-    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+  
+  // Pie chart color
+  // const COLORS = ["#005fb1", "#007760", "#494949"];
 
-    return (
-      <text
-        x={x}
-        y={y}
-        fill="white"
-        textAnchor={x > cx ? "start" : "end"}
-        dominantBaseline="central"
-      >
-        {`${(percent * 100).toFixed(0)}%`}
-      </text>
-    );
-  };
 
+  // Adding new tag
   const onSubmit = async (formData) => {
     setLoading(true);
     try {
@@ -87,7 +67,13 @@ const AdminDashboard = () => {
     }
   };
 
+  // Handling loading state
+  if (documentCountLoading) {
+    return <Loading></Loading>;
+  }
+
   return (
+    /* lg:col-span-4 - 2   grid grid-cols-6 justify-center items-center gap-5*/
     <>
       <Helmet>
         <title>GuildDo - Admin Dashboard</title>
@@ -95,71 +81,131 @@ const AdminDashboard = () => {
       <Container>
         <section className="min-h-screen py-8">
           <SectionTitle title="Admin Dashboard"></SectionTitle>
-                  <div className="grid lg:grid-cols-4 justify-center items-center gap-5 mb-14">
-                      
 
-            <div className="h-[220px] text-center">
-              <ResponsiveContainer width="100%" height="100%">
-                <PieChart width={300} height={220}>
-                  <Pie
-                    data={data}
-                    cx="50%"
-                    cy="50%"
-                    labelLine={false}
-                    label={renderCustomizedLabel}
-                    outerRadius={80}
-                    fill="#8884d8"
-                    dataKey="value"
+          <div className="w-full bg-yellow-400 py-5">
+            <ResponsiveContainer width="100%" height={380}>
+              <ComposedChart
+                data={documentCount}
+                margin={{ top: 20, right: 40, bottom: 20, left: 0 }}
+              >
+                <CartesianGrid stroke="#f5f5f5" />
+                <XAxis
+                  dataKey="name"
+                  scale="point"
+                  interval={0}
+                  padding={{ left: 15, right: 15 }}
+                  stroke="#232323"
+                />
+                <YAxis stroke="#151515" />
+                <Tooltip />
+                <Legend />
+                <Area type="monotone" dataKey="value" fill="#232323" stroke="#8884d8" />
+                <Bar
+                  dataKey="value"
+                  barSize={30}
+                  fill="#005fb1"
+                  barCategoryGap={0}
+                />
+                <Line type="monotone" dataKey="value" stroke="#ff8042" />
+              </ComposedChart>
+            </ResponsiveContainer>
+          </div>{/* wave chart */}
+
+          {/* <div className="flex flex-wrap items-center justify-center gap-5 mb-14">
+
+            <div className="basis-[60%] bg-yellow-400 py-5">
+                <ResponsiveContainer width="100%" height={380}>
+                  <ComposedChart
+                    data={documentCount}
+                    margin={{ top: 20, right: 40, bottom: 20, left: 0 }}
                   >
-                    {data.map((entry, index) => (
-                      <Cell
-                        key={`cell-${index}`}
-                        fill={COLORS[index % COLORS.length]}
-                      />
-                    ))}
-                  </Pie>
-                </PieChart>
-              </ResponsiveContainer>
-              <div>
-                <div className="badge badge-lg rounded-none bg-[#0088fe] py-2 font-medium">
-                  Post
+                    <CartesianGrid stroke="#f5f5f5" />
+                    <XAxis
+                      dataKey="name"
+                      scale="point"
+                      interval={0}
+                    padding={{ left: 15, right: 15 }}
+                    stroke="#232323"
+                    />
+                  <YAxis stroke="#151515" />
+                    <Tooltip />
+                    <Legend />
+                  <Area type="monotone" dataKey="value" fill="#232323" stroke="#8884d8" />
+                    <Bar
+                      dataKey="value"
+                      barSize={30}
+                    fill="#005fb1"
+                      barCategoryGap={0}
+                    />
+                    <Line type="monotone" dataKey="value" stroke="#ff8042" />
+                  </ComposedChart>
+                </ResponsiveContainer>
+            </div>
+
+            <div className="basis-[40%] flex flex-col items-center justify-center bg-yellow-400 py-3">
+              <PieChart width={200} height={370}>
+                <Pie
+                  data={documentCount}
+                  cx="50%"
+                  cy="50%"
+                  innerRadius={115}
+                  outerRadius={150}
+                  fill="#8884d8"
+                  paddingAngle={1}
+                  dataKey="value"
+                  label={({ value, percent }) => `${(percent * 100).toFixed(0)}%`}
+                >
+                  {documentCount.map((entry, index) => (
+                    <Cell
+                      key={`cell-${entry.name}`}
+                      fill={COLORS[index % COLORS.length]}
+                    />
+                  ))}
+                </Pie>
+              </PieChart>
+
+              <div className="flex gap-2 ">
+                <div className="badge badge-lg rounded-none bg-[#005fb1] py-2 font-medium text-white">
+                  <p>Post</p>
                 </div>
-                <div className="badge badge-lg rounded-none bg-[#00c49f] py-2 font-medium">
+                <div className="badge badge-lg rounded-none bg-[#007760] py-2 font-medium text-white">
                   Comment
                 </div>
-                <div className="badge badge-lg rounded-none bg-[#ff8042] py-2 font-medium">
+                <div className="badge badge-lg rounded-none bg-[#494949] py-2 font-medium text-white">
                   User
                 </div>
               </div>
             </div>
-            {/* chart */}
-            <div className="bg-darkColor rounded-none flex items-center">
+            
+
+          </div> */}
+
+          <div className="grid grid-cols-1 md:grid-cols-3 justify-center items-center gap-5 my-14">
+
+            <div className="bg-darkColor rounded-none flex items-center border-x-4 border-yellow-400 title-cut">
               <div className="card-body text-center">
                 <h3 className="text-4xl text-white">{posts}</h3>
                 <h2 className="text-xl text-yellow-400">Total Posts</h2>
               </div>
-            </div>
-            {/* posts */}
-            <div className="bg-darkColor rounded-none flex items-center mt-10 lg:mt-0">
+            </div>{/* posts */}
+            <div className="bg-darkColor rounded-none flex items-center border-x-4 border-white tag-cut">
               <div className="card-body text-center">
                 <h3 className="text-4xl text-white">{comments}</h3>
                 <h2 className="text-xl text-yellow-400">Total comments</h2>
               </div>
-            </div>
-            {/* comments */}
-            <div className="bg-darkColor rounded-none flex items-center  mt-10 lg:mt-0">
+            </div>{/* comments */}
+            <div className="bg-darkColor rounded-none flex items-center  border-x-4 border-yellow-400 title-cut">
               <div className="card-body text-center">
                 <h3 className="text-4xl text-white">{users}</h3>
                 <h2 className="text-xl text-yellow-400">Total users</h2>
               </div>
-            </div>
-            {/* users */}
-          </div>
-          {/* grid */}
+            </div>{/* users */}
 
-          {/* form area */}
+          </div>{/* grid */}
+
+          {/* Add tag form */}
           <form
-            className="mx-auto lg:w-2/4 bg-darkColor p-6 border-t-2 border-yellow-400"
+            className="mx-auto w-full bg-darkColor p-6 border-t-2 border-yellow-400"
             onSubmit={handleSubmit(onSubmit)}
           >
             <h1 className="text-white text-3xl font-semibold capitalize mb-5 text-center">
@@ -186,7 +232,7 @@ const AdminDashboard = () => {
             </div>
             <button
               type="submit"
-              className="py-3 px-4 bg-yellow-400 font-medium outline-none mt-3 next-cut border-2 border-yellow-400 hover:border-white duration-300"
+              className="py-3 px-4 hover:text-slate-600 bg-yellow-400 font-medium outline-none mt-3 next-cut border-r-8 border-white hover:border-r-0 hover:border-l-8 transition-all duration-200"
             >
               {loading ? (
                 <TbLoader3 size={22} className="animate-spin text-[#ffffff]" />

@@ -21,6 +21,7 @@ import Contact from "../pages/Contact/Contact";
 import About from "../pages/About/About";
 import AdminDashboard from "../pages/Dashboard/AdminDashboard/AdminDashboard";
 import UserDashboard from "../pages/Dashboard/UserDashboard/UserDashboard";
+import AllAnnouncements from "../pages/AllAnnouncements/AllAnnouncements";
 
 export const router = createBrowserRouter([
     {
@@ -38,6 +39,10 @@ export const router = createBrowserRouter([
             {
                 path: "about",
                 element: <About></About>
+            },
+            {
+                path: "announcements",
+                element: <AllAnnouncements/>
             },
             {
                 path: "contact",

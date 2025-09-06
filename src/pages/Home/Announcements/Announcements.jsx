@@ -9,7 +9,6 @@ const Announcements = ({ announcements, loading }) => {
             <Loading></Loading>
         );
     }
-
     return (
         <section id="announcements">
             <Container>

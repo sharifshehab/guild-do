@@ -92,11 +92,11 @@ const Content = () => {
                             </table>
                         </div>
                         <div className="pagination col-span-2 flex justify-center mt-5">
-                            <button onClick={handlePrevPage} className="px-5 py-3 bg-yellow-400 text-secondaryColor font-semibold prev-cut">Prev</button>
+                            <button onClick={handlePrevPage} className="px-5 py-3 bg-yellow-400 text-secondaryColor font-semibold prev-cut" data-aos="fade-right">Prev</button>
                             {
-                                pages?.map(page => <button className={currentPage === page ? 'text-lg px-5 py-[9px] bg-white opacity-95 text-darkColor ' : 'bg-white px-5 py-3 text-secondaryColor'} onClick={() => setCurrentPage(page)} key={page}>{page + 1}</button>)
+                                pages?.map(page => <button data-aos="zoom-in" className={currentPage === page ? 'text-lg px-5 py-[9px] bg-white opacity-95 text-darkColor ' : 'bg-white px-5 py-3 text-secondaryColor'} onClick={() => setCurrentPage(page)} key={page}>{page + 1}</button>)
                             }
-                            <button onClick={handleNextPage} className="px-5 py-3 bg-yellow-400 text-secondaryColor font-semibold next-cut">Next</button>
+                            <button onClick={handleNextPage} className="px-5 py-3 bg-yellow-400 text-secondaryColor font-semibold next-cut" data-aos="fade-left">Next</button>
                         </div>{/* pagination */}
                     </div>{/* posts */}
 
@@ -104,7 +104,7 @@ const Content = () => {
                         <SectionTitle title="Elite titans"></SectionTitle>
                         <div className="space-y-10">
 
-                            <div className="bg-yellow-400 title-cut flex items-center gap-4 ps-9 py-3">
+                            <div className="bg-yellow-400 title-cut flex items-center gap-4 ps-9 py-3" data-aos="fade-left">
                                 <img src={skullEmpire} alt="" className="w-[60px]" />
                                 <div>
                                     <h3 className="text-secondaryColor text-2xl md:text-3xl font-semibold">Skull Empire</h3>
@@ -119,7 +119,7 @@ const Content = () => {
                                 </div>
                             </div>{/* single */}
 
-                            <div className="bg-yellow-400 title-cut flex items-center gap-4 ps-9 py-3">
+                            <div className="bg-yellow-400 title-cut flex items-center gap-4 ps-9 py-3" data-aos="fade-left" data-aos-delay={300}>
                                 <img src={valkyrie} alt="" className="w-[75px]" />
                                 <div>
                                     <h3 className="text-secondaryColor text-2xl md:text-3xl font-semibold">Valkyrie</h3>
@@ -134,7 +134,7 @@ const Content = () => {
                                 </div>
                             </div>{/* single */}
 
-                            <div className="bg-yellow-400 title-cut flex items-center gap-4 ps-9 py-3">
+                            <div className="bg-yellow-400 title-cut flex items-center gap-4 ps-9 py-3" data-aos="fade-left" data-aos-delay={300}>
                                 <img src={grim} alt="" className="w-[75px]" />
                                 <div>
                                     <h3 className="text-secondaryColor text-2xl md:text-3xl font-semibold">GrimReaper</h3>
@@ -150,8 +150,6 @@ const Content = () => {
                             </div>{/* single */}
                         </div>
                     </div>{/* sidebar */}
-
-
 
                 </div>{/* grid */}
             </Container>

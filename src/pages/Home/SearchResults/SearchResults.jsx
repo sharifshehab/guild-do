@@ -3,13 +3,14 @@ import SectionTitle from "../../../components/SectionTitle";
 import SingleResult from "./SingleResult/SingleResult";
 
 const SearchResults = ({ searchData, setSearchResult }) => {
-    
-    const clearSearch = ()=>{
+
+    const clearSearch = () => {
         setSearchResult([]);
     }
 
     return (
-        <section id="announcements">
+
+        <section id="searchResults">
             <Container>
                 <SectionTitle title="search results"></SectionTitle>
                 <div className="space-y-10">
@@ -22,6 +23,7 @@ const SearchResults = ({ searchData, setSearchResult }) => {
                 </div>
             </Container>
         </section>
+
     );
 };
 

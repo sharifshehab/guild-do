@@ -47,7 +47,10 @@ const Register = () => {
               email: formData.email,
               phoneNumber: formData.phone,
               Address: formData.address,
+              about: formData.about,
               badge: "Bronze",
+              role: "User",
+              joiningDate: new Date()
             };
             const res = await axiosPublic.post('/users', userInfo);
             if (res.data.insertedId) {
@@ -164,7 +167,7 @@ const Register = () => {
                           required: "Address is required",
                         })}
                       />
-                      <span className="absolute top-3 left-5 peer-focus:-top-3 peer-focus:bg-yellow-400 peer-focus:left-2 peer-focus:scale-[0.9] peer-focus:text-secondaryColor text-[#777777] peer-focus:px-1 transition-all duration-300 ">
+                      <span className="absolute top-3 left-5 peer-focus:-top-3 peer-focus:bg-yellow-400 peer-focus:left-2 peer-focus:scale-[0.9] peer-focus:text-secondaryColor text-[#777777] peer-focus:px-1 transition-all duration-300">
                         Your Address
                       </span>
                     </label>
@@ -224,11 +227,33 @@ const Register = () => {
                   {/* password */}
                 </div>{" "}
                 {/* third-row */}
+                <div className="">
+                  <div className="flex flex-col gap-[5px] w-full mt-[20px]">
+                    <label className="relative w-full bg-darkColor text-[#777777] border-[#e5eaf2] border px-5 py-3 cursor-pointer hover:text-white hover:border-yellow-400 transition-colors duration-300">
+                      <textarea
+                        className="peer min-h-[200px] outline-none bg-transparent text-white md:ps-36  mt-5 md:mt-0 w-full focus:border-yellow-400 transition-colors duration-300" {...register("about", {
+                          required: "About description is required",
+                        })}
+                      ></textarea>
+                      <span
+                        className="absolute top-3 left-5 peer-focus:-top-3 peer-focus:bg-yellow-400 peer-focus:left-2 peer-focus:scale-[0.9] peer-focus:text-secondaryColor text-[#777777] peer-focus:px-1 transition-all duration-300 ">
+                        About Description
+                      </span>
+                    </label>
+                  </div>
+                  {errors.about && (
+                      <span className="text-red-500 text-sm">
+                      {errors.about.message}
+                      </span>
+                    )}
+                  {/* about */}
+                </div>{" "}
+                {/* fourth-row */}
               </div>
 
               <button
                 type="submit"
-                className="py-3 px-4 font-semibold bg-yellow-400 outline-none mt-3 next-cut border-2 border-yellow-400 hover:border-white duration-300"
+                className="py-3 px-4 font-semibold hover:text-slate-600 bg-yellow-400 outline-none mt-3 next-cut border-r-8 border-white hover:border-r-0 hover:border-l-8 transition-all duration-200"
               >
                 {loading ? (
                   <TbLoader3
@@ -247,9 +272,7 @@ const Register = () => {
                 <GoogleSignIn></GoogleSignIn>
                 <Link to="/login" className="text-white">
                   Already have an account?{" "}
-                  <span className="text-gray-300 underline underline-offset-4 decoration-yellow-400">
-                    Log In
-                  </span>
+                  <span className="text-yellow-400 hover:underline underline-offset-4 decoration-yellow-400 transition-all duration-700 ease-in-out">Log In</span>
                 </Link>
               </div>
             </div>

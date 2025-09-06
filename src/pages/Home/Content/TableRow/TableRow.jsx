@@ -10,7 +10,7 @@ const TableRow = ({ post }) => {
     const [postComments] = usePostComments(_id);
 
     return (
-        <tr>
+        <tr data-aos="fade-right">
             <td className="lg:px-5 py-5">
                 <div className="space-y-1">
                     <Link to={`/post/${_id}`} className="text-xl lg:text-[22px] font-semibold text-yellow-400">{postTitle}</Link>

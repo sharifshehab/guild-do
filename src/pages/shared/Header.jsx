@@ -1,6 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 import { HiBars3BottomLeft } from "react-icons/hi2";
 import { MdOutlineNotifications } from "react-icons/md";
+import { MdLogout } from "react-icons/md";
 import Sticky from 'react-stickynode';
 import Container from "../../components/Container";
 import useAuth from "../../hooks/useAuth";
@@ -13,7 +14,6 @@ const Header = () => {
     const { user, handleLogOut } = useAuth();
     const [announcements] = useAnnouncements();
     const [isAdmin, isAdminPending, isAdminLoading] = useAdmin();
-
 
     const menuItems = (
         <>
@@ -60,9 +60,9 @@ const Header = () => {
                             ? "active text-base font-semibold"
                             : "not-active hover:text-white text-base text-white font-semibold"
                     }
-                    to="/contact"
+                    to="/announcements"
                 >
-                    Announcement
+                    Announcements
                 </NavLink>
             </li>
             <li>
@@ -95,10 +95,10 @@ const Header = () => {
                                     {menuItems}
                                 </ul>
                             </div>
-                            <a className="text-xl"><img src={logo} alt="guildDo website logo" /></a>
+                            <Link to={"/"}><img src={logo} alt="guildDo website logo" /></Link>
                         </div>
                         <div className="navbar-center hidden lg:flex">
-                            <ul className="menu menu-horizontal px-1 space-x-1">
+                            <ul className="main-menu menu menu-horizontal px-1 space-x-1">
                                 {menuItems}
                             </ul>
                         </div>
@@ -149,8 +149,8 @@ const Header = () => {
                                             {user && isAdmin &&
                                                 <li>
                                                     <NavLink
-                                                        to={"/dashboard/admin-profile"}
-                                                        className="hover:rounded-none hover:bg-transparent hover:font-semibold"
+                                                        to={"/dashboard/admin-dashboard"}
+                                                        className="hover:rounded-none hover:bg-transparent hover:font-semibold text-secondaryColor"
                                                     >
                                                         Dashboard
                                                     </NavLink>
@@ -159,18 +159,21 @@ const Header = () => {
                                             {user && !isAdmin &&
                                                 <li>
                                                     <NavLink
-                                                        to={"/dashboard/my-profile"}
-                                                        className="hover:rounded-none hover:bg-transparent hover:font-semibold"
+                                                        to={"/dashboard/user-dashboard"}
+                                                        className="hover:rounded-none hover:bg-transparent hover:font-semibold text-secondaryColor"
                                                     >
                                                         Dashboard
                                                     </NavLink>
                                                 </li>
                                             }
-                                            <li className="border-t-2 decoration-white"><button onClick={handleLogOut} className="hover:rounded-none hover:bg-transparent hover:font-semibold">Log Out</button></li>
+                                            <li className="border-t-2 decoration-white"><button onClick={handleLogOut} className="text-base font-semibold pt-2 hover:rounded-none hover:bg-transparent hover:opacity-80 text-secondaryColor ">
+                                                <MdLogout size={22} />Log Out
+
+                                            </button></li>
                                         </ul>
                                     </div>
                                 </div>) :
-                                    <Link to={"/login"} className="px-3 py-2 text-secondaryColor bg-yellow-400 border-l-4 font-medium rounded-none next-cut hover:border-r-4 hover:border-l-0 transition-all duration-200">Join US</Link>
+                                    <Link to={"/login"} className="px-3 py-2 text-secondaryColor hover:text-slate-600 bg-yellow-400 font-medium rounded-none next-cut border-r-8 border-white hover:border-r-0 hover:border-l-8 transition-all duration-200">Join US</Link>
                             }
                         </div>
                     </nav>

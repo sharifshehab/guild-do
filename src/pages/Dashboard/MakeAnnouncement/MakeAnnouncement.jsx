@@ -50,7 +50,7 @@ const MakeAnnouncement = () => {
                     <SectionTitle title="Make Announcement"></SectionTitle>
 
                     {/* form area */}
-                    <form className="w-full mt-12 bg-secondaryColor p-10" onSubmit={handleSubmit(onSubmit)}>
+                    <form className="w-full mt-12 bg-secondaryColor " onSubmit={handleSubmit(onSubmit)}>
                         <div className="space-y-5">
 
                             <div className="flex flex-col sm:flex-row items-center gap-5">
@@ -120,8 +120,7 @@ const MakeAnnouncement = () => {
 
                         </div>{/* space-y-5 */}
 
-                        <button type="submit" className='py-3 px-4 bg-yellow-400 font-medium outline-none mt-3 next-cut border-2 border-yellow-400 hover:border-white duration-300'>{loading ? <TbLoader3 size={22} className="animate-spin text-[#ffffff]" /> : 'Add Announcement'}</button>
-
+                        <button type="submit" className='py-3 px-4 hover:text-slate-600 bg-yellow-400 font-medium outline-none mt-3 next-cut border-r-8 border-white hover:border-r-0 hover:border-l-8 transition-all duration-200'>{loading ? <TbLoader3 size={22} className="animate-spin text-[#ffffff]" /> : 'Add Announcement'}</button>
                     </form>
                     <Toaster />
                 </section>
