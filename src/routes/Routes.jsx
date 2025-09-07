@@ -20,8 +20,10 @@ import AdminRoute from "./adminRoute";
 import Contact from "../pages/Contact/Contact";
 import About from "../pages/About/About";
 import AdminDashboard from "../pages/Dashboard/AdminDashboard/AdminDashboard";
-import UserDashboard from "../pages/Dashboard/UserDashboard/UserDashboard";
+import UserDashboard from "../pages/Dashboard/MyFriends/MyFriends";
 import AllAnnouncements from "../pages/AllAnnouncements/AllAnnouncements";
+import AllMembers from "../pages/AllMembers/AllMembers";
+import MyFriends from "../pages/Dashboard/MyFriends/MyFriends";
 
 export const router = createBrowserRouter([
     {
@@ -34,7 +36,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "post/:postId",
-                element: <PostDetails></PostDetails>
+                element: <PostDetails />
             },
             {
                 path: "about",
@@ -42,11 +44,15 @@ export const router = createBrowserRouter([
             },
             {
                 path: "announcements",
-                element: <AllAnnouncements/>
+                element: <AllAnnouncements />
+            },
+            {
+                path: "members",
+                element: <AllMembers />
             },
             {
                 path: "contact",
-                element: <Contact></Contact>
+                element: <Contact />
             }
         ]
     },
@@ -105,8 +111,8 @@ export const router = createBrowserRouter([
                 element: <MyProfile></MyProfile>
             },
             {
-                path: "user-dashboard",
-                element: <UserDashboard></UserDashboard>
+                path: "my-friends",
+                element: <MyFriends/>
             }
         ]
     },

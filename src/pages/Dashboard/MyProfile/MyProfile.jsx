@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
-import Post from "./Post";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import SectionTitle from "../../../components/SectionTitle";
 import Container from "../../../components/Container";
@@ -9,6 +8,7 @@ import { Helmet } from "react-helmet-async";
 // react icons
 import { ImWarning } from "react-icons/im";
 import formateDate from "../../../components/formateDate";
+import TableRow from "./TableRow/TableRow";
 
 const MyProfile = () => {
   const { user } = useAuth();
@@ -31,11 +31,11 @@ const MyProfile = () => {
     : "Loading...";
   
   
-  // user's top 3 post
-  const { data: myPosts = [] } = useQuery({
-    queryKey: ["userPosts", user?.email],
+  // Friend requests
+  const { data: friendRequests = [], refetch: refetchFriendRequests  } = useQuery({
+    queryKey: ["friendRequests", user?.email],
     queryFn: async () => {
-      const res = await axiosPublic.get(`/posts?email=${user?.email}&limit=3`);
+      const res = await axiosPublic.get(`/friend-requests?email=${user?.email}`);
       return res.data;
     },
   });
@@ -132,21 +132,33 @@ const MyProfile = () => {
               </div>
               {/* user data */}
 
-              {/* posts */}
+              {/* request section */}
               <div className="mt-7">
                 <div className="text-center pt-10">
-                  <SectionTitle title="my recent posts"></SectionTitle>
+                  <SectionTitle title="friend requests"></SectionTitle>
                 </div>
-                <div className="w-full pb-20">
-                  {myPosts?.length === 0 ? (
-                    <p className="text-center text-white">No post found</p>
-                  ) : (
-                    myPosts?.map((post) => (
-                      <Post key={post._id} post={post}></Post>
-                    ))
-                  )}
-                </div>
-              </div>
+
+                <div className="overflow-x-auto pb-32">
+                  <table className="table">
+                    {/* head */}
+                    <thead>
+                      <tr className="text-sm text-white">
+                        <th>name</th>
+                        <th>status</th>
+                        <th>date</th>
+                        <th>action</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      {friendRequests?.length === 0 ? <p className="text-white py-5"> No request found!</p> :
+                        friendRequests?.map(request => <TableRow key={request._id} request={request} refetchFriendRequests={refetchFriendRequests}></TableRow>)
+                      }
+                    </tbody>
+                  </table> 
+                </div> {/* table */}
+              </div>{/* request section end */}
+
             </div>
           </div>
           {/* flex */}

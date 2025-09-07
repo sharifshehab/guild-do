@@ -72,6 +72,18 @@ const Header = () => {
                             ? "active text-base font-semibold"
                             : "not-active hover:text-white text-base text-white font-semibold"
                     }
+                    to="/members"
+                >
+                    Members
+                </NavLink>
+            </li>
+            <li>
+                <NavLink
+                    className={({ isActive }) =>
+                        isActive
+                            ? "active text-base font-semibold"
+                            : "not-active hover:text-white text-base text-white font-semibold"
+                    }
                     to="/contact"
                 >
                     Contact
@@ -79,6 +91,10 @@ const Header = () => {
             </li>
         </>
     );
+
+    if (isAdminLoading || isAdminPending) {
+        <Loading/>
+    }
     return (
         <Sticky enabled={true} innerZ={20}>
             <header className="bg-secondaryColor border-b border-slate-300">
@@ -159,7 +175,7 @@ const Header = () => {
                                             {user && !isAdmin &&
                                                 <li>
                                                     <NavLink
-                                                        to={"/dashboard/user-dashboard"}
+                                                        to={"/dashboard/my-profile"}
                                                         className="hover:rounded-none hover:bg-transparent hover:font-semibold text-secondaryColor"
                                                     >
                                                         Dashboard

@@ -84,18 +84,6 @@ const Dashboard = () => {
                         ? "bg-secondaryColor font-semibold rounded-none text-white focus:bg-secondaryColor focus:text-white"
                         : "hover:bg-white text-darkColor rounded-none"
                     }
-                    to={"/dashboard/user-dashboard"}
-                  >
-                    My Dashboard
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    className={({ isActive }) =>
-                      isActive
-                        ? "bg-secondaryColor font-semibold rounded-none text-white focus:bg-secondaryColor focus:text-white"
-                        : "hover:bg-white text-darkColor rounded-none"
-                    }
                     to={"/dashboard/my-profile"}
                   >
                     My Profile
@@ -124,7 +112,19 @@ const Dashboard = () => {
                   >
                     My Posts
                   </NavLink>
-                </li>
+                  </li>
+                  <li>
+                    <NavLink
+                      className={({ isActive }) =>
+                        isActive
+                          ? "bg-secondaryColor font-semibold rounded-none text-white focus:bg-secondaryColor focus:text-white"
+                          : "hover:bg-white text-darkColor rounded-none"
+                      }
+                      to={"/dashboard/my-friends"}
+                    >
+                      My Friends
+                    </NavLink>
+                  </li>
               </>
             )}
           </ul>
