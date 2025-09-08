@@ -93,7 +93,7 @@ const Header = () => {
     );
 
     if (isAdminLoading || isAdminPending) {
-        <Loading/>
+        <Loading />
     }
     return (
         <Sticky enabled={true} innerZ={20}>
@@ -178,7 +178,7 @@ const Header = () => {
                                                         to={"/dashboard/my-profile"}
                                                         className="hover:rounded-none hover:bg-transparent hover:font-semibold text-secondaryColor"
                                                     >
-                                                        Dashboard
+                                                        My Profile
                                                     </NavLink>
                                                 </li>
                                             }

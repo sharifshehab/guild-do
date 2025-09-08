@@ -20,10 +20,10 @@ import AdminRoute from "./adminRoute";
 import Contact from "../pages/Contact/Contact";
 import About from "../pages/About/About";
 import AdminDashboard from "../pages/Dashboard/AdminDashboard/AdminDashboard";
-import UserDashboard from "../pages/Dashboard/MyFriends/MyFriends";
 import AllAnnouncements from "../pages/AllAnnouncements/AllAnnouncements";
 import AllMembers from "../pages/AllMembers/AllMembers";
 import MyFriends from "../pages/Dashboard/MyFriends/MyFriends";
+import CreateGroup from "../pages/Dashboard/CreateGroup/CreateGroup";
 
 export const router = createBrowserRouter([
     {
@@ -91,28 +91,32 @@ export const router = createBrowserRouter([
             },
             /* user routes */
             {
-                path: "add-post",
-                element: <AddPost></AddPost>
+                path: "my-profile",
+                element: <MyProfile></MyProfile>
             },
             {
-                path: "payment",
-                element: <Payment></Payment>
+                path: "add-post",
+                element: <AddPost></AddPost>
             },
             {
                 path: "my-posts",
                 element: <MyPosts></MyPosts>
             },
             {
-                path: "comments/:postId",
-                element: <PostComments></PostComments>
-            },
-            {
-                path: "my-profile",
-                element: <MyProfile></MyProfile>
+                path: "create-group",
+                element: <CreateGroup />
             },
             {
                 path: "my-friends",
-                element: <MyFriends/>
+                element: <MyFriends />
+            },
+            {
+                path: "payment",
+                element: <Payment></Payment>
+            },
+            {
+                path: "comments/:postId",
+                element: <PostComments></PostComments>
             }
         ]
     },

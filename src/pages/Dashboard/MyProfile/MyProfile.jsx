@@ -9,6 +9,7 @@ import { Helmet } from "react-helmet-async";
 import { ImWarning } from "react-icons/im";
 import formateDate from "../../../components/formateDate";
 import TableRow from "./TableRow/TableRow";
+import Loading from "../../../components/Loading";
 
 const MyProfile = () => {
   const { user } = useAuth();
@@ -32,13 +33,17 @@ const MyProfile = () => {
   
   
   // Friend requests
-  const { data: friendRequests = [], refetch: refetchFriendRequests  } = useQuery({
+  const { data: friendRequests = [], refetch: refetchFriendRequests, isLoading  } = useQuery({
     queryKey: ["friendRequests", user?.email],
     queryFn: async () => {
-      const res = await axiosPublic.get(`/friend-requests?email=${user?.email}`);
+      const res = await axiosPublic.get(`/friend-requests?receivedRequests=${user?.email}`);
       return res.data;
     },
   });
+
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
 
   return (
     <>

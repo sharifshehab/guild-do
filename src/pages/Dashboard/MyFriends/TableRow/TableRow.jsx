@@ -1,11 +1,11 @@
 import formateDate from "../../../../components/formateDate";
 
 const TableRow = ({ friend }) => {
-    const { toUser, status, createdAt } = friend || {}
+    const { fromUser, status, createdAt } = friend || {}
     const date = createdAt
         ? formateDate(createdAt, "yyyy-MM-dd")
         : "Loading...";
-    const name = toUser.split("@")[0].charAt(0).toUpperCase() + toUser.split("@")[0].slice(1);
+    const name = fromUser.split("@")[0].charAt(0).toUpperCase() + fromUser.split("@")[0].slice(1);
     return (
         <tr className="dark:text-primaryColor">
             <td>

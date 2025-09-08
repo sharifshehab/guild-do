@@ -5,7 +5,7 @@ import { useState } from "react";
 import formateDate from "../../../../components/formateDate";
 
 const TableRow = ({ request, refetchFriendRequests }) => {
-    const { _id, name, status, createdAt } = request || {}
+    const { _id, name, fromUser, status, createdAt } = request || {}
     const date = createdAt
         ? formateDate(createdAt, "yyyy-MM-dd")
         : "Loading...";
@@ -18,9 +18,10 @@ const TableRow = ({ request, refetchFriendRequests }) => {
         setRequestStatus(e.target.value)
         try {
             const res = await axiosPublic.patch(`/friend-requests/${_id}`, { requestResponse: e.target.value });
-            refetchFriendRequests()
             if (res?.data?.modifiedCount) {
                 successToast(`Friend request of ${fromUser} ${e.target.value}ed successfully `);
+                // const res = await axiosPublic.delete(`/friend-requests/${_id}`);
+                refetchFriendRequests()
             }
         } catch (error) {
             errorToast(`An error occurred while sending request response to ${fromUser}!`);
