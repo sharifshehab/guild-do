@@ -12,7 +12,7 @@ import Players from "./Players/Players";
 import Testimonials from "./Testimonials/Testimonials";
 
 const Home = () => {
-    const [announcements, isLoading] = useAnnouncements();
+    const [announcements, isLoading] = useAnnouncements(1);
     const { searchResult, setSearchResult } = useAuth();
 
     return (
