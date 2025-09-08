@@ -10,6 +10,7 @@ import { ImWarning } from "react-icons/im";
 import formateDate from "../../../components/formateDate";
 import TableRow from "./TableRow/TableRow";
 import Loading from "../../../components/Loading";
+import GroupTableRow from "./GroupTableRow/GroupTableRow";
 
 const MyProfile = () => {
   const { user } = useAuth();
@@ -33,15 +34,25 @@ const MyProfile = () => {
   
   
   // Friend requests
-  const { data: friendRequests = [], refetch: refetchFriendRequests, isLoading  } = useQuery({
+  const { data: friendRequests = [], refetch: refetchFriendRequests, isLoading: isFriendRequestsLoading  } = useQuery({
     queryKey: ["friendRequests", user?.email],
     queryFn: async () => {
       const res = await axiosPublic.get(`/friend-requests?receivedRequests=${user?.email}`);
       return res.data;
     },
   });
+  
+  // My groups
+  const { data: groups = [], isLoading:isGroupLoading  } = useQuery({
+    queryKey: ["groups", user?.email],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/groups?groupOwner=${user?.email}`);
+      return res.data;
+    },
+  });
+  console.log(groups);
 
-  if (isLoading) {
+  if (isFriendRequestsLoading || isGroupLoading) {
     return <Loading></Loading>;
   }
 
@@ -143,15 +154,15 @@ const MyProfile = () => {
                   <SectionTitle title="friend requests"></SectionTitle>
                 </div>
 
-                <div className="overflow-x-auto pb-32">
+                <div className="overflow-x-auto">
                   <table className="table">
                     {/* head */}
                     <thead>
                       <tr className="text-sm text-white">
-                        <th>name</th>
-                        <th>status</th>
-                        <th>date</th>
-                        <th>action</th>
+                        <th>Name</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                        <th>Action</th>
                       </tr>
                     </thead>
 
@@ -164,6 +175,33 @@ const MyProfile = () => {
                 </div> {/* table */}
               </div>{/* request section end */}
 
+
+              {/* My groups section */}
+              <div className="mt-7">
+                <div className="text-center pt-10">
+                  <SectionTitle title="My groups"></SectionTitle>
+                </div>
+
+                <div className="overflow-x-auto pb-32">
+                  <table className="table">
+                    {/* head */}
+                    <thead>
+                      <tr className="text-sm text-white">
+                        <th>Group Name</th>
+                        <th>Member</th>
+                        <th className="hidden sm:table-cell">Description</th>
+                        <th>Creation Date</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      {groups?.length === 0 ? <p className="text-white py-5">No groups found!</p> :
+                        groups?.map(group => <GroupTableRow key={group._id} group={group} ></GroupTableRow>)
+                      }
+                    </tbody>
+                  </table>
+                </div> {/* table */}
+              </div>{/* My groups end */}
             </div>
           </div>
           {/* flex */}

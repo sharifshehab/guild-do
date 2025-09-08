@@ -21,22 +21,23 @@ const CreateGroup = () => {
     const { successToast, errorToast } = useToast();
     const [loading, setLoading] = useState(false);
 
-
-
     const onSubmit = async (formData) => {
         setLoading(true);
         try {
             const groupData = {
-                groupName: formData.group_name,
-                groupDescription: formData.group_description,
-                groupAdmin: formData.admin_email,
-                groupTag: formData.group_tags.map(tag => tag.value),
+                name: formData.group_name,
+                description: formData.group_description,
+                owner: formData.admin_email,
+                tags: formData.group_tags.map(tag => tag.value),
                 members: [],
                 requests: [],
                 createdAt: new Date()
             }
 
             const res = await axiosPublic.post('/groups', groupData);
+            if (res.data.message) {
+                errorToast(res.data.message);
+            }
             if (res.data.insertedId) {
                 reset(); // Reset form
                 successToast("Group created successful");
@@ -69,7 +70,7 @@ const CreateGroup = () => {
                                         <input type="text"
                                             className="peer text-white bg-darkColor border-[#e5eaf2] border outline-none ps-32 pe-5 py-3 w-full focus:border-primaryColor transition-colors duration-300"
                                             {...register("group_name", { required: "Group name is required" })}
-                                                                                    />
+                                        />
                                         <span
                                             className="absolute top-3 left-5 peer-focus:-top-3 peer-focus:bg-primaryColor peer-focus:left-2 peer-focus:scale-[0.9] peer-focus:text-secondaryColor text-[#777777] peer-focus:px-1 transition-all duration-300 ">
                                             Group Name
