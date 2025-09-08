@@ -67,6 +67,21 @@ const Login = () => {
         }
     }
 
+    // Handle Preset Premium User Login
+    const premiumUserLogin = async () => {
+        setLoginLoading(true);
+        try {
+            await handleEmailLogin("ruekassen@gmail.com", "Ruekas$001");
+            reset();
+            navigate(from, { replace: true });
+        } catch (error) {
+            errorToast(`Login error: ${error.message}`)
+        } finally {
+            setLoading(false);
+            setLoginLoading(false);
+        }
+    }
+
 
 
     return (
@@ -119,12 +134,20 @@ const Login = () => {
                     {/* Preset credentials */}
                     <div className="my-10 space-y-5">
                         <h3 className="text-white text-2xl underline underline-offset-4 decoration-yellow-400 text-center">Demo Credentials</h3>
-                        <div className="flex items-center justify-center gap-2">
+                        <div className="flex items-center flex-col md:flex-row justify-center gap-2">
+                            {/* Admin */}
                             <button type="submit" className='py-3 px-4 font-semibold bg-yellow-400 outline-none prev-cut  border-l-8 border-white hover:border-r-8 hover:border-l-0 transition-all duration-200' onClick={adminLogin}>Login As Admin</button>
 
                             {/* Separator */}
                             <span className="w-px h-10 bg-white mx-2"></span>
 
+                            {/* premium user */}
+                            <button type="submit" className='py-3 px-4 font-semibold bg-yellow-400 outline-none title-cut border-x-8 border-white hover:opacity-85 transition-all duration-200' onClick={premiumUserLogin}>Login As Premium User</button>
+
+                            {/* Separator */}
+                            <span className="w-px h-10 bg-white mx-2"></span>
+
+                            {/* user */}
                             <button type="submit" className='py-3 px-4 font-semibold bg-yellow-400 outline-none next-cut border-r-8 border-white hover:border-r-0 hover:border-l-8 transition-all duration-200' onClick={userLogin}>Login As User</button>
                         </div>
                     </div>
@@ -137,7 +160,7 @@ const Login = () => {
                         </div>
                     </div>
 
-                    <div className="section-title bg-yellow-400 inline-block px-6 p-2 mt-10 title-cut hover:bg-yellow-500 duration-300">
+                    <div className="section-title bg-yellow-400 inline-block cursor-pointer px-6 p-2 mt-10 title-cut hover:border-x-8 hover:bg-yellow-500 duration-300">
                         <Link to={'/'} className="text-darkColor font-bold">Go To Home Page</Link>
                     </div>
 

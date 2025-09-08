@@ -30,7 +30,7 @@ const MyProfile = () => {
   const { name, email, badge, phoneNumber, Address, about } = userProfile || {};
   const date = userProfile?.joiningDate
     ? formateDate(userProfile.joiningDate, "yyyy-MM-dd")
-    : "Loading...";
+    : "";
   
   
   // Friend requests
@@ -66,12 +66,15 @@ const MyProfile = () => {
           <div className="flex items-center justify-center min-h-screen my-10">
             <div className="w-full bg-transparent">
               <div
+                className="shadow-2xl p-6 flex items-center justify-center flex-col title-cut bg-yellow-400"
+              >
+              {/* <div
                 className={`${
                   userProfile?.badge === "Gold"
                     ? "bg-yellow-400"
                     : "bg-amber-700"
                 } shadow-2xl p-6 flex items-center justify-center flex-col title-cut`}
-              >
+              > */}
                 <img
                   alt={name}
                   src={user?.photoURL}
@@ -88,7 +91,7 @@ const MyProfile = () => {
                         userProfile?.badge === "Gold"
                           ? "text-yellow-400"
                           : "text-amber-700"
-                      } px-3 py-2 bg-darkColor`}
+                      } px-3 py-2 bg-darkColor border-2`}
                     >
                       {badge}
                     </span>
@@ -142,7 +145,12 @@ const MyProfile = () => {
                 <div className="col-span-full lg:col-span-4 bg-black p-6 border-t-4 border-yellow-400">
                   <>
                     <h3 className="text-yellow-400 text-2xl uppercase underline underline-offset-4 decoration-white">About</h3>
-                    <p className="my-5 text-slate-300 leading-loose text-base">{about}</p>
+                    <p className="my-5 text-slate-300 leading-loose text-base">{about ? about : <p>
+                      Just joined using{" "}
+                      <span className="text-yellow-400 font-semibold">Google Sign In</span>! Still
+                      setting up my profile, but I’m always ready to explore, connect, and share
+                      cool stuff.
+                    </p>}</p>
                   </>
                 </div> {/* about */}
               </div>

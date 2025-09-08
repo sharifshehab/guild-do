@@ -74,7 +74,7 @@ const Header = () => {
                     }
                     to="/members"
                 >
-                    Members
+                    Community
                 </NavLink>
             </li>
             <li>
