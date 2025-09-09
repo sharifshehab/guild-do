@@ -41,18 +41,21 @@ const Header = () => {
                     About
                 </NavLink>
             </li>
-            <li>
-                <NavLink
-                    className={({ isActive }) =>
-                        isActive
-                            ? "active text-base font-semibold"
-                            : "not-active hover:text-white text-base text-white font-semibold"
-                    }
-                    to="/dashboard/payment"
-                >
-                    Membership
-                </NavLink>
-            </li>
+            {
+                !isAdmin &&
+                <li>
+                    <NavLink
+                        className={({ isActive }) =>
+                            isActive
+                                ? "active text-base font-semibold"
+                                : "not-active hover:text-white text-base text-white font-semibold"
+                        }
+                        to="/dashboard/payment"
+                    >
+                        Membership
+                    </NavLink>
+                </li>
+            }
             <li>
                 <NavLink
                     className={({ isActive }) =>

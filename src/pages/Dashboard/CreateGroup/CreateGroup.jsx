@@ -27,7 +27,8 @@ const CreateGroup = () => {
             const groupData = {
                 name: formData.group_name,
                 description: formData.group_description,
-                owner: formData.admin_email,
+                ownerName: user?.displayName,
+                ownerEmail: user?.email,
                 tags: formData.group_tags.map(tag => tag.value),
                 members: [],
                 requests: [],

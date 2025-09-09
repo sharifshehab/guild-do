@@ -5,7 +5,7 @@ import useToast from '../../../../../hooks/useToast';
 import useAxiosPublic from '../../../../../hooks/useAxiosPublic';
 
 const TableRow = ({ request, groupId }) => {
-    const { userName, userEmail, } = request || {}
+    const { name, email, } = request || {}
     const requestedDate = request?.date
         ? formateDate(request?.date, "yyyy-MM-dd")
         : " ";
@@ -22,7 +22,8 @@ const TableRow = ({ request, groupId }) => {
         try {
             const responseData = {
                 action: e.target.value,
-                joinEmail: userEmail,
+                name: name,
+                email: email,
             }
             const res = await axiosPublic.patch(`/groups/response/${groupId}`, responseData);
             console.log(res);
@@ -39,10 +40,10 @@ const TableRow = ({ request, groupId }) => {
     return (
         <tr >
             <td>
-                <h4 className='text-yellow-400'>{userName}</h4>
+                <h4 className='text-yellow-400'>{name}</h4>
             </td>{/* name */}
             <td>
-                <h4 className='text-yellow-400'>{userEmail}</h4>
+                <h4 className='text-yellow-400'>{email}</h4>
             </td>{/* email */}
             <td>
                 <h4 className='text-yellow-400'>{requestStatus === "pending" ? requestStatus : `${requestStatus}ed`}</h4>

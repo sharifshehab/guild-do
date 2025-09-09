@@ -1,6 +1,7 @@
 import useToast from "../../../hooks/useToast";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import { Toaster } from "react-hot-toast";
+import { useEffect, useState } from "react";
 
 const TableRow = ({ member, requestSender }) => {
     
@@ -8,6 +9,25 @@ const TableRow = ({ member, requestSender }) => {
     // const axiosSecure = useAxiosSecure();
     const axiosPublic = useAxiosPublic();
     const { errorToast, successToast } = useToast();
+    const [isRequestSent, setIsRequestSent] = useState(false);
+
+    useEffect(() => {
+        const checkRequest = async () => {
+            try {
+                const res = await axiosPublic.get(`/friend-requests?sendRequests=${requestSender?.email}`);
+                const alreadySent = res.data.some((req) => req.toUser === email && req.fromUser === requestSender?.email);
+                setIsRequestSent(alreadySent)
+
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        
+        if (requestSender?.email) {
+            checkRequest()
+        }
+    }, [requestSender?.email, email, axiosPublic]);
+
 
     const requestInfo = {
         name: requestSender?.displayName,
@@ -43,7 +63,7 @@ const TableRow = ({ member, requestSender }) => {
                     <h4>{badge}</h4>
                 </td>{/* membership */}
                 <td>
-                    <button className="btn text-secondaryColor rounded-none border-2 border-white bg-yellow-400 hover:bg-yellow-500" onClick={handleFriendRequest}>Send Request</button>
+                    <button className={`btn text-secondaryColor rounded-none border-2 border-white bg-yellow-400 hover:bg-yellow-500 ${isRequestSent && 'cursor-not-allowed opacity-60'}`} onClick={handleFriendRequest} >{isRequestSent ? "Request Sent" : "Send Request" }</button>
                 </td>{/* Action */}
 
             </tr>
