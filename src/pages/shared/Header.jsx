@@ -84,6 +84,18 @@ const Header = () => {
                             ? "active text-base font-semibold"
                             : "not-active hover:text-white text-base text-white font-semibold"
                     }
+                    to="/groups"
+                >
+                    Groups
+                </NavLink>
+            </li>
+            <li>
+                <NavLink
+                    className={({ isActive }) =>
+                        isActive
+                            ? "active text-base font-semibold"
+                            : "not-active hover:text-white text-base text-white font-semibold"
+                    }
                     to="/contact"
                 >
                     Contact

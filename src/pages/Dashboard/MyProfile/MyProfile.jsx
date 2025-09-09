@@ -10,7 +10,7 @@ import { ImWarning } from "react-icons/im";
 import formateDate from "../../../components/formateDate";
 import TableRow from "./TableRow/TableRow";
 import Loading from "../../../components/Loading";
-import GroupTableRow from "./GroupTableRow/GroupTableRow";
+
 
 const MyProfile = () => {
   const { user } = useAuth();
@@ -18,7 +18,7 @@ const MyProfile = () => {
   const axiosSecure = useAxiosSecure();
 
   // user info
-  const { data: userProfile = {} } = useQuery({
+  const { data: userProfile = {}, isLoading: isUserDataLoading } = useQuery({
     queryKey: ["userProfile", user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get(
@@ -29,8 +29,8 @@ const MyProfile = () => {
   });
   const { name, email, badge, phoneNumber, Address, about } = userProfile || {};
   const date = userProfile?.joiningDate
-    ? formateDate(userProfile.joiningDate, "yyyy-MM-dd")
-    : "";
+    ? formateDate(userProfile?.joiningDate, "yyyy-MM-dd")
+    : " ";
   
   
   // Friend requests
@@ -42,17 +42,8 @@ const MyProfile = () => {
     },
   });
   
-  // My groups
-  const { data: groups = [], isLoading:isGroupLoading  } = useQuery({
-    queryKey: ["groups", user?.email],
-    queryFn: async () => {
-      const res = await axiosPublic.get(`/groups?groupOwner=${user?.email}`);
-      return res.data;
-    },
-  });
-  console.log(groups);
 
-  if (isFriendRequestsLoading || isGroupLoading) {
+  if (isUserDataLoading || isFriendRequestsLoading ) {
     return <Loading></Loading>;
   }
 
@@ -65,6 +56,7 @@ const MyProfile = () => {
         <section className="min-h-screen">
           <div className="flex items-center justify-center min-h-screen my-10">
             <div className="w-full bg-transparent">
+
               <div
                 className="shadow-2xl p-6 flex items-center justify-center flex-col title-cut bg-yellow-400"
               >
@@ -136,7 +128,7 @@ const MyProfile = () => {
                         {Address}
                       </p>
                       <p className="text-slate-300  text-lg">{date}</p>
-                    </div> {/* data */}
+                    </div> {/* date */}
 
                   </div> {/* info wrap */}
 
@@ -156,7 +148,7 @@ const MyProfile = () => {
               </div>
               {/* user data */}
 
-              {/* request section */}
+              {/* friend request section */}
               <div className="mt-7">
                 <div className="text-center pt-10">
                   <SectionTitle title="friend requests"></SectionTitle>
@@ -181,35 +173,8 @@ const MyProfile = () => {
                     </tbody>
                   </table> 
                 </div> {/* table */}
-              </div>{/* request section end */}
+              </div>{/* friend request section end */}
 
-
-              {/* My groups section */}
-              <div className="mt-7">
-                <div className="text-center pt-10">
-                  <SectionTitle title="My groups"></SectionTitle>
-                </div>
-
-                <div className="overflow-x-auto pb-32">
-                  <table className="table">
-                    {/* head */}
-                    <thead>
-                      <tr className="text-sm text-white">
-                        <th>Group Name</th>
-                        <th>Member</th>
-                        <th className="hidden sm:table-cell">Description</th>
-                        <th>Creation Date</th>
-                      </tr>
-                    </thead>
-
-                    <tbody>
-                      {groups?.length === 0 ? <p className="text-white py-5">No groups found!</p> :
-                        groups?.map(group => <GroupTableRow key={group._id} group={group} ></GroupTableRow>)
-                      }
-                    </tbody>
-                  </table>
-                </div> {/* table */}
-              </div>{/* My groups end */}
             </div>
           </div>
           {/* flex */}

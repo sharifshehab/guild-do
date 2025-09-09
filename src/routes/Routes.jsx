@@ -24,6 +24,9 @@ import AllAnnouncements from "../pages/AllAnnouncements/AllAnnouncements";
 import AllMembers from "../pages/AllMembers/AllMembers";
 import MyFriends from "../pages/Dashboard/MyFriends/MyFriends";
 import CreateGroup from "../pages/Dashboard/CreateGroup/CreateGroup";
+import AllGroups from "../pages/AllGroups/AllGroups";
+import MyGroups from "../pages/Dashboard/MyGroups/MyGroups";
+import GroupRequests from "../pages/Dashboard/MyGroups/GroupRequests/GroupRequests";
 
 export const router = createBrowserRouter([
     {
@@ -48,7 +51,11 @@ export const router = createBrowserRouter([
             },
             {
                 path: "members",
-                element: <PrivateRoute><AllMembers /></PrivateRoute>, 
+                element: <PrivateRoute><AllMembers /></PrivateRoute>,
+            },
+            {
+                path: "groups",
+                element: <PrivateRoute><AllGroups /></PrivateRoute>,
             },
             {
                 path: "contact",
@@ -107,8 +114,16 @@ export const router = createBrowserRouter([
                 element: <CreateGroup />
             },
             {
+                path: "group-requests",
+                element: <GroupRequests />
+            },
+            {
                 path: "my-friends",
                 element: <MyFriends />
+            },
+            {
+                path: "my-groups",
+                element: <MyGroups />
             },
             {
                 path: "payment",
@@ -118,6 +133,7 @@ export const router = createBrowserRouter([
                 path: "comments/:postId",
                 element: <PostComments></PostComments>
             }
+
         ]
     },
     {

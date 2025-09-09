@@ -20,7 +20,6 @@ const TableRow = ({ request, refetchFriendRequests }) => {
             const res = await axiosPublic.patch(`/friend-requests/${_id}`, { requestResponse: e.target.value });
             if (res?.data?.modifiedCount) {
                 successToast(`Friend request of ${fromUser} ${e.target.value}ed successfully `);
-                // const res = await axiosPublic.delete(`/friend-requests/${_id}`);
                 refetchFriendRequests()
             }
         } catch (error) {
@@ -41,17 +40,17 @@ const TableRow = ({ request, refetchFriendRequests }) => {
                     <h4>{date}</h4>
                 </td>{/* date */}
                 <td>
-                        <select
-                            name="Response"
-                            id="Response"
-                            class="mt-0.5 py-3 bg-black px-3 sm:w-full"
-                            value={requestStatus}
-                            onChange={handleResponse}
-                        >
-                            <option value="">Select a response</option>
-                            <option value="accept">Accept</option>
-                            <option value="reject">Reject</option>
-                        </select>
+                    <select
+                        name="Response"
+                        id="Response"
+                        class="mt-0.5 py-3 bg-black px-3 sm:w-full"
+                        value={requestStatus}
+                        onChange={handleResponse}
+                    >
+                        <option value="">Select a response</option>
+                        <option value="accept">Accept</option>
+                        <option value="reject">Reject</option>
+                    </select>
                 </td>
             </tr>
             <Toaster />

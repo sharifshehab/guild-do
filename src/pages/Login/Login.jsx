@@ -27,8 +27,7 @@ const Login = () => {
         try {
             await handleEmailLogin(formData.email, formData.password);
             reset();
-            console.log(user);
-            // navigate(from, { replace: true });
+            navigate(from, { replace: true });
         } catch (error) {
             errorToast(`Login error: ${error.message}`)
         } finally {
@@ -81,8 +80,6 @@ const Login = () => {
             setLoginLoading(false);
         }
     }
-
-
 
     return (
         <>

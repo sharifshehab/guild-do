@@ -42,7 +42,7 @@ const TableRow = ({ data }) => {
                 setIsReported(true);
             }
         } catch (error) {
-            console.error('Post adding error:', error);
+            console.error('Report adding error:', error);
             errorToast(`There was an error while adding the report: ${error.message}`)
         }
     }
@@ -50,7 +50,7 @@ const TableRow = ({ data }) => {
     return (
         <tr >
             <td>
-                <h4 className='text-yellow-400'>{comment.length > 20 ? (<>{comment.slice(0, 20)}...<CommentModal comment={comment} commenterEmail={email}></CommentModal></>): comment}</h4>
+                <h4 className='text-yellow-400'>{comment.length > 20 ? (<>{comment.slice(0, 20)}...<CommentModal comment={comment} commenterEmail={email}></CommentModal></>) : comment}</h4>
             </td>
             <td>
                 <h4 className='text-yellow-400'>{email}</h4>

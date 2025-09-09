@@ -133,6 +133,18 @@ const Dashboard = () => {
                       ? "bg-secondaryColor font-semibold rounded-none text-white focus:bg-secondaryColor focus:text-white"
                       : "hover:bg-white text-darkColor rounded-none"
                   }
+                    to={"/dashboard/my-groups"}
+                >
+                  My Groups
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive
+                      ? "bg-secondaryColor font-semibold rounded-none text-white focus:bg-secondaryColor focus:text-white"
+                      : "hover:bg-white text-darkColor rounded-none"
+                  }
                     to={"/dashboard/create-group"}
                 >
                   Create Group
