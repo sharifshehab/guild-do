@@ -22,7 +22,7 @@ const GroupTableRow = ({ group }) => {
                 <h4>{requests.length}</h4>
             </td>{/* requests count */}
             <td>
-                <Link to={"/dashboard/group-requests"} state={{ requests: requests, groupName: name, groupId: _id }} className="btn btn-sm rounded-none border-2 bg-yellow-400 hover:bg-yellow-500">View Requests</Link>
+                <Link to={"/dashboard/group-requests"} state={{ requests: requests, groupName: name, groupId: _id }} className="btn btn-sm rounded-none border-2 bg-yellow-400 hover:bg-yellow-500">See Requests</Link>
             </td>{/* view requests */}
             <td>
                 <h4>{date}</h4>

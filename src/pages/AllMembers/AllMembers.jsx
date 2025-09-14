@@ -10,7 +10,7 @@ const AllMembers = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
 
-    const { data: allUsers = [], isLoading } = useQuery({
+    const { data: allUsers = [], refetch, isLoading } = useQuery({
         queryKey: ['allUsers'],
         queryFn: async () => {
             const res = await axiosSecure.get(`/users/${user.email}`)

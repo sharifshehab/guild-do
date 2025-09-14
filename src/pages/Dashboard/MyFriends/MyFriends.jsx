@@ -52,7 +52,7 @@ const MyFriends = () => {
 
               <tbody>
                 {myFriends?.length === 0 ? <p className="text-white py-5"> No friends found!</p> :
-                  myFriends?.map(friend => <TableRow key={friend._id} friend={friend} ></TableRow>)
+                  myFriends?.map(friend => <TableRow key={friend._id} friend={friend} currentUserEmail={user?.email}></TableRow>)
                 }
               </tbody>
             </table>

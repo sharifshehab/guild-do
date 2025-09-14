@@ -14,14 +14,17 @@ const TableRow = ({ request, refetchFriendRequests }) => {
     const { errorToast, successToast } = useToast();
     const [requestStatus, setRequestStatus] = useState("");
 
+    // friend request response
     const handleResponse = async (e) => {
         setRequestStatus(e.target.value)
         try {
             const res = await axiosPublic.patch(`/friend-requests/${_id}`, { requestResponse: e.target.value });
+
             if (res?.data?.modifiedCount) {
-                successToast(`Friend request of ${fromUser} ${e.target.value}ed successfully `);
+                successToast(`Friend request of ${fromUser} is ${e.target.value}ed successfully `);
                 refetchFriendRequests()
             }
+
         } catch (error) {
             errorToast(`An error occurred while sending request response to ${fromUser}!`);
         }

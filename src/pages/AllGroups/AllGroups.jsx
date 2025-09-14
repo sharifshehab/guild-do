@@ -12,7 +12,7 @@ const AllGroups = () => {
     // const axiosSecure = useAxiosSecure();
     const axiosPublic = useAxiosPublic();
 
-    const { data: groups = [], isLoading } = useQuery({
+    const { data: groups = [], refetch, isLoading } = useQuery({
         queryKey: ['groups', ],
         queryFn: async () => {
             const res = await axiosPublic.get('/groups')
@@ -41,7 +41,7 @@ const AllGroups = () => {
 
                         <tbody>
                             {groups?.length === 0 ? <p className="text-white py-5">No groups found!</p> :
-                                groups?.map(group => <TableRow key={group._id} group={group} requestUser={user}></TableRow>)
+                                groups?.map(group => <TableRow key={group._id} group={group} refetch={refetch} requestUser={user}></TableRow>)
                             }
                         </tbody>
                     </table>

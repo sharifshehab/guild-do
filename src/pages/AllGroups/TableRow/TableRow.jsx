@@ -3,7 +3,7 @@ import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import { Toaster } from "react-hot-toast";
 import { useEffect, useState } from "react";
 
-const TableRow = ({ group, requestUser }) => {
+const TableRow = ({ group, refetch, requestUser }) => {
     const { _id, name, description, tags, requests, members } = group || {}
     const [isRequestSent, setIsRequestSent] = useState(false);
     // const axiosSecure = useAxiosSecure();
@@ -40,6 +40,7 @@ const TableRow = ({ group, requestUser }) => {
             }
             if (res?.data?.acknowledged) {
                 successToast(`Join request sent successfully to ${name}`);
+                refetch()
             }
         } catch (error) {
             console.log(error);

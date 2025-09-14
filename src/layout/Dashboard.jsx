@@ -89,7 +89,19 @@ const Dashboard = () => {
                 >
                   My Profile
                 </NavLink>
-              </li>
+                </li>
+                <li>
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive
+                        ? "bg-secondaryColor font-semibold rounded-none text-white focus:bg-secondaryColor focus:text-white"
+                        : "hover:bg-white text-darkColor rounded-none"
+                    }
+                    to={"/dashboard/my-posts"}
+                  >
+                    My Posts
+                  </NavLink>
+                </li>
               <li>
                 <NavLink
                   className={({ isActive }) =>
@@ -100,18 +112,6 @@ const Dashboard = () => {
                   to={"/dashboard/add-post"}
                 >
                   Add Post
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  className={({ isActive }) =>
-                    isActive
-                      ? "bg-secondaryColor font-semibold rounded-none text-white focus:bg-secondaryColor focus:text-white"
-                      : "hover:bg-white text-darkColor rounded-none"
-                  }
-                  to={"/dashboard/my-posts"}
-                >
-                  All My Posts
                 </NavLink>
               </li>
               <li>

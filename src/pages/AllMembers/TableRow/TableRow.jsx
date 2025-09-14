@@ -26,7 +26,7 @@ const TableRow = ({ member, requestSender }) => {
         if (requestSender?.email) {
             checkRequest()
         }
-    }, [requestSender?.email, email, axiosPublic]);
+    }, [requestSender?.email, email, axiosPublic, isRequestSent]);
 
 
     const requestInfo = {
@@ -45,6 +45,7 @@ const TableRow = ({ member, requestSender }) => {
             }
             if (res?.data?.acknowledged) {
                 successToast(`Friend request sent successfully to ${name}`);
+                
             }
 
             console.log(res?.data?.message);

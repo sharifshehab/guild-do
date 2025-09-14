@@ -9,11 +9,29 @@ import useAnnouncements from "../../API/useAnnouncements";
 import useAdmin from "../../API/useAdmin";
 import logo from "../../assets/images/logo.png";
 import Loading from "../../components/Loading";
+import { useEffect, useState } from "react";
 
 const Header = () => {
     const { user, handleLogOut } = useAuth();
-    const [announcements] = useAnnouncements();
     const [isAdmin, isAdminPending, isAdminLoading] = useAdmin();
+    const [announcements] = useAnnouncements();
+    const [announcementCounts, setAnnouncementCounts] = useState(0);
+
+
+    useEffect(() => {
+        const viewed = localStorage.getItem("viewedAnnouncements");
+
+        if (viewed === "true") {
+            setAnnouncementCounts(0);
+        } else {
+            setAnnouncementCounts(announcements.length);
+        }
+    }, [announcements]);
+
+    const handleAnnouncementCounts = () => {
+        setAnnouncementCounts(0);
+        localStorage.setItem("viewedAnnouncements", "true");
+    };
 
     const menuItems = (
         <>
@@ -135,13 +153,13 @@ const Header = () => {
                         </div>
                         <div className="navbar-end">
                             {
-                                user?.uid ? (<div className="flex items-center">
+                                user?.uid ? (<div className="flex items-center" onClick={handleAnnouncementCounts}>
                                     {/* icon */}
                                     <div className="dropdown dropdown-end">
                                         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
                                             <div className="indicator">
                                                 <MdOutlineNotifications size={23} className="text-yellow-400" />
-                                                <span className="badge badge-sm indicator-item">{announcements.length}</span>
+                                                <span className="badge badge-sm indicator-item">{announcementCounts}</span>
                                             </div>
                                         </div>
 
